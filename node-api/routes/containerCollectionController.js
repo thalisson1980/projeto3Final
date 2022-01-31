@@ -43,18 +43,16 @@ router.post('/findByUser',async (req,res)=>{
         
           for (const  Element of vetorCollections){
               let resposta = []
-                let containerCollections = await containerCollection.find({collectionID:Element._id.toString(),key:User.key})
+              let containerCollections = await containerCollection.find({collectionID:Element._id.toString(),key:User.key})
+              let allCollections = await containerCollection.find({collectionID:Element._id.toString()})
               for (const collect of  containerCollections){
                     let existe = false;
                 try{
                     for(let i=0;resposta.length;i++){
-                        
                             if(collect.container === resposta[i].container){
-                                resposta[i].massCollected_kg = resposta[i].massCollected_kg + Element.massCollected_kg/containerCollections.length;
+                                resposta[i].massCollected_kg = resposta[i].massCollected_kg + Element.massCollected_kg/allCollections.length;
                                 existe = true;
-                                
                             }
-                        
                     }
                 }catch(err){
                     console.log(err)
@@ -62,7 +60,7 @@ router.post('/findByUser',async (req,res)=>{
                     if(!existe){
                         let obj = {
                             container:collect.container,
-                            massCollected_kg: Element.massCollected_kg/containerCollections.length,
+                            massCollected_kg: Element.massCollected_kg/allCollections.length,
                             collectionDate: Element.collectionEndDate
                         }
                         resposta.push(obj);
