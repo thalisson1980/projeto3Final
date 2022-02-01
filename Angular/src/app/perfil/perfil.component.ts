@@ -42,6 +42,7 @@ export class PerfilComponent implements OnInit {
 
   list:any;
 
+  chart:any;
   canvas: any;
   ctx: any;
   @ViewChild('mychart') mychart:any;
@@ -262,13 +263,19 @@ export class PerfilComponent implements OnInit {
     let listOfDate = [];
     let listOfKG = [];
     for (const obj of this.list){
-       listOfDate.push(obj.collectionDate);
-       listOfKG.push(obj.massCollected_kg);
+      let aux = obj.collectionDate.split('T');
+       listOfDate.push(aux[0]);
+       let pesoPorDeposicao = obj.massCollected_kg/obj.totalCollections;
+       let outrasDepoiscoes =  obj.totalCollections-obj.numberCollections;
+       let pesoDepositado = obj.massCollected_kg-(pesoPorDeposicao*outrasDepoiscoes )
+       listOfKG.push(pesoDepositado);
+     
     }
+   
     this.canvas = this.mychart.nativeElement; 
     this.ctx = this.canvas.getContext('2d');
 
-    new Chart(this.ctx, {
+    this.chart= new Chart(this.ctx, {
       type: 'bar',
       data: {
         labels: listOfDate,
@@ -287,10 +294,16 @@ export class PerfilComponent implements OnInit {
           }
       }
   });
-   
+    
   }
  
 compare(){
+  try{
+    this.chart.destroy();
+  }catch(err){
+
+  }
+ 
   this.dateAlert='';
   var startControl = document.getElementById('start')?.getAttribute('min');
   var endControl = document.getElementById('end')?.getAttribute('max');
@@ -329,6 +342,7 @@ compare(){
         this.list.push(this.collectionsList[i])
       }
   }
+  
     this.createChart();
   }
 }

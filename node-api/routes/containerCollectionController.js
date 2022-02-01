@@ -37,7 +37,7 @@ router.post('/findByUser',async (req,res)=>{
                 
             }
         }
-        console.log(vetorCollections)
+     
         let respostaFinal = [];
 
         
@@ -87,6 +87,12 @@ router.post('/findByUser',async (req,res)=>{
 });
 
 router.post('/dates',async (req,res)=>{
+    var firstCollect = new Date();
+    var lastCollect = new Date();
+    lastCollect.setFullYear('1900');
+    firstCollect.setFullYear('3000')
+
+
     var queryClient = { email: req.body.email};
     const User = await user.findOne(queryClient)
     let collectionsList;
@@ -96,46 +102,64 @@ router.post('/dates',async (req,res)=>{
         const containers = await container.find({$regex: queryCode + ".*"});
         
 
-
-        var firstCollect = new Date();
-        var lastCollect = new Date();
-        lastCollect.setFullYear('1900');
         for(const Element of containers){
             if(Element.ddccff.substring(0,4)==req.body.code.substring(0,4)){
-                var queryContainer = {container: Element.id,key:User.key};
-                var collections = await containerCollection.find(queryContainer);
+                var collections = await containerCollection.find({container: Element.id,key:User.key});
                 for( const collect of collections){
-                    if(collect.collectionDate < firstCollect ){
-                        firstCollect =collect.collectionDate;
+                    let collectAtual = await Collection.findOne({_id:collect.collectionID})
+                    let aux = await containerCollection.find({collectionID:collect.collectionID})
+                    if(collectAtual.collectionEndDate < firstCollect ){
+                        firstCollect =collectAtual.collectionEndDate;
                     }
-                    if(collect.collectionDate > lastCollect ){
-                        lastCollect =collect.collectionDate;
+                    if(collectAtual.collectionEndDate > lastCollect ){
+                        lastCollect =collectAtual.collectionEndDate;
                     }
 
-                    collectionsList.push(collect);
+                    let existeCollect = false;
+                    for(const collection of collectionsList){
+                        if(collection.collection === collectAtual._id.toString()){
+
+                             collection.numberCollections = collection.numberCollections+1;   
+                            existeCollect = true;
+                        }
+                    }
+                    if(!existeCollect){
+                        
+                        collectionsList.push({collection:collectAtual._id.toString(),massCollected_kg:collectAtual.massCollected_kg,numberCollections:1,collectionDate:collectAtual.collectionEndDate,totalCollections:aux.length});
+                    }
+                   
                 }
             }
         }
+        
+       
     }
     if(req.body.choice == 'parish'){
-        var queryCode = {ddccff: req.body.code};
-        const containers = await container.find( queryCode);
-        
-        var firstCollect = new Date();
-        var lastCollect = new Date();
-        lastCollect.setFullYear('1900');
+        const containers = await container.find({ddccff: req.body.code});
         for(const Element of containers){
-           
-            var queryContainer = {container: Element.id,key:User.key};
-            var collections = await containerCollection.find(queryContainer);
+            var collections = await containerCollection.find({container: Element.id,key:User.key});
             for( const collect of collections){
-                if(collect.collectionDate < firstCollect ){
-                        firstCollect =collect.collectionDate;
+                let collectAtual = await Collection.findOne({_id:collect.collectionID})
+                let aux = await containerCollection.find({collectionID:collect.collectionID})
+                if(collectAtual.collectionEndDate < firstCollect ){
+                    firstCollect =collectAtual.collectionEndDate;
                 }
-                if(collect.collectionDate > lastCollect ){
-                        lastCollect =collect.collectionDate;
+                if(collectAtual.collectionEndDate > lastCollect ){
+                    lastCollect =collectAtual.collectionEndDate;
                 }
-                collectionsList.push(collect);
+
+                let existeCollect = false;
+                for(const collection of collectionsList){
+                    if(collection.collection === collectAtual._id.toString()){
+
+                         collection.numberCollections = collection.numberCollections+1;   
+                        existeCollect = true;
+                    }
+                }
+                if(!existeCollect){
+                    
+                    collectionsList.push({collection:collectAtual._id.toString(),massCollected_kg:collectAtual.massCollected_kg,numberCollections:1,collectionDate:collectAtual.collectionEndDate,totalCollections:aux.length});
+                }
             }
             
         }
@@ -143,25 +167,35 @@ router.post('/dates',async (req,res)=>{
     }
 
     if(req.body.choice == 'container'){
-        var firstCollect = new Date();
-        var lastCollect = new Date();
-        lastCollect.setFullYear('1900');
-        
-           
+  
         var queryContainer = {container: req.body.id,key:User.key};
         var collections = await containerCollection.find(queryContainer);
             for( const collect of collections){
-                if(collect.collectionDate < firstCollect ){
-                        firstCollect =collect.collectionDate;
+                let collectAtual = await Collection.findOne({_id:collect.collectionID})
+                let aux = await containerCollection.find({collectionID:collect.collectionID})
+                if(collectAtual.collectionEndDate < firstCollect ){
+                    firstCollect =collectAtual.collectionEndDate;
                 }
-                if(collect.collectionDate > lastCollect ){
-                        lastCollect =collect.collectionDate;
+                if(collectAtual.collectionEndDate > lastCollect ){
+                    lastCollect =collectAtual.collectionEndDate;
                 }
-                collectionsList.push(collect);
+
+                let existeCollect = false;
+                for(const collection of collectionsList){
+                    if(collection.collection === collectAtual._id.toString()){
+
+                         collection.numberCollections = collection.numberCollections+1;   
+                        existeCollect = true;
+                    }
+                }
+                if(!existeCollect){
+                    
+                    collectionsList.push({collection:collectAtual._id.toString(),massCollected_kg:collectAtual.massCollected_kg,numberCollections:1,collectionDate:collectAtual.collectionEndDate,totalCollections:aux.length});
+                }
             }
  
     }
-
+   
     res.json({first:firstCollect,last:lastCollect,collections:collectionsList});
 });
 

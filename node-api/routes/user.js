@@ -33,15 +33,11 @@ router.post('/',async (req,res) =>{
 
 router.post('/login',async (req,res)=>{
     try{
-        
-        var query1 = { email: req.body.email };
-        var query2 = { email: req.body.email,password:req.body.password };
-       
-        
-        const User1 =  await user.findOne(query1) ;     
+    
+        const User1 =  await user.findOne({ email: req.body.email }) ;     
         if(User1){
             
-            const User2 =  await user.findOne(query2) ; 
+            const User2 =  await user.findOne({ email: req.body.email,password:req.body.password }) ; 
             if(User2){
                 res.json({message: "sucesso"});
             }else{
@@ -51,6 +47,7 @@ router.post('/login',async (req,res)=>{
         }else{
             res.json({message: "email nao existe"});
         }
+
 
     }catch(err){
         console.log("what2")
