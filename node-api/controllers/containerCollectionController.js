@@ -50,7 +50,7 @@ router.post('/findByUser',async (req,res)=>{
                 try{
                     for(let i=0;resposta.length;i++){
                             if(collect.container === resposta[i].container){
-                                resposta[i].massCollected_kg = resposta[i].massCollected_kg + Element.massCollected_kg/allCollections.length;
+                                resposta[i].massaCollect_kg = resposta[i].massaCollect_kg + Element.massaCollect_kg/allCollections.length;
                                 existe = true;
                             }
                     }
@@ -60,8 +60,8 @@ router.post('/findByUser',async (req,res)=>{
                     if(!existe){
                         let obj = {
                             container:collect.container,
-                            massCollected_kg: Element.massCollected_kg/allCollections.length,
-                            collectionDate: Element.collectionEndDate
+                            massaCollect_kg: Element.massaCollect_kg/allCollections.length,
+                            collectionDate: Element.dateEndTime
                         }
                         resposta.push(obj);
                         
@@ -108,11 +108,11 @@ router.post('/dates',async (req,res)=>{
                 for( const collect of collections){
                     let collectAtual = await Collection.findOne({_id:collect.collectionID})
                     let aux = await containerCollection.find({collectionID:collect.collectionID})
-                    if(collectAtual.collectionEndDate < firstCollect ){
-                        firstCollect =collectAtual.collectionEndDate;
+                    if(collectAtual.dateEndTime < firstCollect ){
+                        firstCollect =collectAtual.dateEndTime;
                     }
-                    if(collectAtual.collectionEndDate > lastCollect ){
-                        lastCollect =collectAtual.collectionEndDate;
+                    if(collectAtual.dateEndTime > lastCollect ){
+                        lastCollect =collectAtual.dateEndTime;
                     }
 
                     let existeCollect = false;
@@ -125,7 +125,7 @@ router.post('/dates',async (req,res)=>{
                     }
                     if(!existeCollect){
                         
-                        collectionsList.push({collection:collectAtual._id.toString(),massCollected_kg:collectAtual.massCollected_kg,numberCollections:1,collectionDate:collectAtual.collectionEndDate,totalCollections:aux.length});
+                        collectionsList.push({collection:collectAtual._id.toString(),massaCollect_kg:collectAtual.massaCollect_kg,numberCollections:1,collectionDate:collectAtual.dateEndTime,totalCollections:aux.length});
                     }
                    
                 }
@@ -141,11 +141,11 @@ router.post('/dates',async (req,res)=>{
             for( const collect of collections){
                 let collectAtual = await Collection.findOne({_id:collect.collectionID})
                 let aux = await containerCollection.find({collectionID:collect.collectionID})
-                if(collectAtual.collectionEndDate < firstCollect ){
-                    firstCollect =collectAtual.collectionEndDate;
+                if(collectAtual.dateEndTime < firstCollect ){
+                    firstCollect =collectAtual.dateEndTime;
                 }
-                if(collectAtual.collectionEndDate > lastCollect ){
-                    lastCollect =collectAtual.collectionEndDate;
+                if(collectAtual.dateEndTime > lastCollect ){
+                    lastCollect =collectAtual.dateEndTime;
                 }
 
                 let existeCollect = false;
@@ -158,7 +158,7 @@ router.post('/dates',async (req,res)=>{
                 }
                 if(!existeCollect){
                     
-                    collectionsList.push({collection:collectAtual._id.toString(),massCollected_kg:collectAtual.massCollected_kg,numberCollections:1,collectionDate:collectAtual.collectionEndDate,totalCollections:aux.length});
+                    collectionsList.push({collection:collectAtual._id.toString(),massaCollect_kg:collectAtual.massaCollect_kg,numberCollections:1,collectionDate:collectAtual.dateEndTime,totalCollections:aux.length});
                 }
             }
             
@@ -173,11 +173,11 @@ router.post('/dates',async (req,res)=>{
             for( const collect of collections){
                 let collectAtual = await Collection.findOne({_id:collect.collectionID})
                 let aux = await containerCollection.find({collectionID:collect.collectionID})
-                if(collectAtual.collectionEndDate < firstCollect ){
-                    firstCollect =collectAtual.collectionEndDate;
+                if(collectAtual.dateEndTime < firstCollect ){
+                    firstCollect =collectAtual.dateEndTime;
                 }
-                if(collectAtual.collectionEndDate > lastCollect ){
-                    lastCollect =collectAtual.collectionEndDate;
+                if(collectAtual.dateEndTime > lastCollect ){
+                    lastCollect =collectAtual.dateEndTime;
                 }
 
                 let existeCollect = false;
@@ -190,7 +190,7 @@ router.post('/dates',async (req,res)=>{
                 }
                 if(!existeCollect){
                     
-                    collectionsList.push({collection:collectAtual._id.toString(),massCollected_kg:collectAtual.massCollected_kg,numberCollections:1,collectionDate:collectAtual.collectionEndDate,totalCollections:aux.length});
+                    collectionsList.push({collection:collectAtual._id.toString(),massaCollect_kg:collectAtual.massaCollect_kg,numberCollections:1,collectionDate:collectAtual.dateEndTime,totalCollections:aux.length});
                 }
             }
  

@@ -1,27 +1,32 @@
 const mongoose = require('mongoose');
 
 const collectionSchema = new mongoose.Schema({
-    collectionStartDate:{
-        type: Date,
-        required: false,
-        default: Date.now
-    }, 
-    collectionEndDate:{
-        type: Date,
-        required: false,
-        default: Date.now
+    _id: {
+        type: String
     },
-    massCollected_kg: {
+    employees: [{
+        type: mongoose.SchemaTypes.String,
+        ref: 'Employee'
+    }],
+    circuit: {
+        type: mongoose.SchemaTypes.String,
+        ref: 'Circuit'
+    },
+    dateStartTime: {
+        type: Date,
+        required: false,
+    },
+    dateEndTime: {
+        type: Date,
+        required: false
+    },
+    massaCollect_kg: {
         type: Number,
-        required: true
-    },
-    circuito:{
-        type:String,
-        required:true
+        required: false
     }
     
 });
 
-const collection = mongoose.model('collection', collectionSchema);
+const collection = mongoose.model('Collection', collectionSchema);
 
 module.exports = collection;

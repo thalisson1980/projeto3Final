@@ -10,7 +10,7 @@ const containerSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    ocupation:{
+    adress:{
         type: String,
         lowercase:true
     },
@@ -20,6 +20,6 @@ const containerSchema = new mongoose.Schema({
     } 
 });
 
-const container = mongoose.model('container', containerSchema);
+const container = mongoose.model('Container', containerSchema);
 
 module.exports = container;

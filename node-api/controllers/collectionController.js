@@ -8,10 +8,10 @@ router.post('/create',async (req,res)=>{
         
 
        const collection = new Collection({
-        collectionStartDate:req.body.collectionStartDate,
-        collectionEndDate:req.body.collectionEndDate,
-        massCollected_kg:req.body.massCollected_kg,
-        circuito:req.body.circuito
+        dateStartTime:req.body.dateStartTime,
+        dateEndTime:req.body.dateEndTime,
+        massaCollect_kg:req.body.massaCollect_kg,
+        circuit:req.body.circuit
     });
 
         const result =  await collection.save() ;   
@@ -20,7 +20,6 @@ router.post('/create',async (req,res)=>{
         
 
     }catch(err){
-        console.log("what2")
         res.json({message:err})
     }
 

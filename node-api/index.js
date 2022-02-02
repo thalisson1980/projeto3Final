@@ -15,19 +15,19 @@ app.use(bodyParser.text());
 app.use(cors());
 
 //definir rotas
-const userRoute = require('./routes/user');
+const userRoute = require('./controllers/user');
 app.use('/user',userRoute);
-const keyRoute = require('./routes/keyController');
+const keyRoute = require('./controllers/keyController');
 app.use('/key',keyRoute);
-const keyRequestRoute = require('./routes/keyRequestController');
+const keyRequestRoute = require('./controllers/keyRequestController');
 app.use('/keyRequest', keyRequestRoute);
-const containerRoute = require('./routes/containerController');
+const containerRoute = require('./controllers/containerController');
 app.use('/container',containerRoute);
-const collectionRoute = require('./routes/collectionController');
+const collectionRoute = require('./controllers/collectionController');
 app.use('/collection',collectionRoute);
-const containerCollectionRoute = require('./routes/containerCollectionController');
+const containerCollectionRoute = require('./controllers/containerCollectionController');
 app.use('/containerCollection',containerCollectionRoute);
-const DDCCFFRoute = require('./routes/ddccffController');
+const DDCCFFRoute = require('./controllers/ddccffController');
 app.use('/DDCCFF',DDCCFFRoute);
 
 
