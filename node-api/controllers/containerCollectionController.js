@@ -11,10 +11,10 @@ const Collection = require('../models/collection');
 
 
 
-router.post('/findByUser', async (req,res)=>{
+router.post('/findByUser', authMiddleware, async (req,res)=>{
     try{
-       console.log(req.headers)
-        const User = await user.findOne({email: req.body });
+   
+        const User = await user.findOne({email: req.body.email });
         
         var queryCol = { key: User.key };
         var mysort = { collectionDate: -1 };
@@ -63,7 +63,7 @@ router.post('/findByUser', async (req,res)=>{
                             }
                     }
                 }catch(err){
-                    console.log(err)
+                    
                 }finally{
                     if(!existe){
                         let obj = {

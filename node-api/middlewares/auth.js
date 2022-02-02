@@ -1,5 +1,5 @@
 module.exports = (req, res, next) => {
-    const authHeader = req.headers.authorization;
+    const authHeader = req.body.token;
     const jwt = require('jsonwebtoken');
     const authToken = require('../token/secret');
 
