@@ -35,7 +35,10 @@ export class AppServiceService {
 
   listContainers(dados:any):Observable<any>
   {
-    return this._http.post("http://localhost:3000/containerCollection/findByUser",{email:dados});
+    const options ={
+      header:dados.token
+    }
+    return this._http.post("http://localhost:3000/containerCollection/findByUser",dados.email,Headers=dados.token);
   }
 
   listCounties():Observable<any>

@@ -30,16 +30,17 @@ export class LoginComponent implements OnInit {
     if(this.userForm.valid){
       
         this.service.login(this.userForm.value).subscribe((res)=>{
-        
+          console.log(res)
           if(res.message=="sucesso"){
             this.successmsg="Login Success!";
             localStorage.setItem('email',this.userForm.value.email);
+            localStorage.setItem('token',res.token)
             this.router.navigate(['perfil']);
           }
-          if(res.message=="email nao existe"){
+          if(res.error=="User not found"){
             this.errormsg="This email is not valid";
           }
-          if(res.message=="password incorreta"){
+          if(res.error=="Invalid password"){
             this.errormsg="Incorrect Password";
             console.log(res)
           }

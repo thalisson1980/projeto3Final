@@ -63,16 +63,13 @@ router.get('/:userId', authMiddleware, async(req, res) => {
 
 
 router.post('/', async(req, res) => {
-
-
-
     try {
-        const { email } = req.body;
+        const { email } = req.body.email;
         if (await User.findOne({ email }))
             return res.status(400).send({ error: 'User already exists' });
-        const _id = uuidv4();
+       
+         const _id = uuidv4();
         const user = await User.create({...req.body, _id });
-
         user.password = undefined;
 
 
@@ -91,6 +88,7 @@ router.post('/', async(req, res) => {
 
 router.post('/login', async(req, res) => {
     try {
+      
         const { email, password } = req.body;
 
         const user = await User.findOne({ email }).select('+password');
@@ -109,7 +107,7 @@ router.post('/login', async(req, res) => {
             token: generateToken({ id: user._id }),
         });
     } catch (err) {
-
+        console.log(err)
         return res.status(400).send({ error: 'Registration failed' });
     }
 });

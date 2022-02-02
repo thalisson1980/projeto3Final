@@ -103,8 +103,11 @@ export class PerfilComponent implements OnInit {
 
   historicoContentor(){
     
-    const email = localStorage.getItem('email');
-    this.service.listContainers(email).subscribe((res)=>{
+    const dados = {
+      email:localStorage.getItem('email'),
+      token:localStorage.getItem('token')
+    }
+    this.service.listContainers(dados).subscribe((res)=>{
       console.log(res)
       if(res.collections){
         document.querySelector<HTMLElement>('.bg-modal2')!.style.display ="flex";
@@ -265,9 +268,9 @@ export class PerfilComponent implements OnInit {
     for (const obj of this.list){
       let aux = obj.collectionDate.split('T');
        listOfDate.push(aux[0]);
-       let pesoPorDeposicao = obj.massCollected_kg/obj.totalCollections;
+       let pesoPorDeposicao = obj.massaCollect_kg/obj.totalCollections;
        let outrasDepoiscoes =  obj.totalCollections-obj.numberCollections;
-       let pesoDepositado = obj.massCollected_kg-(pesoPorDeposicao*outrasDepoiscoes )
+       let pesoDepositado = obj.massaCollect_kg-(pesoPorDeposicao*outrasDepoiscoes )
        listOfKG.push(pesoDepositado);
      
     }

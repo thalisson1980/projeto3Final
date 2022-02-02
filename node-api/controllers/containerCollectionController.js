@@ -1,13 +1,20 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
+const authToken = require('../token/secret.json');
+const authMiddleware = require('../middlewares/auth');
+
 const containerCollection = require('../models/containerCollection');
 const user = require('../models/user');
 const container = require('../models/container');
 const Collection = require('../models/collection');
 
-router.post('/findByUser',async (req,res)=>{
+
+
+router.post('/findByUser', async (req,res)=>{
     try{
-        const User = await user.findOne({email: req.body.email });
+       console.log(req.headers)
+        const User = await user.findOne({email: req.body });
         
         var queryCol = { key: User.key };
         var mysort = { collectionDate: -1 };
@@ -25,6 +32,7 @@ router.post('/findByUser',async (req,res)=>{
                 }
             }
             if(!existe){
+                
                 await Collection.findById(containerCollections[i].collectionID)
                  .then(found =>{
                      vetorCollections.push(found);
@@ -39,7 +47,7 @@ router.post('/findByUser',async (req,res)=>{
         }
      
         let respostaFinal = [];
-
+       
         
           for (const  Element of vetorCollections){
               let resposta = []
@@ -76,7 +84,7 @@ router.post('/findByUser',async (req,res)=>{
                 
             }
        
-      
+        
         res.json({collections:respostaFinal})
 
     }catch(err){
@@ -87,6 +95,7 @@ router.post('/findByUser',async (req,res)=>{
 });
 
 router.post('/dates',async (req,res)=>{
+    console.log("entrou")
     var firstCollect = new Date();
     var lastCollect = new Date();
     lastCollect.setFullYear('1900');
