@@ -23,10 +23,10 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.get('/:containerId', async(req, res) => {
+router.get('/:collectionId', async(req, res) => {
     try {
 
-        const collection = await Collection.findById(req.params.containerId);
+        const collection = await Collection.findById(req.params.collectionId);
         return res.json({ collection });
 
     } catch (error) {
@@ -98,7 +98,7 @@ router.put('/:collectionId', authMiddleware, async(req, res) => {
     }
 });
 
-router.delete('/:containerId', authMiddleware, async(req, res) => {
+router.delete('/:collectionId', authMiddleware, async(req, res) => {
     try {
         const { authorization } = req.headers
         const token = authorization.replace("Bearer ", "")
@@ -113,8 +113,8 @@ router.delete('/:containerId', authMiddleware, async(req, res) => {
             return res.status(400).send("You are not authorized to do this");
         }
 
-        await Collection.findByIdAndRemove(req.params.containerId);
-        return res.status(200).send({ message: 'Container deleted' });
+        await Collection.findByIdAndRemove(req.params.collectionId);
+        return res.status(200).send({ message: 'Collection deleted' });
 
     } catch (err) {
         return res.json({ error: 'Error deleting collection' });

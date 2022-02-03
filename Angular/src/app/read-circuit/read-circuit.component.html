@@ -2,13 +2,15 @@
     <thead>
         <tr>
             <th scope="col">_id</th>
-            <th scope="col">Container</th>
+            <th scope="col">Code</th>
+            <th scope="col">Containers</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor='let circuit of read_circuit'>
             <th scope="row">{{circuit._id}}</th>
-            <td>{{circuit.container}}</td>
+            <td>{{circuit.circuit_cod}}</td>
+            <td>{{circuit.containers}}</td>
         </tr>
     </tbody>
 </table>
