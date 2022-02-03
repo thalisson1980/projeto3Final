@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -35,7 +35,7 @@ export class AppServiceService {
 
   listContainers(dados:any):Observable<any>
   {
-    
+    let headers = new HttpHeaders().set('Auhtorization')
     
     return this._http.post("http://localhost:3000/containerCollection/findByUser",dados);
   }
