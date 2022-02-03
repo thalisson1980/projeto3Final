@@ -5,6 +5,7 @@ const user = require('../models/user');
 
 
 router.post('/',async (req,res) =>{
+    
     if(req.body.email){
         var query1 = { email: req.body.email };
 
@@ -30,7 +31,6 @@ router.post('/',async (req,res) =>{
         var query1 = { email: req.body };
 
     const User1 =  await user.findOne(query1); 
-
     if(User1){
         if(User1.key==null){
             
