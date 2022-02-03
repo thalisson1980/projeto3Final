@@ -106,6 +106,7 @@ export class PerfilComponent implements OnInit {
     const dados = {
       email:localStorage.getItem('email'),
       token:localStorage.getItem('token')
+      
     }
     this.service.listContainers(dados).subscribe((res)=>{
       console.log(res)
