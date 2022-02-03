@@ -9,7 +9,9 @@ import { RegistarComponent } from './registar/registar.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CreateEmployeeComponent } from './create-employee/create-employee.component';
-import { ReadEmployeeComponent } from './read-employee/read-employee.component'
+import { ReadEmployeeComponent } from './read-employee/read-employee.component';
+import { ReadCircuitComponent } from './read-circuit/read-circuit.component';
+import { ReadContainerComponent } from './read-container/read-container.component'
 
 
 
@@ -20,7 +22,9 @@ import { ReadEmployeeComponent } from './read-employee/read-employee.component'
     RegistarComponent,
     PerfilComponent,
     CreateEmployeeComponent,
-    ReadEmployeeComponent
+    ReadEmployeeComponent,
+    ReadCircuitComponent,
+    ReadContainerComponent
     ],
   imports: [
     BrowserModule,

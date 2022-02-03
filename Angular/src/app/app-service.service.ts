@@ -64,4 +64,12 @@ export class AppServiceService {
   {
     return this._http.get("http://localhost:3000/employee");
   }
+  getCircuit():Observable<any>
+  {
+    return this._http.get("http://localhost:3000/circuit");
+  }
+  getContainer():Observable<any>
+  {
+    return this._http.get("http://localhost:3000/container");
+  }
 }

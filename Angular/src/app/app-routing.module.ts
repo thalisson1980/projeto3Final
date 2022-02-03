@@ -5,13 +5,17 @@ import { RegistarComponent } from './registar/registar.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CreateEmployeeComponent } from './create-employee/create-employee.component';
 import { ReadEmployeeComponent } from './read-employee/read-employee.component';
+import { ReadCircuitComponent } from './read-circuit/read-circuit.component';
+import { ReadContainerComponent } from './read-container/read-container.component';
 
 const routes: Routes = [
   {path: 'login', component:LoginComponent},
   {path: 'registar', component:RegistarComponent},
   {path: 'perfil',component:PerfilComponent},
   {path: 'create-employee', component:CreateEmployeeComponent},
-  {path: 'read-employee', component:ReadEmployeeComponent}
+  {path: 'read-employee', component:ReadEmployeeComponent},
+  {path: 'read-circuit', component:ReadCircuitComponent},
+  {path: 'read-container', component:ReadContainerComponent}
 ];
 
 @NgModule({
