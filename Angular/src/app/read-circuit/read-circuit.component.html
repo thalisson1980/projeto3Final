@@ -10,7 +10,7 @@
         <tr *ngFor='let circuit of read_circuit'>
             <th scope="row">{{circuit._id}}</th>
             <td>{{circuit.circuit_cod}}</td>
-            <td>{{circuit.containers}}</td>
+            <td>{{circuit.containers.container_cod}}</td>
         </tr>
     </tbody>
 </table>

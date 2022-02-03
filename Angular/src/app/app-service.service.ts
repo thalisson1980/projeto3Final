@@ -72,4 +72,10 @@ export class AppServiceService {
   {
     return this._http.get("http://localhost:3000/container");
   }
+
+  createEmployee(data:any):Observable<any>
+  {
+    console.log(data,'createapi=>')
+    return this._http.post("http://localhost:3000/employee",data);
+  }
 }
