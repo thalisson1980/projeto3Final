@@ -1,20 +1,14 @@
 <table class="table">
     <thead>
         <tr>
-            <!-- <th scope="col">_id</th>
-            <th scope="col">Container_cod</th>
-            <th scope="col">GPS</th>
-            <th scope="col">adress/th>
-                <th scope="col">ddccff</th> -->
+            <th scope="col">_id</th>
+            <th scope="col">Container</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor='let circuit of read_circuit'>
             <th scope="row">{{circuit._id}}</th>
-            <td>{{circuit.container_cod}}</td>
-            <td>{{circuit.gpsLocation}}</td>
-            <td>{{circuit.adress}}</td>
-            <td>{{circuit.ddccff}}</td>
+            <td>{{circuit.container}}</td>
         </tr>
     </tbody>
 </table>
