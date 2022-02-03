@@ -68,8 +68,8 @@ router.post('/', async(req, res) => {
         if (await User.findOne({ email }))
             return res.status(400).send({ error: 'User already exists' });
        
-         //const _id = uuidv4();
-        const user = await User.create({...req.body });
+         const _id = uuidv4();
+        const user = await User.create({...req.body, _id });
         user.password = undefined;
 
 
