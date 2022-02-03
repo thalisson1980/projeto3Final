@@ -7,7 +7,9 @@ import { LoginComponent } from './login/login.component';
 import { AppServiceService } from './app-service.service';
 import { RegistarComponent } from './registar/registar.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { PerfilComponent } from './perfil/perfil.component'
+import { PerfilComponent } from './perfil/perfil.component';
+import { CreateEmployeeComponent } from './create-employee/create-employee.component';
+import { ReadEmployeeComponent } from './read-employee/read-employee.component'
 
 
 
@@ -16,7 +18,9 @@ import { PerfilComponent } from './perfil/perfil.component'
     AppComponent,
     LoginComponent,
     RegistarComponent,
-    PerfilComponent
+    PerfilComponent,
+    CreateEmployeeComponent,
+    ReadEmployeeComponent
     ],
   imports: [
     BrowserModule,

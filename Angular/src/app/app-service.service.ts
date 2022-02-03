@@ -29,14 +29,14 @@ export class AppServiceService {
 
   makeRequest(dados:any):Observable<any>
   {
-  
+
       return this._http.post("http://localhost:3000/keyRequest",dados);
   }
 
   listContainers(dados:any):Observable<any>
   {
-    
-    
+
+
     return this._http.post("http://localhost:3000/containerCollection/findByUser",dados);
   }
 
@@ -58,5 +58,10 @@ export class AppServiceService {
   getDates(data:any):Observable<any>
   {
     return this._http.post("http://localhost:3000/containerCollection/dates",data);
+  }
+
+  getEmployee():Observable<any>
+  {
+    return this._http.get("http://localhost:3000/employee");
   }
 }
