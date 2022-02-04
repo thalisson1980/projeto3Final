@@ -25,10 +25,10 @@ const UserSchema = new mongoose.Schema({
         required: false,
         default: Date.now
     },
-    key: [{
+    key: {
         type: mongoose.SchemaTypes.String,
         ref: 'key'
-    }],
+    },
     permission: {
         type: String,
         required: true,

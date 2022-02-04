@@ -26,6 +26,22 @@ router.get('/', async(req, res) => {
     }
 })
 
+router.post('/containers',async (req,res)=>{
+         try{
+    
+             var code = { ddccff: req.body };
+            const containers = await Container.find(code)
+    
+            console.log(containers)
+    
+          res.json(containers);
+    
+         }catch(err){
+             res.json({message:err})
+        }
+    
+     });
+
 router.get('/:containerId', async(req, res) => {
     try {
 

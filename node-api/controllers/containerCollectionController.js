@@ -11,7 +11,7 @@ const Collection = require('../models/collection');
 
 
 
-router.post('/findByUser', authMiddleware, async (req,res)=>{
+router.post('/findByUser', async (req,res)=>{
     try{
    
         const User = await user.findOne({email: req.body.email });
@@ -21,11 +21,13 @@ router.post('/findByUser', authMiddleware, async (req,res)=>{
 
         const containerCollections =  await containerCollection.find(queryCol).sort(mysort) ;  
         
+        
         let vetorCollections = [];
         
         for(let i=0;i<containerCollections.length;i++){
             let existe = false;
             for(let j=0;j<vetorCollections.length;j++){
+               
                 if(containerCollections[i].collectionID === vetorCollections[j]._id.toString()){
                     existe = true;
                   
@@ -95,7 +97,6 @@ router.post('/findByUser', authMiddleware, async (req,res)=>{
 });
 
 router.post('/dates',async (req,res)=>{
-    console.log("entrou")
     var firstCollect = new Date();
     var lastCollect = new Date();
     lastCollect.setFullYear('1900');
@@ -109,12 +110,13 @@ router.post('/dates',async (req,res)=>{
     if(req.body.choice == 'county'){
         var queryCode = {ddccff: req.body.code.substring(0,4)};
         const containers = await container.find({$regex: queryCode + ".*"});
-        
+       
 
         for(const Element of containers){
             if(Element.ddccff.substring(0,4)==req.body.code.substring(0,4)){
-                var collections = await containerCollection.find({container: Element.id,key:User.key});
+                var collections = await containerCollection.find({container: Element.container_cod,key:User.key});
                 for( const collect of collections){
+                    
                     let collectAtual = await Collection.findOne({_id:collect.collectionID})
                     let aux = await containerCollection.find({collectionID:collect.collectionID})
                     if(collectAtual.dateEndTime < firstCollect ){
@@ -146,7 +148,7 @@ router.post('/dates',async (req,res)=>{
     if(req.body.choice == 'parish'){
         const containers = await container.find({ddccff: req.body.code});
         for(const Element of containers){
-            var collections = await containerCollection.find({container: Element.id,key:User.key});
+            var collections = await containerCollection.find({container: Element.container_cod,key:User.key});
             for( const collect of collections){
                 let collectAtual = await Collection.findOne({_id:collect.collectionID})
                 let aux = await containerCollection.find({collectionID:collect.collectionID})
@@ -179,6 +181,7 @@ router.post('/dates',async (req,res)=>{
   
         var queryContainer = {container: req.body.id,key:User.key};
         var collections = await containerCollection.find(queryContainer);
+        console.log(collections)
             for( const collect of collections){
                 let collectAtual = await Collection.findOne({_id:collect.collectionID})
                 let aux = await containerCollection.find({collectionID:collect.collectionID})

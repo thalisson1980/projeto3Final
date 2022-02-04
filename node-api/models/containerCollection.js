@@ -4,7 +4,7 @@ const containerCollectionSchema = new mongoose.Schema({
     _id: {
         type: String,
     },
-    collection: {
+    collectionID: {
         type: mongoose.SchemaTypes.String,
         ref: 'Collection'
     },
