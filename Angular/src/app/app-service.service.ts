@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -29,14 +29,15 @@ export class AppServiceService {
 
   makeRequest(dados:any):Observable<any>
   {
-  
+
       return this._http.post("http://localhost:3000/keyRequest",dados);
   }
 
   listContainers(dados:any):Observable<any>
   {
-    let headers = new HttpHeaders().set('Authorization',dados.token)
-    return this._http.post("http://localhost:3000/containerCollection/findByUser",dados.email,{ headers });
+
+
+    return this._http.post("http://localhost:3000/containerCollection/findByUser",dados);
   }
 
   listCounties():Observable<any>
@@ -57,5 +58,24 @@ export class AppServiceService {
   getDates(data:any):Observable<any>
   {
     return this._http.post("http://localhost:3000/containerCollection/dates",data);
+  }
+
+  getEmployee():Observable<any>
+  {
+    return this._http.get("http://localhost:3000/employee");
+  }
+  getCircuit():Observable<any>
+  {
+    return this._http.get("http://localhost:3000/circuit");
+  }
+  getContainer():Observable<any>
+  {
+    return this._http.get("http://localhost:3000/container");
+  }
+
+  createEmployee(data:any):Observable<any>
+  {
+    console.log(data,'createapi=>')
+    return this._http.post("http://localhost:3000/employee",data);
   }
 }

@@ -6,7 +6,11 @@ const CircuitSchema = new mongoose.Schema({
         type: String,
 
     },
-    container: [{
+    circuit_cod: {
+        type: String,
+        required: true
+    },
+    containers: [{
         type: mongoose.SchemaTypes.String,
         ref: 'Container'
     }],

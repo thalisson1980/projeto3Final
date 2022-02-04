@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">_id</th>
+            <th scope="col">Container_cod</th>
+            <th scope="col">GPS</th>
+            <th scope="col">adress/th>
+                <th scope="col">ddccff</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let container of read_container'>
+            <th scope="row">{{container._id}}</th>
+            <td>{{container.container_cod}}</td>
+            <td>{{container.gpsLocation}}</td>
+            <td>{{container.adress}}</td>
+            <td>{{container.ddccff}}</td>
+        </tr>
+    </tbody>
+</table>

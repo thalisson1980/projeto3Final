@@ -1,0 +1,24 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Adress</th>
+            <th scope="col">Postal Code</th>
+            <th scope="col">Occupation</th>
+            <th scope="col">Permission</th>
+            <th scope="col">Ativo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let employee of read'>
+            <th scope="row">{{employee._id}}</th>
+            <td>{{employee.name}}</td>
+            <td>{{employee.adress}}</td>
+            <td>{{employee.postalCode}}</td>
+            <td>{{employee.occupation}}</td>
+            <td>{{employee.permission}}</td>
+            <td>{{employee.ativo}}</td>
+        </tr>
+    </tbody>
+</table>

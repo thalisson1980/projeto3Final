@@ -42,18 +42,20 @@ router.post('/', async(req, res) => {
 
 
     try {
-        const { authorization } = req.headers
-        const token = authorization.replace("Bearer ", "")
-        const payload = jwt.verify(token, authToken.secret);
-        const user = await User.findById(payload.id);
+        // const { authorization } = req.headers
+        // const token = authorization.replace("Bearer ", "")
+        // const payload = jwt.verify(token, authToken.secret);
+        // const user = await User.findById(payload.id);
 
-        if (!user) {
-            return res.status(400).send("User not found");
-        }
+        // if (!user) {
+        //     return res.status(400).send("User not found");
+        // }
 
-        if (user.permission !== 'admin') {
-            return res.status(400).send("You are not authorized to do this");
-        }
+        // if (user.permission !== 'admin') {
+        //     return res.status(400).send("You are not authorized to do this");
+        // }
+
+
         const { name } = req.body;
         if (await Employee.findOne({ name }))
             return res.status(400).send({ error: 'Employee already exists' });

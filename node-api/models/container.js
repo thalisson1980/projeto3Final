@@ -1,25 +1,28 @@
 const mongoose = require('mongoose');
 
-const containerSchema = new mongoose.Schema({
-    id: {
+const ContainerSchema = new mongoose.Schema({
+    _id: {
         type: String,
-        required: true,
-        lowercase:true
+
     },
-    gpsLocation:{
+    container_cod: {
         type: String,
-        required: true,
+        required: true
     },
-    adress:{
+    gpsLocation: {
         type: String,
-        lowercase:true
+        required: false
     },
-    ddccff:{
-       type: String,
-       required:true 
-    } 
+    adress: {
+        type: String,
+        required: true
+    },
+    ddccff: {
+        type: mongoose.SchemaTypes.String,
+        ref: 'DDCCFF'
+    }
 });
 
-const container = mongoose.model('Container', containerSchema);
+const Container = mongoose.model('Container', ContainerSchema);
 
-module.exports = container;
+module.exports = Container;

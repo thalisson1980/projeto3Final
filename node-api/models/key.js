@@ -4,16 +4,36 @@ const KeySchema = new mongoose.Schema({
     code: {
         type: String,
         required: true,
-        unique:true
+        unique: true
     },
     DDCCFF: {
         type: String,
         unique: true,
         required: true,
-        lowercase:true
+        lowercase: true
+    },
+    startDate: {
+        type: Date,
+        required: false,
+        default: Date.now
+    },
+    endDate: {
+        type: Date,
+        required: false,
+        default: null
+    },
+    user: [{
+        type: mongoose.SchemaTypes.String,
+        ref: 'user'
+    }],
+    ativo: {
+        type: Boolean,
+        required: true,
+        default: true,
     }
+
 });
 
 const Key = mongoose.model('key', KeySchema);
 
-module.exports =Key;
+module.exports = Key;
