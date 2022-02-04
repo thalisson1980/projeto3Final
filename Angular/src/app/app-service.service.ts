@@ -52,7 +52,7 @@ export class AppServiceService {
 
   listContainersByParish(code:any):Observable<any>
   {
-    return this._http.post("http://localhost:3000/container/containers",code);
+    return this._http.post("http://localhost:3000/container/containers/byParish",code);
   }
 
   getDates(data:any):Observable<any>

@@ -181,7 +181,6 @@ router.post('/dates',async (req,res)=>{
   
         var queryContainer = {container: req.body.id,key:User.key};
         var collections = await containerCollection.find(queryContainer);
-        console.log(collections)
             for( const collect of collections){
                 let collectAtual = await Collection.findOne({_id:collect.collectionID})
                 let aux = await containerCollection.find({collectionID:collect.collectionID})

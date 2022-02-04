@@ -26,13 +26,12 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.post('/containers',async (req,res)=>{
+router.post('/containers/byParish',async (req,res)=>{
          try{
     
              var code = { ddccff: req.body };
             const containers = await Container.find(code)
     
-            console.log(containers)
     
           res.json(containers);
     
