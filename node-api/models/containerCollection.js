@@ -1,20 +1,22 @@
 const mongoose = require('mongoose');
 
 const containerCollectionSchema = new mongoose.Schema({
-    container: {
+    _id: {
         type: String,
-        required: true
     },
-    collectionID: {
-        type: String,
-        required:true
+    collection: {
+        type: mongoose.SchemaTypes.String,
+        ref: 'Collection'
+    },
+    container: {
+        type: mongoose.SchemaTypes.String,
+        ref: 'Container'
     },
     key: {
-        type: String,
-        required: true,
-        lowercase:true
-    } 
-    
+        type: mongoose.SchemaTypes.String,
+        ref: 'Key'
+    }
+
 });
 
 const containerCollection = mongoose.model('containerCollection', containerCollectionSchema);
