@@ -26,6 +26,11 @@ const EmployeeSchema = new mongoose.Schema({
         type: String,
         required: true,
         default: "view",
+    },
+    ativo: {
+        type: Boolean,
+        required: true,
+        default: true,
     }
 });
 
