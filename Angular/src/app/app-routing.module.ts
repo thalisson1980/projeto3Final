@@ -7,6 +7,7 @@ import { CreateEmployeeComponent } from './create-employee/create-employee.compo
 import { ReadEmployeeComponent } from './read-employee/read-employee.component';
 import { ReadCircuitComponent } from './read-circuit/read-circuit.component';
 import { ReadContainerComponent } from './read-container/read-container.component';
+import { CompararComponent } from './comparar/comparar.component';
 
 const routes: Routes = [
   {path: 'login', component:LoginComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'create-employee', component:CreateEmployeeComponent},
   {path: 'read-employee', component:ReadEmployeeComponent},
   {path: 'read-circuit', component:ReadCircuitComponent},
-  {path: 'read-container', component:ReadContainerComponent}
+  {path: 'read-container', component:ReadContainerComponent},
+  {path: 'comparar',component:CompararComponent}
 ];
 
 @NgModule({

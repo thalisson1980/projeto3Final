@@ -8,6 +8,16 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
   </head>
 <body >
+
+  <header>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand">Biowastes</a>
+      <form class="form-inline">
+        <button class="btn btn-outline-success" routerLink="/paginaInicialUser" type="button">Página inicial</button>
+        <button class="btn btn-outline-success" routerLink="/logout" type="button">Logout</button>
+      </form>
+    </nav>
+</header>
   
     <div class="container my-container">
        
@@ -31,7 +41,7 @@
               <button id="historicoRecolha"   (click)="historicoDeposicaoPorRecolha()">Histórico de recolhas</button>
           </div>
             <div class="col-3 my-col">
-              <button id="depositionsHistory"   (click)="compararDeposicao()">Comparar deposições</button>
+              <button routerLink="/comparar" ><a></a>Comparar deposições</button>
             </div>
         </div>
         <div class="row  my-row my-row3">
@@ -135,86 +145,6 @@
           
   </div>
 </div>
-
-<div class="bg-modal bg-modal3">
-  <div class="modal-content modal-content3">
-
-      <div class="close" (click)="closeModal3()">+</div>
-
-      <h1>Gráfico de deposições</h1>
-      <div *ngIf="dateAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>{{dateAlert}}</strong>
-      </div>
-
-      <div class="row my-row1">
-        <div class="col-1 my-col">
-        
-  
-          <select style="width: 50px;" [(ngModel)]="choice" name="choice" id="choice" (ngModelChange)="choiceMade()">
-            <option selected hidden value="" >List by</option>
-            <option value="county">County</option>
-            <option value="parish">Parish</option>
-            <option id="container" value="container">Container</option>
-          </select>
-          
-        </div>  
-        
-
-      <div *ngIf="(choice)=='container' || (choice)=='parish' || (choice)=='county' ">
-        <div class="col-2  my-col">
-          <select style="width: 150px;" [(ngModel)]="county" name="county" id="county" (ngModelChange)="countyChosen()" >
-            <option selected hidden >Choose a county</option>
-            <option *ngFor="let county of counties" value={{county.code}}>{{county.location}}</option>
-          </select>
-        </div>
-      </div>
-
-  
-      <div *ngIf="(choice)=='container' || (choice)=='parish'">
-      <div class="col-4 my-col">
-        <select style="width: 150px;" [(ngModel)]="parish" name="parish" id="parish" (ngModelChange)="parishChosen()" >
-          <option selected hidden >Choose a parish</option>
-          <option *ngFor="let parish of parishList" value={{parish.code}}>{{parish.location}}</option>
-        </select>
-      </div>
-    </div>
-
-      <div *ngIf="(choice)=='container'">
-        <div class="col-1 my-col">
-          <select  [(ngModel)]="container" style="width: 150px;" name="container" id="container" (ngModelChange)="containerChosen()" >
-            <option selected hidden >Choose a container</option>
-            <option *ngFor="let container of containers" value={{container.container_cod}}>{{container.container_cod}}</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="col-2 my-col">
-        <input [(ngModel)]="minDate"  min="2021-10-31" type="date" id="start" name="start"
-        max="2022-12-31" > 
-      </div>
-
-      <div class="col-2 my-col">
-        <input [(ngModel)]="maxDate" min="2021-10-31" type="date" id="end" name="end"
-       value="2021-07-22"
-        max="2022-12-31">
-      </div>
-
-      <div class="col-1 my-col">
-        <button class="button" id="compare" name="compare" (click)="compare()">Compare</button>
-      </div>
-    
-      </div>
-
-      <div class="row my-row myChartRow ">
-        <canvas id="myChart" width="400" height="150" #mychart></canvas>
-      </div>
-    </div>
-  
-      
-  
-</div>
-
-
 
 
 </body>

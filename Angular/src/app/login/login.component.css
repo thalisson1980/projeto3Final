@@ -1,3 +1,8 @@
 .contentor{
   width:  380px;
 }
+
+.navbar{
+  height: 80px;
+  margin-bottom: 5%;
+}

@@ -1,0 +1,20 @@
+.navbar{
+    height: 80px;
+    margin-bottom: 5%;
+}
+
+.my-container{
+    border: 1px solid black;
+}
+
+.my-row{
+    border:3px solid black
+}
+
+.my-row1{
+    text-align: center;
+}
+
+.my-row3{
+    text-align: center;
+}

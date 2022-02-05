@@ -6,11 +6,6 @@
     border:3px solid black
 }
 
-
-body{
-    padding-top:100px;
-}
-
 .my-row1{
     text-align: center;
 }
@@ -80,4 +75,9 @@ cursor: pointer;
 
 h1{
     padding-bottom: 50px;
+}
+
+.navbar{
+    height: 80px;
+    margin-bottom: 5%;
 }

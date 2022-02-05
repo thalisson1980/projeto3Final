@@ -11,7 +11,8 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { CreateEmployeeComponent } from './create-employee/create-employee.component';
 import { ReadEmployeeComponent } from './read-employee/read-employee.component';
 import { ReadCircuitComponent } from './read-circuit/read-circuit.component';
-import { ReadContainerComponent } from './read-container/read-container.component'
+import { ReadContainerComponent } from './read-container/read-container.component';
+import { CompararComponent } from './comparar/comparar.component'
 
 
 
@@ -24,7 +25,8 @@ import { ReadContainerComponent } from './read-container/read-container.componen
     CreateEmployeeComponent,
     ReadEmployeeComponent,
     ReadCircuitComponent,
-    ReadContainerComponent
+    ReadContainerComponent,
+    CompararComponent
     ],
   imports: [
     BrowserModule,
