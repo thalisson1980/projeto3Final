@@ -60,6 +60,14 @@ body{
     overflow-x:hidden;
     
 }
+.modal-content4{
+    overflow: auto;
+    height:400px;
+    overflow-x:hidden;
+    
+}
+
+
 
 .close{
 position: absolute;

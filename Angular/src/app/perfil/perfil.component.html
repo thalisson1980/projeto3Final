@@ -21,14 +21,17 @@
             </div>
         </div>
         <div class="row justify-content-between my-row my-row2">
-            <div class="col-4 my-col">
+            <div class="col-3 my-col">
                 <button id="pedirChave"   (click)="pedirChave()">Criar chave</button>
             </div>
-            <div class="col-4 my-col">
-                <button id="historicoContentor"   (click)="historicoContentor()">Histórico de contentores</button>
+            <div class="col-3 my-col">
+                <button id="historicoContentor"   (click)="historicoDeposicaoPorContentor()">Histórico de contentores</button>
             </div>
-            <div class="col-4 my-col">
-              <button id="depositionsHistory"   (click)="depositionsHistory()">Histórico de contentores</button>
+            <div class="col-3 my-col">
+              <button id="historicoRecolha"   (click)="historicoDeposicaoPorRecolha()">Histórico de recolhas</button>
+          </div>
+            <div class="col-3 my-col">
+              <button id="depositionsHistory"   (click)="compararDeposicao()">Comparar deposições</button>
             </div>
         </div>
         <div class="row  my-row my-row3">
@@ -76,7 +79,7 @@
 
         <div class="close" (click)="closeModal2()">+</div>
 
-        <h1>Container history</h1>
+        <h1>Histórico de contentores</h1>
 
         <div class="container">
             <table class="table">
@@ -102,12 +105,43 @@
     </div>
 </div>
 
+<div class="bg-modal bg-modal4">
+  <div class="modal-content modal-content4">
+
+      <div class="close" (click)="closeModal4()">+</div>
+
+      <h1>Histórico de recolhas</h1>
+
+      <div class="container">
+          <table class="table">
+              <thead>
+                <th scope="col">Numero de deposiçoes</th>
+                <th scope="col">Kgs deposited</th>
+                <th scope="col">Date</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let collection of collections">
+                  <td>{{collection.numberCollections}}</td>
+                  <td>{{collection.massaCollect_kg}}</td>
+                  <td>{{collection.collectionDate}}</td>
+                  
+                </tr>
+              </tbody>
+            </table>
+
+      </div>
+
+          
+          
+  </div>
+</div>
+
 <div class="bg-modal bg-modal3">
   <div class="modal-content modal-content3">
 
       <div class="close" (click)="closeModal3()">+</div>
 
-      <h1>Depositions history</h1>
+      <h1>Gráfico de deposições</h1>
       <div *ngIf="dateAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>{{dateAlert}}</strong>
       </div>

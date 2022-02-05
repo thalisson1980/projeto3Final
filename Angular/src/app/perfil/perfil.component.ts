@@ -19,6 +19,7 @@ export class PerfilComponent implements OnInit {
   mensagem:any;
   errormsg:any;
 
+
   collections:any;
 
   choice:any;
@@ -48,9 +49,7 @@ export class PerfilComponent implements OnInit {
   @ViewChild('mychart') mychart:any;
   
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   userForm = new FormGroup({
     'reason':new FormControl('', Validators.required),
@@ -101,17 +100,20 @@ export class PerfilComponent implements OnInit {
     document.querySelector<HTMLElement>('.bg-modal3')!.style.display ="none";
   }
 
-  historicoContentor(){
-    
+  closeModal4(){
+    document.querySelector<HTMLElement>('.bg-modal4')!.style.display ="none";
+  }
+
+
+  historicoDeposicaoPorContentor(){
+    document.querySelector<HTMLElement>('.bg-modal2')!.style.display ="flex";
     const dados = {
       email:localStorage.getItem('email'),
       token:localStorage.getItem('token')
-      
     }
     this.service.listContainers(dados).subscribe((res)=>{
-      console.log(res)
       if(res.collections){
-        document.querySelector<HTMLElement>('.bg-modal2')!.style.display ="flex";
+        
         
          this.collections = res.collections;
         
@@ -121,7 +123,29 @@ export class PerfilComponent implements OnInit {
     })
   }
 
-  depositionsHistory(){
+  historicoDeposicaoPorRecolha(){
+    document.querySelector<HTMLElement>('.bg-modal4')!.style.display ="flex";
+    const dados = {
+      email:localStorage.getItem('email'),
+      token:localStorage.getItem('token')
+    }
+
+    var data = {choice: "recolha",code:"null",email: localStorage.getItem('email')}
+      this.service.getDates(data).subscribe((res)=>{
+        if(res){
+          this.collections = res.collections;
+          console.log(this.collections)
+          for (const collection of this.collections){
+            let aux = collection.massaCollect_kg/collection.totalCollections;
+            collection.massaCollect_kg = collection.massaCollect_kg - ((collection.totalCollections-collection.numberCollections)*aux)
+          }
+        } else{
+          this.mensagem = res.ERROR;; 
+        }
+      })
+  }
+
+  compararDeposicao(){
     document.querySelector<HTMLElement>('.bg-modal3')!.style.display ="flex";
   }
 
@@ -143,25 +167,7 @@ export class PerfilComponent implements OnInit {
       this.service.getDates(data).subscribe((res)=>{
         
         if(res){
-          
-         this.collectionsList = res.collections;
-
-         var datesFirst = res.first.split('-');
-         var restFirst = datesFirst[2].split('T');
-         var minimum = datesFirst[0] + '-' + datesFirst[1] +'-'+restFirst[0];
-
-         var datesLast = res.last.split('-');
-         var restLast = datesLast[2].split('T');
-         var maximum = datesLast[0] + '-' + datesLast[1] +'-'+restLast[0];
-  
-          var input = document.getElementById("start");
-          input!.setAttribute("min", minimum);
-          input!.setAttribute("max",maximum);
-
-          var inputEnd = document.getElementById("end");
-          inputEnd!.setAttribute("min", minimum);
-          inputEnd!.setAttribute("max",maximum);
-        
+          this.atribuirData(res)
         } else{
           this.mensagem = res.ERROR;; 
         }
@@ -189,40 +195,17 @@ export class PerfilComponent implements OnInit {
        this.service.getDates(data).subscribe((res)=>{
         
         if(res){
-          this.collectionsList = res.collections;
-
-         var datesFirst = res.first.split('-');
-         var restFirst = datesFirst[2].split('T');
-         var minimum = datesFirst[0] + '-' + datesFirst[1] +'-'+restFirst[0];
-
-         var datesLast = res.last.split('-');
-         var restLast = datesLast[2].split('T');
-         var maximum = datesLast[0] + '-' + datesLast[1] +'-'+restLast[0];
-  
-          var input = document.getElementById("start");
-          input!.setAttribute("min", minimum);
-          input!.setAttribute("max",maximum);
-
-          var inputEnd = document.getElementById("end");
-          inputEnd!.setAttribute("min", minimum);
-          inputEnd!.setAttribute("max",maximum);
-        
+          this.atribuirData(res)
         } else{
           this.mensagem = res.ERROR;; 
         }
       })
       }
-    
-      
-      
-    
 
-    
     if(this.choice == 'parish' || this.choice == 'container'){
     this.service.listContainersByParish(this.parish).subscribe((res)=>{
       
       if(res){
-        
          this.containers = res;
       } else{
         this.mensagem = res.ERROR;; 
@@ -238,29 +221,33 @@ export class PerfilComponent implements OnInit {
       this.service.getDates(data).subscribe((res)=>{
         
         if(res){
-          this.collectionsList = res.collections;
-
-         var datesFirst = res.first.split('-');
-         var restFirst = datesFirst[2].split('T');
-         var minimum = datesFirst[0] + '-' + datesFirst[1] +'-'+restFirst[0];
-
-         var datesLast = res.last.split('-');
-         var restLast = datesLast[2].split('T');
-         var maximum = datesLast[0] + '-' + datesLast[1] +'-'+restLast[0];
-  
-          var inputStart = document.getElementById("start");
-          inputStart!.setAttribute("min", minimum);
-          inputStart!.setAttribute("max",maximum);
-
-          var inputEnd = document.getElementById("end");
-          inputEnd!.setAttribute("min", minimum);
-          inputEnd!.setAttribute("max",maximum);
+          this.atribuirData(res)
         
         } else{
           this.mensagem = res.ERROR;; 
         }
       })
     }
+  }
+
+  atribuirData(res:any){
+    this.collectionsList = res.collections;
+
+    var datesFirst = res.first.split('-');
+    var restFirst = datesFirst[2].split('T');
+    var minimum = datesFirst[0] + '-' + datesFirst[1] +'-'+restFirst[0];
+
+    var datesLast = res.last.split('-');
+    var restLast = datesLast[2].split('T');
+    var maximum = datesLast[0] + '-' + datesLast[1] +'-'+restLast[0];
+
+     var inputStart = document.getElementById("start");
+     inputStart!.setAttribute("min", minimum);
+     inputStart!.setAttribute("max",maximum);
+
+     var inputEnd = document.getElementById("end");
+     inputEnd!.setAttribute("min", minimum);
+     inputEnd!.setAttribute("max",maximum);
   }
 
   createChart(){

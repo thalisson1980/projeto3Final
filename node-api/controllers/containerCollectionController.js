@@ -107,13 +107,14 @@ router.post('/dates',async (req,res)=>{
     const User = await user.findOne(queryClient)
     let collectionsList;
     collectionsList = [];
-    if(req.body.choice == 'county'){
+    if(req.body.choice == 'county' || req.body.choice == "recolha"){
         var queryCode = {ddccff: req.body.code.substring(0,4)};
-        const containers = await container.find({$regex: queryCode + ".*"});
-       
-
+        let containers = await container.find({$regex: queryCode + ".*"});
+        if(req.body.choice == "recolha"){
+            containers = await container.find();
+        }
         for(const Element of containers){
-            if(Element.ddccff.substring(0,4)==req.body.code.substring(0,4)){
+            if(Element.ddccff.substring(0,4)==req.body.code.substring(0,4) || req.body.choice == "recolha"){
                 var collections = await containerCollection.find({container: Element.container_cod,key:User.key});
                 for( const collect of collections){
                     
