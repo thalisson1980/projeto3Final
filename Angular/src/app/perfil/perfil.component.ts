@@ -3,6 +3,7 @@ import { AppServiceService } from '../app-service.service';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { max } from 'rxjs';
 import { Chart,registerables  } from 'chart.js';
+import { areAllEquivalent } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-perfil',
@@ -21,6 +22,8 @@ export class PerfilComponent implements OnInit {
 
 
   collections:any;
+  collectionsV3:any;
+ 
 
   choice:any;
   counties:any;
@@ -96,12 +99,11 @@ export class PerfilComponent implements OnInit {
     document.querySelector<HTMLElement>('.bg-modal2')!.style.display ="none";
   }
 
-  closeModal3(){
-    document.querySelector<HTMLElement>('.bg-modal3')!.style.display ="none";
-  }
-
   closeModal4(){
     document.querySelector<HTMLElement>('.bg-modal4')!.style.display ="none";
+  }
+  closeModal5(){
+    document.querySelector<HTMLElement>('.bg-modal5')!.style.display ="none";
   }
 
 
@@ -134,7 +136,6 @@ export class PerfilComponent implements OnInit {
       this.service.getDates(data).subscribe((res)=>{
         if(res){
           this.collections = res.collections;
-          console.log(this.collections)
           for (const collection of this.collections){
             let aux = collection.massaCollect_kg/collection.totalCollections;
             collection.massaCollect_kg = collection.massaCollect_kg - ((collection.totalCollections-collection.numberCollections)*aux)
@@ -143,6 +144,75 @@ export class PerfilComponent implements OnInit {
           this.mensagem = res.ERROR;; 
         }
       })
+  }
+
+  historicoDeposicaoPorMes(){
+    
+   var collectionsV2 = new Array;
+    document.querySelector<HTMLElement>('.bg-modal5')!.style.display ="flex";
+    const dados = {
+      email:localStorage.getItem('email'),
+      token:localStorage.getItem('token')
+    }
+    var data = {choice: "recolha",code:"null",email: localStorage.getItem('email')}
+      this.service.getDates(data).subscribe((res)=>{
+        if(res){
+      
+          this.collections = res.collections;
+          let primeiro = true;
+          for (const collection of this.collections){
+            let aux = collection.massaCollect_kg/collection.totalCollections;
+            collection.massaCollect_kg = collection.massaCollect_kg - ((collection.totalCollections-collection.numberCollections)*aux);      
+            try{
+              
+              if(primeiro){
+                var collectionAux = new Date(collection.collectionDate);
+                var obj = {
+                  ano: collectionAux.getFullYear(),
+                  mes: collectionAux.getMonth(),
+                  pesoDepositado:collection.massaCollect_kg,
+                  numeroDeposicoes:collection.numberCollections
+                }
+            
+                collectionsV2.push(obj)
+                primeiro=false;
+                
+              }else{
+                var existe = false;
+                var collectionAux = new Date(collection.collectionDate);
+                for(const collectionV2 of collectionsV2){
+                    if(collectionV2.ano === collectionAux.getFullYear()){
+                      if(collectionV2.mes === collectionAux.getMonth()){
+                        existe = true;
+                        collectionV2.pesoDepositado = collectionV2.pesoDepositado + collection.massaCollect_kg ;
+                        collectionV2.numeroDeposicoes = collectionV2.numeroDeposicoes + collection.numberCollections;
+                      }
+                  }
+                }
+                if(!existe){
+                  var obj = {
+                    ano: collectionAux.getFullYear(),
+                    mes: collectionAux.getMonth(),
+                    pesoDepositado:collection.massaCollect_kg,
+                    numeroDeposicoes:collection.numberCollections
+                  }
+                  collectionsV2.push(obj)
+                }
+              }
+
+             
+            }catch(err){
+
+            }
+          
+          }
+        
+        } else{
+          this.mensagem = res.ERROR;; 
+        }
+      })
+     
+      this.collectionsV3 = collectionsV2;
   }
 
  
