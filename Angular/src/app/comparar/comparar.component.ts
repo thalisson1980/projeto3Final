@@ -45,6 +45,7 @@ export class CompararComponent implements OnInit {
   @ViewChild('mychart') mychart:any;
 
   ngOnInit(): void {
+    
   }
 
   choiceMade(){

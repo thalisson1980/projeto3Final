@@ -49,13 +49,13 @@
     height: 800px;
 }
 
-.modal-content2{
+.modal-content2 {
     overflow: auto;
     height:500px;
     overflow-x:hidden;
     
 }
-.modal-content4{
+.modal-content4, .modal-content5{
     overflow: auto;
     height:400px;
     overflow-x:hidden;

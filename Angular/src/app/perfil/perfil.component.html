@@ -40,6 +40,10 @@
             <div class="col-3 my-col">
               <button id="historicoRecolha"   (click)="historicoDeposicaoPorRecolha()">Histórico de recolhas</button>
           </div>
+
+          <div class="col-3 my-col">
+            <button id="historicoMensal"   (click)="historicoDeposicaoPorMes()">Histórico por mês</button>
+        </div>
             <div class="col-3 my-col">
               <button routerLink="/comparar" ><a></a>Comparar deposições</button>
             </div>
@@ -136,6 +140,38 @@
                   <td>{{collection.collectionDate}}</td>
                   
                 </tr>
+              </tbody>
+            </table>
+
+      </div>
+
+          
+          
+  </div>
+</div>
+
+<div class="bg-modal bg-modal5">
+  <div class="modal-content modal-content5">
+
+      <div class="close" (click)="closeModal5()">+</div>
+
+      <h1>Histórico de recolhas</h1>
+
+      <div class="container">
+          <table class="table">
+              <thead>
+                <th scope="col">Numero de deposiçoes</th>
+                <th scope="col">Kgs deposited</th>
+                <th scope="col">Data</th>
+              </thead>
+              <tbody>
+                
+                <tr *ngFor="let collection of collectionsV3">
+                  <td>{{collection.numeroDeposicoes}}</td>
+                  <td>{{collection.pesoDepositado}}</td>
+                  <td>{{collection.ano+'/'+collection.mes}}</td>
+                  
+        
               </tbody>
             </table>
 

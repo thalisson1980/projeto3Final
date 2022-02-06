@@ -34,12 +34,14 @@
                   <div class="col-1 my-col">
                   
             
-                    <select style="width: 50px;" [(ngModel)]="choice" name="choice" id="choice" (ngModelChange)="choiceMade()">
-                      <option selected hidden value="" >List by</option>
+                    <select   style="width: 80px;" [(ngModel)]="choice" name="choice" id="choice" (ngModelChange)="choiceMade()">
+                      <option hidden selected >List by</option>
                       <option value="county">County</option>
                       <option value="parish">Parish</option>
                       <option id="container" value="container">Container</option>
                     </select>
+
+                    
                     
                   </div>  
                   
@@ -71,9 +73,7 @@
                     </select>
                   </div>
                 </div>
-          
-               
-              
+
                 </div>
 
                 <div class="row my-row">
