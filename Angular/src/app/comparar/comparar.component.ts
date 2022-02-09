@@ -38,6 +38,7 @@ export class CompararComponent implements OnInit {
   dateAlert:any;
 
   list:any;
+  tipoComparacao:any;
 
   chart:any;
   canvas: any;
@@ -149,18 +150,8 @@ export class CompararComponent implements OnInit {
      inputEnd!.setAttribute("max",maximum);
   }
 
-  createChart(){
-    let listOfDate = [];
-    let listOfKG = [];
-    for (const obj of this.list){
-      let aux = obj.collectionDate.split('T');
-       listOfDate.push(aux[0]);
-       let pesoPorDeposicao = obj.massaCollect_kg/obj.totalCollections;
-       let outrasDepoiscoes =  obj.totalCollections-obj.numberCollections;
-       let pesoDepositado = obj.massaCollect_kg-(pesoPorDeposicao*outrasDepoiscoes )
-       listOfKG.push(pesoDepositado);
-     
-    }
+  createChart(listOfDate:any,listOfKG:any){
+    
    
     this.canvas = this.mychart.nativeElement; 
     this.ctx = this.canvas.getContext('2d');
@@ -168,7 +159,7 @@ export class CompararComponent implements OnInit {
     this.chart= new Chart(this.ctx, {
       type: 'bar',
       data: {
-        labels: listOfDate,
+        labels: listOfDate, 
         datasets: [{
             label: 'KG collected',
             data: listOfKG,
@@ -185,6 +176,21 @@ export class CompararComponent implements OnInit {
       }
   });
     
+  }
+
+  criarArrayDuasDatas(){
+    let listOfDate = [];
+    let listOfKG = [];
+    for (const obj of this.list){
+      let aux = obj.collectionDate.split('T');
+       listOfDate.push(aux[0]);
+       let pesoPorDeposicao = obj.massaCollect_kg/obj.totalCollections;
+       let outrasDepoiscoes =  obj.totalCollections-obj.numberCollections;
+       let pesoDepositado = obj.massaCollect_kg-(pesoPorDeposicao*outrasDepoiscoes )
+       listOfKG.push(pesoDepositado);
+     
+    }
+    this.createChart(listOfDate,listOfKG)
   }
  
 compare(){
@@ -233,8 +239,23 @@ compare(){
       }
   }
   
-    this.createChart();
+    this.criarArrayDuasDatas();
   }
 }
+
+compararSemana(){
+ this.list = [];
+ var hoje = new Date();
+ var ultimaSemana = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate()-7);
+ console.log(this.collectionsList)
+ for (let i = 0; i<this.collectionsList.length ; i++) {
+  var collectDate = new Date(this.collectionsList[i].collectionDate);
+  if ( collectDate >= ultimaSemana ) {
+    this.list.push(this.collectionsList[i])
+  }
+}
+this.criarArrayDuasDatas();
+}
+
 
 }
