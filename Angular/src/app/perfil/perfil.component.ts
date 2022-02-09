@@ -169,7 +169,7 @@ export class PerfilComponent implements OnInit {
                 var collectionAux = new Date(collection.collectionDate);
                 var obj = {
                   ano: collectionAux.getFullYear(),
-                  mes: collectionAux.getMonth(),
+                  mes: collectionAux.getMonth()+1,
                   pesoDepositado:collection.massaCollect_kg,
                   numeroDeposicoes:collection.numberCollections
                 }
@@ -182,7 +182,7 @@ export class PerfilComponent implements OnInit {
                 var collectionAux = new Date(collection.collectionDate);
                 for(const collectionV2 of collectionsV2){
                     if(collectionV2.ano === collectionAux.getFullYear()){
-                      if(collectionV2.mes === collectionAux.getMonth()){
+                      if(collectionV2.mes === collectionAux.getMonth()+1){
                         existe = true;
                         collectionV2.pesoDepositado = collectionV2.pesoDepositado + collection.massaCollect_kg ;
                         collectionV2.numeroDeposicoes = collectionV2.numeroDeposicoes + collection.numberCollections;
@@ -192,7 +192,7 @@ export class PerfilComponent implements OnInit {
                 if(!existe){
                   var obj = {
                     ano: collectionAux.getFullYear(),
-                    mes: collectionAux.getMonth(),
+                    mes: collectionAux.getMonth()+1,
                     pesoDepositado:collection.massaCollect_kg,
                     numeroDeposicoes:collection.numberCollections
                   }

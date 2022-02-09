@@ -151,7 +151,11 @@ export class CompararComponent implements OnInit {
   }
 
   createChart(listOfDate:any,listOfKG:any){
-    
+    try{
+      this.chart.destroy();
+    }catch(err){
+  
+    }
    
     this.canvas = this.mychart.nativeElement; 
     this.ctx = this.canvas.getContext('2d');
@@ -194,12 +198,7 @@ export class CompararComponent implements OnInit {
   }
  
 compare(){
-  try{
-    this.chart.destroy();
-  }catch(err){
 
-  }
- 
   this.dateAlert='';
   var startControl = document.getElementById('start')?.getAttribute('min');
   var endControl = document.getElementById('end')?.getAttribute('max');
