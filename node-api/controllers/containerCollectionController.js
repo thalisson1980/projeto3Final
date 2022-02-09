@@ -211,6 +211,10 @@ router.post('/dates',async (req,res)=>{
     res.json({first:firstCollect,last:lastCollect,collections:collectionsList});
 });
 
+router.post('/listByDate',async (req,res) =>{
+    
+})
+
 
 router.post('/create',async (req,res)=>{
     try{
