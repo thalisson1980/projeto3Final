@@ -19,6 +19,9 @@ import { AdminComponent } from './menuAdmin/admin/admin.component';
 import { ManagerComponent } from './menuManager/manager/manager.component';
 import { MenuEmployeeComponent } from './menuEmployee/menu-employee/menu-employee.component';
 import { MenuUserComponent } from './menuUser/menu-user/menu-user.component';
+import { ReadUserComponent } from './user/read-user/read-user.component';
+import { CreateUserComponent } from './user/create-user/create-user.component';
+
 
 
 
@@ -40,6 +43,9 @@ import { MenuUserComponent } from './menuUser/menu-user/menu-user.component';
     ManagerComponent,
     MenuEmployeeComponent,
     MenuUserComponent,
+    ReadUserComponent,
+    CreateUserComponent,
+
 
 
 

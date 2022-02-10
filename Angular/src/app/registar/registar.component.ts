@@ -38,7 +38,7 @@ export class RegistarComponent implements OnInit {
             this.successmsg = 'Account created!'
             sessionStorage.setItem('email',res.user.email);
             sessionStorage.setItem('token',res.token);
-            this.router.navigate(['perfil']);
+            this.router.navigate(['menuUser']);
 
           }
 

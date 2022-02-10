@@ -1,0 +1,11 @@
+.contentor {
+    width: 148px;
+    height: 130px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+h5 {
+    text-align: center
+}
