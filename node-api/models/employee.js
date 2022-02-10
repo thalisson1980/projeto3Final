@@ -25,7 +25,7 @@ const EmployeeSchema = new mongoose.Schema({
     permission: {
         type: String,
         required: true,
-        default: "view",
+        default: "viewEmployee",
     },
     ativo: {
         type: Boolean,

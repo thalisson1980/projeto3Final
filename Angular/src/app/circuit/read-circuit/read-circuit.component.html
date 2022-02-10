@@ -1,0 +1,32 @@
+<div class="container mt-5">
+
+    <h2>List Circuit</h2>
+
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th scope="col">_id</th>
+                <th scope="col">Circuit_code</th>
+                <th scope="col">Containers</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let circuit of read_circuit'>
+                <th scope="row">{{circuit._id}}</th>
+                <td>{{circuit.circuit_cod}}</td>
+                <td *ngFor='let container of circuit.containers'>
+                    {{container.container_cod}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+</head>
+
+<body>

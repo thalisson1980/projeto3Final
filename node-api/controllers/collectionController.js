@@ -14,6 +14,17 @@ const authMiddleware = require('../middlewares/auth');
 
 router.get('/', async(req, res) => {
     try {
+        const { token } = req.session
+        const payload = jwt.verify(token, authToken.secret);
+        const user = await User.findById(payload.id);
+
+        if (!user) {
+            return res.status(400).send("User not found");
+        }
+
+        if (user.permission === 'view') {
+            return res.status(400).send("You are not authorized to do this");
+        }
 
         const collections = await Collection.find().populate(['employees']).populate('circuit');
         return res.json(collections);
@@ -25,8 +36,18 @@ router.get('/', async(req, res) => {
 
 router.get('/:collectionId', async(req, res) => {
     try {
+        const { token } = req.session
+        const payload = jwt.verify(token, authToken.secret);
+        const user = await User.findById(payload.id);
 
-        const collection = await Collection.findById(req.params.collectionId);
+        if (!user) {
+            return res.status(400).send("User not found");
+        }
+
+        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
+            return res.status(400).send("You are not authorized to do this");
+        }
+        const collection = await Collection.findById(req.params.collectionId).populate(['employees']).populate('circuit').populate('[containers]');;
         return res.json({ collection });
 
     } catch (error) {
@@ -39,8 +60,7 @@ router.post('/', async(req, res) => {
 
 
     try {
-        const { authorization } = req.headers
-        const token = authorization.replace("Bearer ", "")
+        const { token } = req.session
         const payload = jwt.verify(token, authToken.secret);
         const user = await User.findById(payload.id);
 
@@ -48,7 +68,7 @@ router.post('/', async(req, res) => {
             return res.status(400).send("User not found");
         }
 
-        if (user.permission !== 'admin') {
+        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
             return res.status(400).send("You are not authorized to do this");
         }
 
@@ -65,8 +85,7 @@ router.post('/', async(req, res) => {
 router.put('/:collectionId', authMiddleware, async(req, res) => {
     try {
 
-        const { authorization } = req.headers
-        const token = authorization.replace("Bearer ", "")
+        const { token } = req.session
         const payload = jwt.verify(token, authToken.secret);
         const user = await User.findById(payload.id);
 
@@ -74,7 +93,7 @@ router.put('/:collectionId', authMiddleware, async(req, res) => {
             return res.status(400).send("User not found");
         }
 
-        if ((user.permission === 'view')) {
+        if (user.permission === 'view') {
             return res.status(400).send("You are not authorized to do this");
         }
 
@@ -100,8 +119,7 @@ router.put('/:collectionId', authMiddleware, async(req, res) => {
 
 router.delete('/:collectionId', authMiddleware, async(req, res) => {
     try {
-        const { authorization } = req.headers
-        const token = authorization.replace("Bearer ", "")
+        const { token } = req.session
         const payload = jwt.verify(token, authToken.secret);
         const user = await User.findById(payload.id);
 

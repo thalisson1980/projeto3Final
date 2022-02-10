@@ -1,22 +1,14 @@
 module.exports = (req, res, next) => {
-    const authHeader = req.headers.authorization;
+    const authHeader = req.session.token;
     const jwt = require('jsonwebtoken');
     const authToken = require('../token/secret');
-
+    console.log(authHeader)
     if (!authHeader)
         return res.status(401).send({ error: 'No token provided' });
 
-    const parts = authHeader.split(' ');
+    // s
 
-    if (!parts.length === 2)
-        return res.status(401).send({ error: 'Token error' });
-
-    const [scheme, token] = parts;
-
-    if (!/^Bearer$/i.test(scheme))
-        return res.status(401).send({ error: 'Token malformatted' });
-
-    jwt.verify(token, authToken.secret, (err, decoded) => {
+    jwt.verify(authHeader, authToken.secret, (err, decoded) => {
         if (err) return res.status(401).send({ error: 'Token invalid' });
 
         req.userId = decoded.id;

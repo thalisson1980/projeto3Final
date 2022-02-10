@@ -1,0 +1,27 @@
+<div class="container mt-5">
+
+    <h2>List Collection</h2>
+
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th scope="col">_id</th>
+                <th scope="col">Employees</th>
+                <th scope="col">Ocuppation</th>
+                <th scope="col">Circuit</th>
+                <th scope="col">Date Start Time</th>
+                <th scope="col">Date End Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let collection of read_collection'>
+                <th scope="row">{{collection._id}}</th>
+                <td *ngFor='let employee of collection.employees'>{{employee.name}}</td>
+                <td *ngFor='let employee of collection.employees'>{{employee.occupation}}</td>
+                <td *ngFor='let circuit of collection.circuit'>{{collection.circuit_cod}}</td>
+                <!-- <td *ngFor='let circuit of collection.circuit'>{{circuit.circuit_cod}}</td> -->
+            </tr>
+
+        </tbody>
+    </table>
+</div>

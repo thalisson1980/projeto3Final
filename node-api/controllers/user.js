@@ -19,8 +19,9 @@ function generateToken(params = {}) {
 
 router.get('/', authMiddleware, async(req, res) => {
     try {
-        const { authorization } = req.headers
-        const token = authorization.replace("Bearer ", "")
+
+        //Verificar oermissoes de user pelo cookie
+        const { token } = req.session
         const payload = jwt.verify(token, authToken.secret);
         const user = await User.findById(payload.id);
 
@@ -39,10 +40,19 @@ router.get('/', authMiddleware, async(req, res) => {
     }
 })
 
+router.get("/logout", async(req, res) => {
+    try {
+        req.session = null;
+        res.send("logout")
+    } catch (error) {
+        console.log(error)
+    }
+
+})
+
 router.get('/:userId', authMiddleware, async(req, res) => {
     try {
-        const { authorization } = req.headers
-        const token = authorization.replace("Bearer ", "")
+        const { token } = req.session
         const payload = jwt.verify(token, authToken.secret);
         const user = await User.findById(payload.id);
 
@@ -50,7 +60,7 @@ router.get('/:userId', authMiddleware, async(req, res) => {
             return res.status(400).send("User not found");
         }
 
-        if (user.permission !== 'admin') {
+        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
             return res.status(400).send("You are not authorized to do this");
         }
         const user_id = await User.findById(req.params.userId);
@@ -63,20 +73,23 @@ router.get('/:userId', authMiddleware, async(req, res) => {
 
 
 router.post('/', async(req, res) => {
+
+
+
     try {
-        const { email } = req.body.email;
+        const { email } = req.body;
         if (await User.findOne({ email }))
             return res.status(400).send({ error: 'User already exists' });
-       
-         const _id = uuidv4();
+        const _id = uuidv4();
         const user = await User.create({...req.body, _id });
+
         user.password = undefined;
-
-
+        const token = generateToken({ id: user.id })
+        req.session = { cookie: token }
         return res.send({
 
             user,
-            token: generateToken({ id: user.id }),
+            token: token,
 
         });
 
@@ -88,7 +101,6 @@ router.post('/', async(req, res) => {
 
 router.post('/login', async(req, res) => {
     try {
-      
         const { email, password } = req.body;
 
         const user = await User.findOne({ email }).select('+password');
@@ -96,15 +108,17 @@ router.post('/login', async(req, res) => {
         if (!user) {
             return res.status(400).send({ error: "User not found" });
         }
-
+        const validar = await bcrypt.compare(password, user.password)
         if (!await bcrypt.compare(password, user.password)) {
             return res.status(400).send({ error: "Invalid password" });
         }
         user.password = undefined;
-
+        const token = generateToken({ id: user.id })
+        req.session = { token: token }
         res.json({
+            permission: user.permission,
             message: "sucesso",
-            token: generateToken({ id: user._id }),
+            token: token,
         });
     } catch (err) {
         console.log(err)
@@ -116,8 +130,8 @@ router.post('/login', async(req, res) => {
 router.put('/:userId', authMiddleware, async(req, res) => {
     try {
 
-        const { authorization } = req.headers
-        const token = authorization.replace("Bearer ", "")
+        const { token } = req.session
+
         const payload = jwt.verify(token, authToken.secret);
         const user = await User.findById(payload.id);
 
@@ -144,8 +158,8 @@ router.put('/:userId', authMiddleware, async(req, res) => {
 
 router.delete('/:userId', authMiddleware, async(req, res) => {
     try {
-        const { authorization } = req.headers
-        const token = authorization.replace("Bearer ", "")
+        const { token } = req.session
+
         const payload = jwt.verify(token, authToken.secret);
         const user = await User.findById(payload.id);
         console.log(user)
@@ -163,69 +177,5 @@ router.delete('/:userId', authMiddleware, async(req, res) => {
         return res.status(400).send({ error: 'Error deleting user' });
     }
 });
-
-
-// const express = require('express');
-// const router = express.Router();
-// const user = require('../models/user');
-// const bcrypt = require('bcryptjs');
-
-
-// router.get('/',async (req,res)=>{
-//     try {
-
-//         const users = await user.find();
-//         res.json(users);
-
-//     }catch(error){
-//         res.json({message:error})
-//     }
-// })
-
-// router.post('/',async (req,res) =>{
-//     const User = new user({
-//         name: req.body.nome,
-//         email: req.body.email,
-//         password:req.body.password
-
-//     });
-
-//     try{
-//         const resultado = await User.save();
-//         res.json(resultado);
-//     }catch(error){
-//         res.json({message : error});
-//     }
-
-
-// }); 
-
-// router.post('/login',async (req,res)=>{
-//     try{
-
-//         var query1 = { email: req.body.email };
-//         var query2 = { email: req.body.email,password:req.body.password };
-
-
-//         const User1 =  await user.findOne(query1) ;     
-//         if(User1){
-
-//             const User2 =  await user.findOne(query2) ; 
-//             if(User2){
-//                 res.json({message: "sucesso"});
-//             }else{
-
-//                 res.json({message: "password incorreta"});
-//             }
-//         }else{
-//             res.json({message: "email nao existe"});
-//         }
-
-//     }catch(err){
-//         console.log("what2")
-//         res.json({message:err})
-//     }
-
-// });
 
 module.exports = router;

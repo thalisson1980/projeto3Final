@@ -1,0 +1,33 @@
+<div class="container mt-5">
+
+    <!-- <div *ngIf="successmsg" class="alert alert-warning alert-sucess fade show" role="alert">
+        <strong>{{successmsg}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div> -->
+    <h2>List Container</h2>
+
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Container_cod</th>
+                <th scope="col">GPS</th>
+                <th scope="col">adress</th>
+                <th scope="col"></th>
+                <!-- <th scope="col"></th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let container of readContainer'>
+                <th scope="row">{{container._id}}</th>
+                <td>{{container.container_cod}}</td>
+                <td>{{container.gpsLocation}}</td>
+                <td>{{container.adress}}</td>
+                <!-- <td>
+                    <button button class="btn btn-sm btn-danger" (click)="deleteID(container._id)">Delete></button></td>
+                &nbsp; -->
+                <!-- <a [routerLink]="['/container', container.id]" class="btn btn-sm btn-success">Update</a> -->
+            </tr>
+        </tbody>
+    </table>
+</div>

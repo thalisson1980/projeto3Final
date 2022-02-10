@@ -1,0 +1,37 @@
+<div class="container mt-5">
+
+    <div *ngIf="successmsg" class="alert alert-warning alert-sucess fade show" role="alert">
+        <strong>{{successmsg}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Adress</th>
+                <th scope="col">Postal Code</th>
+                <th scope="col">Occupation</th>
+                <th scope="col">Permission</th>
+                <th scope="col">Ativo</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let employee of readEmployee'>
+                <th scope="row">{{employee._id}}</th>
+                <td>{{employee.name}}</td>
+                <td>{{employee.adress}}</td>
+                <td>{{employee.postalCode}}</td>
+                <td>{{employee.occupation}}</td>
+                <td>{{employee.permission}}</td>
+                <td>{{employee.ativo}}</td>
+                <td>
+                    <button button class="btn btn-sm btn-danger" (click)="deleteID(employee._id)">Delete></button></td>
+                &nbsp;
+                <a [routerLink]="['/employee', employee.id]" class="btn btn-sm btn-success">Update</a>
+            </tr>
+        </tbody>
+    </table>
+</div>

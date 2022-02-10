@@ -11,16 +11,16 @@ const ContainerSchema = new mongoose.Schema({
     },
     gpsLocation: {
         type: String,
-        required: false
+        // required: true
     },
     adress: {
         type: String,
         required: true
-    },
-    ddccff: {
-        type: mongoose.SchemaTypes.String,
-        ref: 'DDCCFF'
     }
+    // ddccff: {
+    //     type: mongoose.SchemaTypes.String,
+    //     ref: 'DDCCFF'
+    // }
 });
 
 const Container = mongoose.model('Container', ContainerSchema);

@@ -12,10 +12,10 @@ import { Chart,registerables  } from 'chart.js';
 export class PerfilComponent implements OnInit {
 
 
-  constructor(private service:AppServiceService) { 
+  constructor(private service:AppServiceService) {
     Chart.register(...registerables)
   }
-  
+
   mensagem:any;
   errormsg:any;
 
@@ -46,15 +46,15 @@ export class PerfilComponent implements OnInit {
   canvas: any;
   ctx: any;
   @ViewChild('mychart') mychart:any;
-  
+
 
   ngOnInit(): void {
-    
+
   }
 
   userForm = new FormGroup({
     'reason':new FormControl('', Validators.required),
-    
+
   });
 
   submit(){
@@ -62,7 +62,7 @@ export class PerfilComponent implements OnInit {
 
       const email =localStorage.getItem('email');
       const mensagem = JSON.parse(`{"email":"${email}","reason":"${this.userForm.value.reason}"}`);
-      
+
       this.service.makeRequest(mensagem).subscribe((res)=>{
 
       })
@@ -77,16 +77,16 @@ export class PerfilComponent implements OnInit {
     const email = localStorage.getItem('email');
     this.service.makeRequest(email).subscribe((res)=>{
       if(res.message =='assigned'){
-        
+
         document.querySelector<HTMLElement>('.bg-modal1')!.style.display ="flex";
       } else{
-        this.mensagem = res.message; 
+        this.mensagem = res.message;
       }
     })
   }
 
    fechar() {
-    this.mensagem = ""; 
+    this.mensagem = "";
   }
 
   closeModal1(){
@@ -102,21 +102,21 @@ export class PerfilComponent implements OnInit {
   }
 
   historicoContentor(){
-    
+
     const dados = {
       email:localStorage.getItem('email'),
       token:localStorage.getItem('token')
-      
+
     }
     this.service.listContainers(dados).subscribe((res)=>{
       console.log(res)
       if(res.collections){
         document.querySelector<HTMLElement>('.bg-modal2')!.style.display ="flex";
-        
+
          this.collections = res.collections;
-        
+
       } else{
-        this.mensagem = res.ERROR;; 
+        this.mensagem = res.ERROR;;
       }
     })
   }
@@ -128,22 +128,22 @@ export class PerfilComponent implements OnInit {
   choiceMade(){
     this.service.listCounties().subscribe((res)=>{
       if(res){
-        
+
          this.counties= res;
-        
+
       } else{
-        this.mensagem = res.ERROR;; 
+        this.mensagem = res.ERROR;;
       }
-    }) 
+    })
   }
 
   countyChosen(){
     if(this.choice == 'county'){
       var data = {choice: this.choice,code:this.county,email: localStorage.getItem('email')}
       this.service.getDates(data).subscribe((res)=>{
-        
+
         if(res){
-          
+
          this.collectionsList = res.collections;
 
          var datesFirst = res.first.split('-');
@@ -153,7 +153,7 @@ export class PerfilComponent implements OnInit {
          var datesLast = res.last.split('-');
          var restLast = datesLast[2].split('T');
          var maximum = datesLast[0] + '-' + datesLast[1] +'-'+restLast[0];
-  
+
           var input = document.getElementById("start");
           input!.setAttribute("min", minimum);
           input!.setAttribute("max",maximum);
@@ -161,22 +161,22 @@ export class PerfilComponent implements OnInit {
           var inputEnd = document.getElementById("end");
           inputEnd!.setAttribute("min", minimum);
           inputEnd!.setAttribute("max",maximum);
-        
+
         } else{
-          this.mensagem = res.ERROR;; 
+          this.mensagem = res.ERROR;;
         }
       })
     }
     if(this.choice == 'parish' || this.choice == 'container' ){
 
-    
+
     this.service.listParish(this.county).subscribe((res)=>{
-      
+
       if(res){
-        
+
          this.parishList = res;
       } else{
-        this.mensagem = res.ERROR;; 
+        this.mensagem = res.ERROR;;
       }
     })
   }
@@ -187,7 +187,7 @@ export class PerfilComponent implements OnInit {
       var data = {choice: this.choice,code:this.parish,email: localStorage.getItem('email')}
 
        this.service.getDates(data).subscribe((res)=>{
-        
+
         if(res){
           this.collectionsList = res.collections;
 
@@ -198,7 +198,7 @@ export class PerfilComponent implements OnInit {
          var datesLast = res.last.split('-');
          var restLast = datesLast[2].split('T');
          var maximum = datesLast[0] + '-' + datesLast[1] +'-'+restLast[0];
-  
+
           var input = document.getElementById("start");
           input!.setAttribute("min", minimum);
           input!.setAttribute("max",maximum);
@@ -206,26 +206,26 @@ export class PerfilComponent implements OnInit {
           var inputEnd = document.getElementById("end");
           inputEnd!.setAttribute("min", minimum);
           inputEnd!.setAttribute("max",maximum);
-        
+
         } else{
-          this.mensagem = res.ERROR;; 
+          this.mensagem = res.ERROR;;
         }
       })
       }
-    
-      
-      
-    
 
-    
+
+
+
+
+
     if(this.choice == 'parish' || this.choice == 'container'){
     this.service.listContainersByParish(this.parish).subscribe((res)=>{
-      
+
       if(res){
-        
+
          this.containers = res;
       } else{
-        this.mensagem = res.ERROR;; 
+        this.mensagem = res.ERROR;;
       }
     })
   }
@@ -234,9 +234,9 @@ export class PerfilComponent implements OnInit {
   containerChosen(){
     if(this.choice == 'container'){
       var data = {choice: this.choice,id:this.container,email: localStorage.getItem('email')}
-    
+
       this.service.getDates(data).subscribe((res)=>{
-        
+
         if(res){
           this.collectionsList = res.collections;
 
@@ -247,7 +247,7 @@ export class PerfilComponent implements OnInit {
          var datesLast = res.last.split('-');
          var restLast = datesLast[2].split('T');
          var maximum = datesLast[0] + '-' + datesLast[1] +'-'+restLast[0];
-  
+
           var inputStart = document.getElementById("start");
           inputStart!.setAttribute("min", minimum);
           inputStart!.setAttribute("max",maximum);
@@ -255,9 +255,9 @@ export class PerfilComponent implements OnInit {
           var inputEnd = document.getElementById("end");
           inputEnd!.setAttribute("min", minimum);
           inputEnd!.setAttribute("max",maximum);
-        
+
         } else{
-          this.mensagem = res.ERROR;; 
+          this.mensagem = res.ERROR;;
         }
       })
     }
@@ -273,10 +273,10 @@ export class PerfilComponent implements OnInit {
        let outrasDepoiscoes =  obj.totalCollections-obj.numberCollections;
        let pesoDepositado = obj.massaCollect_kg-(pesoPorDeposicao*outrasDepoiscoes )
        listOfKG.push(pesoDepositado);
-     
+
     }
-   
-    this.canvas = this.mychart.nativeElement; 
+
+    this.canvas = this.mychart.nativeElement;
     this.ctx = this.canvas.getContext('2d');
 
     this.chart= new Chart(this.ctx, {
@@ -298,22 +298,22 @@ export class PerfilComponent implements OnInit {
           }
       }
   });
-    
+
   }
- 
+
 compare(){
   try{
     this.chart.destroy();
   }catch(err){
 
   }
- 
+
   this.dateAlert='';
   var startControl = document.getElementById('start')?.getAttribute('min');
   var endControl = document.getElementById('end')?.getAttribute('max');
   if(this.choice  || this.county){
   if(this.minDate < this.maxDate){
-    
+
     if(this.minDate < startControl!){
       this.dateAlert = 'Please choose a valid start date!';
     }
@@ -323,7 +323,7 @@ compare(){
  }else{
   this.dateAlert = 'The start date must be before the end date!';
  }
- 
+
   }else{
     this.dateAlert = 'please fill all fields!'
   }
@@ -346,7 +346,7 @@ compare(){
         this.list.push(this.collectionsList[i])
       }
   }
-  
+
     this.createChart();
   }
 }
