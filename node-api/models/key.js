@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 
 const KeySchema = new mongoose.Schema({
-    code: {
-        type: String,
-        required: true,
-        unique: true
+    _id: {
+        type: String
     },
     DDCCFF: {
         type: String,
@@ -22,10 +20,10 @@ const KeySchema = new mongoose.Schema({
         required: false,
         default: null
     },
-    user: [{
+    user: {
         type: mongoose.SchemaTypes.String,
         ref: 'user'
-    }],
+    },
     ativo: {
         type: Boolean,
         required: true,
