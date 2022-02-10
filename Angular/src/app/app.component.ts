@@ -8,7 +8,7 @@ import { Router } from '@angular/router'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Angular';
+  // title = 'Angular';
 
   constructor (private service : AppServiceService,private Router:Router){
 
@@ -18,5 +18,5 @@ export class AppComponent implements OnInit {
 
   }
 
-  
+
 }

@@ -21,6 +21,7 @@ import { MenuEmployeeComponent } from './menuEmployee/menu-employee/menu-employe
 import { MenuUserComponent } from './menuUser/menu-user/menu-user.component';
 import { ReadUserComponent } from './user/read-user/read-user.component';
 import { CreateUserComponent } from './user/create-user/create-user.component';
+import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
 
 
 
@@ -45,6 +46,7 @@ import { CreateUserComponent } from './user/create-user/create-user.component';
     MenuUserComponent,
     ReadUserComponent,
     CreateUserComponent,
+    MenuPrincipalComponent,
 
 
 

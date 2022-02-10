@@ -3,20 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegistarComponent } from './registar/registar.component';
 import { PerfilComponent } from './perfil/perfil.component';
-import { CreateCircuitComponent } from '././circuit/create-circuit/create-circuit.component';
-import { ReadCircuitComponent } from '././circuit/read-circuit/read-circuit.component';
-import { CreateCollectionComponent } from '././collection/create-collection/create-collection.component';
-import { ReadCollectionComponent } from '././collection/read-collection/read-collection.component';
-import { CreateContainerComponent } from '././container/create-container/create-container.component';
-import { ReadContainerComponent } from '././container/read-container/read-container.component';
-import { CreateEmployeeComponent } from '././employee/create-employee/create-employee.component';
-import { ReadEmployeeComponent } from '././employee/read-employee/read-employee.component';
-import { AdminComponent } from '././menuAdmin/admin/admin.component';
-import { ManagerComponent } from '././menuManager/manager/manager.component';
-import { MenuEmployeeComponent } from '././menuEmployee/menu-employee/menu-employee.component';
-import { MenuUserComponent } from '././menuUser/menu-user/menu-user.component';
+import { CreateCircuitComponent } from './circuit/create-circuit/create-circuit.component';
+import { ReadCircuitComponent } from './circuit/read-circuit/read-circuit.component';
+import { CreateCollectionComponent } from './collection/create-collection/create-collection.component';
+import { ReadCollectionComponent } from './collection/read-collection/read-collection.component';
+import { CreateContainerComponent } from './container/create-container/create-container.component';
+import { ReadContainerComponent } from './container/read-container/read-container.component';
+import { CreateEmployeeComponent } from './employee/create-employee/create-employee.component';
+import { ReadEmployeeComponent } from './employee/read-employee/read-employee.component';
+import { AdminComponent } from './menuAdmin/admin/admin.component';
+import { ManagerComponent } from './menuManager/manager/manager.component';
+import { MenuEmployeeComponent } from './menuEmployee/menu-employee/menu-employee.component';
+import { MenuUserComponent } from './menuUser/menu-user/menu-user.component';
 import { CreateUserComponent } from './user/create-user/create-user.component';
 import { ReadUserComponent } from './user/read-user/read-user.component';
+import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
 
 const routes: Routes = [
   {path: 'login', component:LoginComponent},
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: 'menuUser', component:MenuUserComponent},
   {path: 'createUser', component:CreateUserComponent},
   {path: 'readUser', component:ReadUserComponent},
+  {path: '', component:MenuPrincipalComponent},
 
 ];
 
