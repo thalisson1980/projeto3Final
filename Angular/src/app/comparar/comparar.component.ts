@@ -150,7 +150,7 @@ export class CompararComponent implements OnInit {
      inputEnd!.setAttribute("max",maximum);
   }
 
-  createChart(listOfDate:any,listOfKG:any){
+  createChart(listOfDate:any,listOfMyKG:any,listOfOther:any){
     try{
       this.chart.destroy();
     }catch(err){
@@ -165,11 +165,18 @@ export class CompararComponent implements OnInit {
       data: {
         labels: listOfDate, 
         datasets: [{
-            label: 'KG collected',
-            data: listOfKG,
+            label: 'Minhas deposições',
+            data: listOfMyKG,
             borderWidth: 1,
             backgroundColor: ['rgba(75, 192, 192, 0.2)']
-        }]
+        },
+        {
+          label: 'Outras deposições',
+          data: listOfOther,
+          borderWidth: 1,
+          backgroundColor: ['rgba(75, 75, 75, 0.2)']
+      }
+      ]
     } ,
       options: {
           scales: {
@@ -185,16 +192,25 @@ export class CompararComponent implements OnInit {
   criarArrayDuasDatas(){
     let listOfDate = [];
     let listOfKG = [];
+    let listOfOther = [];
     for (const obj of this.list){
       let aux = obj.collectionDate.split('T');
        listOfDate.push(aux[0]);
        let pesoPorDeposicao = obj.massaCollect_kg/obj.totalCollections;
-       let outrasDepoiscoes =  obj.totalCollections-obj.numberCollections;
-       let pesoDepositado = obj.massaCollect_kg-(pesoPorDeposicao*outrasDepoiscoes )
+
+       let pesoDepositado = pesoPorDeposicao * obj.numberCollections;
        listOfKG.push(pesoDepositado);
+
+       let outrasDeposicoes = pesoPorDeposicao * (obj.colecoesZona/obj.colecoesUnicas);
+       if(obj.colecoesUnicas == 0){
+        listOfOther.push(0);
+       }else{
+        listOfOther.push(outrasDeposicoes);
+       }
+      
      
     }
-    this.createChart(listOfDate,listOfKG)
+    this.createChart(listOfDate,listOfKG,listOfOther)
   }
  
 compare(){

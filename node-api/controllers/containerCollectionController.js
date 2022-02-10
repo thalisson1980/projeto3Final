@@ -9,6 +9,8 @@ const user = require('../models/user');
 const container = require('../models/container');
 const Collection = require('../models/collection');
 
+const bd = require('../bd/ligacao');
+
 
 
 router.post('/findByUser', async (req,res)=>{
@@ -134,10 +136,28 @@ router.post('/dates',async (req,res)=>{
                              collection.numberCollections = collection.numberCollections+1;   
                             existeCollect = true;
                         }
+
                     }
                     if(!existeCollect){
-                        
-                        collectionsList.push({collection:collectAtual._id.toString(),massaCollect_kg:collectAtual.massaCollect_kg,numberCollections:1,collectionDate:collectAtual.dateEndTime,totalCollections:aux.length});
+                        let colecoesUnicas = [];
+                        let nColecoesZona = 0;
+                        for(const colecao of aux){
+                            let existe = false;
+                            if(colecao.key != User.key){
+                                nColecoesZona = nColecoesZona+1;
+                            }
+                            for(const chave of colecoesUnicas){
+                                if(chave == colecao.key ){
+                                    existe = true;
+
+                                }
+                            }
+                            if(!existe){
+                                colecoesUnicas.push(colecao.key)
+                            }
+                        }
+                    
+                        collectionsList.push({colecoesZona:nColecoesZona,colecoesUnicas:colecoesUnicas.length-1,collection:collectAtual._id.toString(),massaCollect_kg:collectAtual.massaCollect_kg,numberCollections:1,collectionDate:collectAtual.dateEndTime,totalCollections:aux.length});
                     }
                    
                 }
@@ -169,8 +189,27 @@ router.post('/dates',async (req,res)=>{
                     }
                 }
                 if(!existeCollect){
-                    
-                    collectionsList.push({collection:collectAtual._id.toString(),massaCollect_kg:collectAtual.massaCollect_kg,numberCollections:1,collectionDate:collectAtual.dateEndTime,totalCollections:aux.length});
+                    let colecoesUnicas = [];
+                    let nColecoesZona = 0;
+                    for(const colecao of aux){
+                        const contentor = await container.findOne({container_cod:colecao.container})
+                        if(contentor.ddccff == req.body.code ){
+                            let existe = false;
+                            if(colecao.key != User.key){
+                                nColecoesZona = nColecoesZona+1;
+                            }
+                            for(const chave of colecoesUnicas){
+                                if(chave == colecao.key ){
+                                    existe = true;
+                                }     
+                            }
+                            if(!existe){
+                                colecoesUnicas.push(colecao.key)
+                            }
+                        }
+                        
+                    }
+                    collectionsList.push({colecoesZona:nColecoesZona,colecoesUnicas:colecoesUnicas.length-1,collection:collectAtual._id.toString(),massaCollect_kg:collectAtual.massaCollect_kg,numberCollections:1,collectionDate:collectAtual.dateEndTime,totalCollections:aux.length});
                 }
             }
             
@@ -201,19 +240,36 @@ router.post('/dates',async (req,res)=>{
                     }
                 }
                 if(!existeCollect){
-                    
-                    collectionsList.push({collection:collectAtual._id.toString(),massaCollect_kg:collectAtual.massaCollect_kg,numberCollections:1,collectionDate:collectAtual.dateEndTime,totalCollections:aux.length});
+                    let colecoesUnicas = [];
+                    let nColecoesZona = 0;
+                    for(const colecao of aux){
+                        const contentor = await container.findOne({container_cod:colecao.container})
+                        if(contentor.container_cod == req.body.id ){
+                            let existe = false;
+                            if(colecao.key != User.key){
+                                nColecoesZona = nColecoesZona+1;
+                            }
+                            for(const chave of colecoesUnicas){
+                                if(chave == colecao.key){
+                                    existe = true;
+                                }
+                            }
+                            if(!existe){
+                                colecoesUnicas.push(colecao.key)
+                            }
+                        }
+                        
+                    }
+                    collectionsList.push({colecoesZona:nColecoesZona,colecoesUnicas:colecoesUnicas.length-1,collection:collectAtual._id.toString(),massaCollect_kg:collectAtual.massaCollect_kg,numberCollections:1,collectionDate:collectAtual.dateEndTime,totalCollections:aux.length});
                 }
             }
  
     }
-   
+    console.log(collectionsList)
     res.json({first:firstCollect,last:lastCollect,collections:collectionsList});
 });
 
-router.post('/listByDate',async (req,res) =>{
-    
-})
+
 
 
 router.post('/create',async (req,res)=>{
