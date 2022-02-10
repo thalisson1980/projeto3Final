@@ -4,12 +4,6 @@ const KeySchema = new mongoose.Schema({
     _id: {
         type: String
     },
-    DDCCFF: {
-        type: String,
-        unique: true,
-        required: true,
-        lowercase: true
-    },
     startDate: {
         type: Date,
         required: false,
@@ -26,7 +20,6 @@ const KeySchema = new mongoose.Schema({
     },
     ativo: {
         type: Boolean,
-        required: true,
         default: true,
     }
 

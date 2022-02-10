@@ -8,6 +8,7 @@ const containerCollection = require('../models/containerCollection');
 const user = require('../models/user');
 const container = require('../models/container');
 const Collection = require('../models/collection');
+const Key = require('../models/key');
 
 const bd = require('../bd/ligacao');
 
@@ -17,15 +18,14 @@ router.post('/findByUser', async (req,res)=>{
     try{
    
         const User = await user.findOne({email: req.body.email });
-        
-        var queryCol = { key: User.key };
+        const chaves = await Key.find({ user: User._id })
         var mysort = { collectionDate: -1 };
-
-        const containerCollections =  await containerCollection.find(queryCol).sort(mysort) ;  
         
-        
+        let respostaFinal = [];
+        for(const chave of chaves){
+            
+        const containerCollections =  await containerCollection.find({key:chave._id}).sort(mysort) ;  
         let vetorCollections = [];
-        
         for(let i=0;i<containerCollections.length;i++){
             let existe = false;
             for(let j=0;j<vetorCollections.length;j++){
@@ -44,18 +44,13 @@ router.post('/findByUser', async (req,res)=>{
                  .catch(err =>{
                      console.log(err)
                  })
-               
-                
                 
             }
         }
-     
-        let respostaFinal = [];
-       
         
           for (const  Element of vetorCollections){
               let resposta = []
-              let containerCollections = await containerCollection.find({collectionID:Element._id.toString(),key:User.key})
+              let containerCollections = await containerCollection.find({collectionID:Element._id.toString(),key:chave._id})
               let allCollections = await containerCollection.find({collectionID:Element._id.toString()})
               for (const collect of  containerCollections){
                     let existe = false;
@@ -87,10 +82,8 @@ router.post('/findByUser', async (req,res)=>{
 
                 
             }
-       
-        
+        }
         res.json({collections:respostaFinal})
-
     }catch(err){
        
         res.json({message:err})
@@ -107,8 +100,13 @@ router.post('/dates',async (req,res)=>{
 
     var queryClient = { email: req.body.email};
     const User = await user.findOne(queryClient)
-    let collectionsList;
-    collectionsList = [];
+    const chaves = await Key.find({ user: User._id });
+
+    let collectionsList= [];
+    
+    for(const chaveUser of chaves){
+
+    
     if(req.body.choice == 'county' || req.body.choice == "recolha"){
         var queryCode = {ddccff: req.body.code.substring(0,4)};
         let containers = await container.find({$regex: queryCode + ".*"});
@@ -117,7 +115,7 @@ router.post('/dates',async (req,res)=>{
         }
         for(const Element of containers){
             if(Element.ddccff.substring(0,4)==req.body.code.substring(0,4) || req.body.choice == "recolha"){
-                var collections = await containerCollection.find({container: Element.container_cod,key:User.key});
+                var collections = await containerCollection.find({container: Element.container_cod,key:chaveUser._id});
                 for( const collect of collections){
                     
                     let collectAtual = await Collection.findOne({_id:collect.collectionID})
@@ -143,7 +141,7 @@ router.post('/dates',async (req,res)=>{
                         let nColecoesZona = 0;
                         for(const colecao of aux){
                             let existe = false;
-                            if(colecao.key != User.key){
+                            if(colecao.key != chaveUser._id){
                                 nColecoesZona = nColecoesZona+1;
                             }
                             for(const chave of colecoesUnicas){
@@ -169,7 +167,7 @@ router.post('/dates',async (req,res)=>{
     if(req.body.choice == 'parish'){
         const containers = await container.find({ddccff: req.body.code});
         for(const Element of containers){
-            var collections = await containerCollection.find({container: Element.container_cod,key:User.key});
+            var collections = await containerCollection.find({container: Element.container_cod,key:chaveUser._id});
             for( const collect of collections){
                 let collectAtual = await Collection.findOne({_id:collect.collectionID})
                 let aux = await containerCollection.find({collectionID:collect.collectionID})
@@ -195,7 +193,7 @@ router.post('/dates',async (req,res)=>{
                         const contentor = await container.findOne({container_cod:colecao.container})
                         if(contentor.ddccff == req.body.code ){
                             let existe = false;
-                            if(colecao.key != User.key){
+                            if(colecao.key != chaveUser._id){
                                 nColecoesZona = nColecoesZona+1;
                             }
                             for(const chave of colecoesUnicas){
@@ -219,7 +217,7 @@ router.post('/dates',async (req,res)=>{
 
     if(req.body.choice == 'container'){
   
-        var queryContainer = {container: req.body.id,key:User.key};
+        var queryContainer = {container: req.body.id,key:chaveUser._id};
         var collections = await containerCollection.find(queryContainer);
             for( const collect of collections){
                 let collectAtual = await Collection.findOne({_id:collect.collectionID})
@@ -246,7 +244,7 @@ router.post('/dates',async (req,res)=>{
                         const contentor = await container.findOne({container_cod:colecao.container})
                         if(contentor.container_cod == req.body.id ){
                             let existe = false;
-                            if(colecao.key != User.key){
+                            if(colecao.key != chaveUser._id){
                                 nColecoesZona = nColecoesZona+1;
                             }
                             for(const chave of colecoesUnicas){
@@ -265,6 +263,7 @@ router.post('/dates',async (req,res)=>{
             }
  
     }
+}
     console.log(collectionsList)
     res.json({first:firstCollect,last:lastCollect,collections:collectionsList});
 });

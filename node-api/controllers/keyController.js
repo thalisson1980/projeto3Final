@@ -7,7 +7,6 @@ const User = require('../models/user');
 
 router.post('/', async(req, res) => {
 
-
     try {
        
         const _id = uuidv4();
