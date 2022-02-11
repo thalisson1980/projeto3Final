@@ -108,6 +108,7 @@ export class CompararComponent implements OnInit {
     this.service.listContainersByParish(this.parish).subscribe((res)=>{
       
       if(res){
+        console.log(res)
          this.containers = res;
       } else{
         this.mensagem = res.ERROR;; 
@@ -260,18 +261,110 @@ compare(){
   }
 }
 
-compararSemana(){
+compararMes(){
  this.list = [];
  var hoje = new Date();
- var ultimaSemana = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate()-7);
- console.log(this.collectionsList)
+ var ultimaSemana = new Date(hoje.getFullYear(), hoje.getMonth()-1, hoje.getDate());
  for (let i = 0; i<this.collectionsList.length ; i++) {
   var collectDate = new Date(this.collectionsList[i].collectionDate);
   if ( collectDate >= ultimaSemana ) {
     this.list.push(this.collectionsList[i])
   }
 }
+console.log(this.list)
 this.criarArrayDuasDatas();
+}
+
+compararTrimestre(escolha:any){
+  this.list = [];
+  var hoje = new Date();
+  var ultimoSemestre= new Date(hoje.getFullYear(), hoje.getMonth()-3, hoje.getDate());
+  if(escolha==1)ultimoSemestre= new Date(hoje.getFullYear(), hoje.getMonth()-6, hoje.getDate());
+  let listAux = [];
+  for (let i = 0; i<this.collectionsList.length ; i++){
+    var primeira= new Date(this.collectionsList[i].collectionDate);
+    
+    try{
+      if(i%2 == 0){
+        var segunda = new Date(this.collectionsList[i+1].collectionDate);
+        listAux.push({
+            colecoesUnicas:this.collectionsList[i].colecoesUnicas + this.collectionsList[i+1].colecoesUnicas,
+            colecoesZona:this.collectionsList[i].colecoesZona + this.collectionsList[i+1].colecoesZona,
+            collectionDate: this.collectionsList[i+1].collectionDate,
+            massaCollect_kg:this.collectionsList[i].massaCollect_kg + this.collectionsList[i+1].massaCollect_kg,
+            numberCollections: this.collectionsList[i].numberCollections + this.collectionsList[i+1].numberCollections,
+            totalCollections: this.collectionsList[i].totalCollections + this.collectionsList[i+1].totalCollections,
+        })
+      } 
+    }catch(err){
+      listAux.push({
+        colecoesUnicas:this.collectionsList[i].colecoesUnicas,
+        colecoesZona:this.collectionsList[i].colecoesZona,
+        collectionDate: this.collectionsList[i].collectionDate,
+        massaCollect_kg:this.collectionsList[i].massaCollect_kg,
+        numberCollections: this.collectionsList[i].numberCollections,
+        totalCollections: this.collectionsList[i].totalCollections,
+    })
+    }
+  }
+
+  for(let i=0; i<listAux.length;i++){
+    var collectDate = new Date(listAux[i].collectionDate);
+    if ( collectDate >= ultimoSemestre ) {
+      this.list.push(listAux[i])
+    }
+  }
+  console.log(this.list)
+  this.criarArrayDuasDatas();
+}
+
+compararAno(escolha:any){
+  this.list = [];
+  var hoje = new Date();
+  var ultimoSemestre= new Date(hoje.getFullYear()-1, hoje.getMonth(), hoje.getDate());
+  if(escolha==1)ultimoSemestre= new Date(hoje.getFullYear()-50, hoje.getMonth(), hoje.getDate());
+  let listAux = [];
+
+  for (let i = 0; i<this.collectionsList.length ; i++){
+    var data= new Date(this.collectionsList[i].collectionDate);
+    let existe = false;
+    for(let j =0; j<listAux.length;j++){
+      
+
+      if(data.getFullYear() == listAux[j].ano && data.getMonth()+1== listAux[j].mes){
+        existe = true;
+           listAux[j].colecoesUnicas=listAux[j].colecoesUnicas + this.collectionsList[i].colecoesUnicas 
+           listAux[j].colecoesZona= listAux[j].colecoesZona + this.collectionsList[i].colecoesZona 
+           listAux[j].collectionDate = this.collectionsList[i].collectionDate
+           listAux[j].massaCollect_kg=  listAux[j].massaCollect_kg +this.collectionsList[i].massaCollect_kg
+           listAux[j].numberCollections=listAux[j].numberCollections+  this.collectionsList[i].numberCollections 
+           listAux[j].totalCollections= listAux[j].totalCollections+  this.collectionsList[i].totalCollections 
+      }
+    }
+    if(!existe){
+      listAux.push({
+        colecoesUnicas: this.collectionsList[i].colecoesUnicas,
+        colecoesZona: this.collectionsList[i].colecoesZona,
+        collectionDate:  this.collectionsList[i].collectionDate,
+        massaCollect_kg: this.collectionsList[i].massaCollect_kg,
+        numberCollections:  this.collectionsList[i].numberCollections,
+        totalCollections:  this.collectionsList[i].totalCollections,
+        mes: data.getMonth()+1,
+        ano:data.getFullYear()
+      })
+    }
+   
+  }
+
+  for(let i=0; i<listAux.length;i++){
+    var collectDate = new Date(listAux[i].collectionDate);
+    if ( collectDate >= ultimoSemestre ) {
+      this.list.push(listAux[i])
+    }
+  }
+  console.log(this.list)
+  this.criarArrayDuasDatas();
+
 }
 
 
