@@ -105,8 +105,6 @@ router.post('/dates',async (req,res)=>{
     let collectionsList= [];
     
     for(const chaveUser of chaves){
-
-    
     if(req.body.choice == 'county' || req.body.choice == "recolha"){
         var queryCode = {ddccff: req.body.code.substring(0,4)};
         let containers = await container.find({$regex: queryCode + ".*"});
