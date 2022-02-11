@@ -19,6 +19,7 @@ import { CreateUserComponent } from './user/create-user/create-user.component';
 import { ReadUserComponent } from './user/read-user/read-user.component';
 import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
 import { CompararComponent } from './comparar/comparar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {path: 'login', component:LoginComponent},
@@ -44,7 +45,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),FormsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

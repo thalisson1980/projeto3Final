@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppServiceService } from '../app-service.service';
-import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators,FormsModule} from '@angular/forms';
 import { max } from 'rxjs';
 import { Chart,registerables  } from 'chart.js';
 
@@ -9,6 +9,8 @@ import { Chart,registerables  } from 'chart.js';
   templateUrl: './comparar.component.html',
   styleUrls: ['./comparar.component.css']
 })
+
+
 export class CompararComponent implements OnInit {
 
   constructor(private service:AppServiceService) { 
