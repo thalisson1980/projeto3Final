@@ -16,11 +16,11 @@ const ContainerSchema = new mongoose.Schema({
     adress: {
         type: String,
         required: true
-    }
-    // ddccff: {
-    //     type: mongoose.SchemaTypes.String,
-    //     ref: 'DDCCFF'
-    // }
+    },
+     ddccff: {
+         type: mongoose.SchemaTypes.String,
+        ref: 'DDCCFF'
+     }
 });
 
 const Container = mongoose.model('Container', ContainerSchema);
