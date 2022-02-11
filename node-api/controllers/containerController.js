@@ -17,32 +17,62 @@ const authMiddleware = require('../middlewares/auth');
 
 router.get('/', async(req, res) => {
     try {
+        const { token } = req.session
+        const payload = jwt.verify(token, authToken.secret);
+        const user = await User.findById(payload.id);
 
-        const containers = await Container.find();
-        return res.json(containers);
+        if (!user) {
+            return res.status(400).send("User not found");
+        }
+
+        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
+            return res.status(400).send("You are not authorized to do this");
+        }
 
     } catch (error) {
         return res.status(400).send({ error: 'Error loading containers' })
     }
 })
 
-router.post('/containers/byParish',async (req,res)=>{
-         try{
-    
-             var code = { ddccff: req.body };
-            const containers = await Container.find(code)
-    
-    
-          res.json(containers);
-    
-         }catch(err){
-             res.json({message:err})
+router.post('/containers/byParish', async(req, res) => {
+    try {
+        const { token } = req.session
+        const payload = jwt.verify(token, authToken.secret);
+        const user = await User.findById(payload.id);
+
+        if (!user) {
+            return res.status(400).send("User not found");
         }
-    
-     });
+
+        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
+            return res.status(400).send("You are not authorized to do this");
+        }
+
+        var code = { ddccff: req.body };
+        const containers = await Container.find(code)
+
+
+        res.json(containers);
+
+    } catch (err) {
+        res.json({ message: err })
+    }
+
+});
 
 router.get('/:containerId', async(req, res) => {
     try {
+        const { token } = req.session
+        const payload = jwt.verify(token, authToken.secret);
+        const user = await User.findById(payload.id);
+
+        if (!user) {
+            return res.status(400).send("User not found");
+        }
+
+        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
+            return res.status(400).send("You are not authorized to do this");
+        }
 
         const container = await Container.findById(req.params.containerId);
         return res.json({ container });
@@ -57,8 +87,7 @@ router.post('/', async(req, res) => {
 
 
     try {
-        const { authorization } = req.headers
-        const token = authorization.replace("Bearer ", "")
+        const { token } = req.session
         const payload = jwt.verify(token, authToken.secret);
         const user = await User.findById(payload.id);
 
@@ -66,7 +95,7 @@ router.post('/', async(req, res) => {
             return res.status(400).send("User not found");
         }
 
-        if (user.permission !== 'admin') {
+        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
             return res.status(400).send("You are not authorized to do this");
         }
 
@@ -83,8 +112,7 @@ router.post('/', async(req, res) => {
 router.put('/:containerId', authMiddleware, async(req, res) => {
     try {
 
-        const { authorization } = req.headers
-        const token = authorization.replace("Bearer ", "")
+        const { token } = req.session
         const payload = jwt.verify(token, authToken.secret);
         const user = await User.findById(payload.id);
 
@@ -92,10 +120,9 @@ router.put('/:containerId', authMiddleware, async(req, res) => {
             return res.status(400).send("User not found");
         }
 
-        if ((user.permission === 'view')) {
+        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
             return res.status(400).send("You are not authorized to do this");
         }
-
 
         let code = req.body.code;
 
@@ -117,8 +144,7 @@ router.put('/:containerId', authMiddleware, async(req, res) => {
 
 router.delete('/:containerId', authMiddleware, async(req, res) => {
     try {
-        const { authorization } = req.headers
-        const token = authorization.replace("Bearer ", "")
+        const { token } = req.session
         const payload = jwt.verify(token, authToken.secret);
         const user = await User.findById(payload.id);
 

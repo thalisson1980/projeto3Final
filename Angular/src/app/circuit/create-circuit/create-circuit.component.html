@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+
+
+</head>
+
+<body>
+
+    <section class="vh-100" style="background-color: #eee;">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create Circuit</p>
+
+                                    <div *ngIf="errormsg" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>{{errormsg}}</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+                                    </div>
+
+                                    <div *ngIf="successmsg" class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>{{successmsg}}</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+                                    </div>
+
+                                    <div class="container mt-5">
+
+                                        <div *ngIf="errormsg" class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>{{errormsg}}</strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+
+                                        <div *ngIf="successmsg" class="alert alert-warning alert-sucess fade show" role="alert">
+                                            <strong>{{successmsg}}</strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+
+                                        <form [formGroup]="circuitForm" (ngSubmit)="circuitSubmit()">
+
+                                            <div class="mb-3">
+                                                <label for="circuit_cod" class="form-label">Circuit code</label>
+                                                <input type="text" class="form-control" formControlName="circuit_cod" placeholder="Enter name">
+                                            </div>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                       Containers
+                                      </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                    <li>
+                                                        <a class="dropdown-item" value="#"></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <button class="btn btn-primary  mt-3">Create</button>
+                                        </form>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                    <img id="contentor" src="https://ambiente.cascais.pt/sites/default/files/styles/760x380/public/biorresiduos.png?itok=ZExIAnD6" class="contentor" alt="Sample image">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

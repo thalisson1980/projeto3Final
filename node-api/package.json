@@ -1,25 +1,25 @@
 {
-  "name": "api",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "bcrypt-node": "^0.1.0",
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "express-openid-connect": "^2.5.2",
-    "jsonwebtoken": "^8.5.1",
-    "mongo": "^0.1.0",
-    "mongoose": "^6.0.14",
-    "node-fetch": "^3.1.0",
-    "uuid": "^8.3.2",
-    "xlsx": "^0.17.4"
-  }
+    "name": "api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "bcrypt-node": "^0.1.0",
+        "bcryptjs": "^2.4.3",
+        "cookie-session": "^2.0.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "express-openid-connect": "^2.5.2",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.0.14",
+        "node-fetch": "^3.1.0",
+        "uuid": "^8.3.2",
+        "xlsx": "^0.17.4"
+    }
 }

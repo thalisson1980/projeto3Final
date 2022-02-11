@@ -17,6 +17,17 @@ const authMiddleware = require('../middlewares/auth');
 
 router.get('/', async(req, res) => {
     try {
+        const { token } = req.session
+        const payload = jwt.verify(token, authToken.secret);
+        const user = await User.findById(payload.id);
+
+        if (!user) {
+            return res.status(400).send("User not found");
+        }
+
+        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
+            return res.status(400).send("You are not authorized to do this");
+        }
 
         const employees = await Employee.find();
         return res.json(employees);
@@ -28,7 +39,17 @@ router.get('/', async(req, res) => {
 
 router.get('/:employeeId', authMiddleware, async(req, res) => {
     try {
+        const { token } = req.session
+        const payload = jwt.verify(token, authToken.secret);
+        const user = await User.findById(payload.id);
 
+        if (!user) {
+            return res.status(400).send("User not found");
+        }
+
+        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
+            return res.status(400).send("You are not authorized to do this");
+        }
         const employee = await Employee.findById(req.params.employeeId);
         return res.json({ employee });
 
@@ -42,18 +63,17 @@ router.post('/', async(req, res) => {
 
 
     try {
-        // const { authorization } = req.headers
-        // const token = authorization.replace("Bearer ", "")
-        // const payload = jwt.verify(token, authToken.secret);
-        // const user = await User.findById(payload.id);
+        const { token } = req.session
+        const payload = jwt.verify(token, authToken.secret);
+        const user = await User.findById(payload.id);
 
-        // if (!user) {
-        //     return res.status(400).send("User not found");
-        // }
+        if (!user) {
+            return res.status(400).send("User not found");
+        }
 
-        // if (user.permission !== 'admin') {
-        //     return res.status(400).send("You are not authorized to do this");
-        // }
+        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
+            return res.status(400).send("You are not authorized to do this");
+        }
 
 
         const { name } = req.body;
@@ -65,14 +85,14 @@ router.post('/', async(req, res) => {
 
 
     } catch (err) {
+        console.log(err)
         return res.status(400).send({ error: 'Error creating new employee' });
     }
 });
 
 router.put('/:employeeId', authMiddleware, async(req, res) => {
     try {
-        const { authorization } = req.headers
-        const token = authorization.replace("Bearer ", "")
+        const { token } = req.session
         const payload = jwt.verify(token, authToken.secret);
         const user = await User.findById(payload.id);
 
@@ -80,10 +100,9 @@ router.put('/:employeeId', authMiddleware, async(req, res) => {
             return res.status(400).send("User not found");
         }
 
-        if ((user.permission === 'view')) {
+        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
             return res.status(400).send("You are not authorized to do this");
         }
-
         const { name, adress, postalCode, occupation, permission } = req.body;
         const employee = await Employee.findByIdAndUpdate(req.params.employeeId, {
 
@@ -103,13 +122,12 @@ router.put('/:employeeId', authMiddleware, async(req, res) => {
 });
 
 router.delete('/:employeeId', authMiddleware, async(req, res) => {
-    const { authorization } = req.headers
-    const token = authorization.replace("Bearer ", "")
+    const { token } = req.session
     const payload = jwt.verify(token, authToken.secret);
     const user = await User.findById(payload.id);
 
     if (!user) {
-        return res.status(400).send("Employee not found");
+        return res.status(400).send("User not found");
     }
 
     if (user.permission !== 'admin') {

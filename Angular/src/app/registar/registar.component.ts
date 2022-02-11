@@ -10,7 +10,7 @@ import { Router } from '@angular/router'
 })
 export class RegistarComponent implements OnInit {
 
-  constructor(private service:AppServiceService,private router: Router) { }
+  constructor(private service:AppServiceService, private router: Router) { }
 
   errormsg:any;
   successmsg:any;
@@ -31,18 +31,19 @@ export class RegistarComponent implements OnInit {
         this.service.criarUser(this.userForm.value).subscribe((res)=>{
          if(res.error =='User already exists'){
               this.errormsg = 'This email already exists!';
-              
+
           }
           if(res.user){
             this.userForm.reset();
             this.successmsg = 'Account created!'
-            localStorage.setItem('email',res.user.email);
-            localStorage.setItem('token',res.token);
-            this.router.navigate(['perfil']);
+            sessionStorage.setItem('email',res.user.email);
+            sessionStorage.setItem('token',res.token);
+            this.router.navigate(['menuUser']);
+
           }
-            
-          
-          
+
+
+
         })
       }else{
         this.errormsg = 'Passwords must match!';
@@ -50,8 +51,8 @@ export class RegistarComponent implements OnInit {
     }else{
       this.errormsg = 'Fill every parameter!';
     }
-    
+
   }
 
-  
+
 }
