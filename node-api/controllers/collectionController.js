@@ -73,8 +73,8 @@ router.post('/', async(req, res) => {
         }
 
         const _id = uuidv4();
-        const container = await Collection.create({...req.body, _id });
-        return res.send({ container });
+        const collection = await Collection.create({...req.body, _id });
+        return res.send({ collection });
 
 
     } catch (err) {

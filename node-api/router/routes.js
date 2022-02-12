@@ -6,7 +6,6 @@ const router = express.Router();
 const userRoute = require('.././controllers/user');
 const keyRoute = require('.././controllers/keyController');
 const keyRequestRoute = require('.././controllers/keyRequestController');
-
 const DDCCFFRoute = require('.././controllers/ddccffController');
 const reqAuthRoute = require('.././controllers/reqAuthController');
 const EmployeeRoute = require('.././controllers/employeeController');
@@ -19,7 +18,6 @@ const containerCollectionRoute = require('.././controllers/containerCollectionCo
 
 router.use('/DDCCFF', DDCCFFRoute);
 router.use('/user', userRoute);
-
 router.use('/key', keyRoute);
 router.use('/circuit', circuitRoute);
 router.use('/keyRequest', keyRequestRoute);

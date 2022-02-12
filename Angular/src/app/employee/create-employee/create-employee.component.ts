@@ -1,7 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
 import { AppServiceService} from '../../app-service.service';
 import { Router } from '@angular/router'
+import { ActivatedRoute} from '@angular/router'
 import {  FormControl,FormGroup, Validators} from '@angular/forms'
+
 
 @Component({
   selector: 'app-create-employee',
@@ -10,12 +13,26 @@ import {  FormControl,FormGroup, Validators} from '@angular/forms'
 })
 export class CreateEmployeeComponent implements OnInit {
 
-  constructor(private service : AppServiceService,private router:Router) { }
+  constructor(private service : AppServiceService, private router: Router, private activatedRoute: ActivatedRoute ) { }
   errormsg:any;
   successmsg:any;
+  getparamid:any;
 
   ngOnInit(): void {
+    this.getparamid = this.activatedRoute.snapshot.paramMap.get('id');
+    if(this.getparamid){
+    this.service.getOneEmployee(this.getparamid).subscribe((res)=>{
+      console.log(res, 'res==>');
+      this.employeeForm.patchValue({
+        name: res.employee[0].name,
+        adress: res.employee[0].adress,
+        postalCode: res.employee[0].postalCode,
+        occupation: res.employee[0].occupation,
+        permission: res.employee[0].permission
+      });
+    });
   }
+}
   employeeForm = new FormGroup({
     // '_id':new FormControl('',Validators.required),
     'name':new FormControl('',Validators.required),
@@ -62,6 +79,20 @@ export class CreateEmployeeComponent implements OnInit {
     else
     {
       this.errormsg = 'All field is required';
+    }
+  }
+
+  employeeUpdate()
+  {
+    console.log(this.employeeForm.value,'updatedForm');
+    if(this.employeeForm.valid)
+    {
+      this.service.updateEmployee(this.employeeForm.value, this.getparamid).subscribe((res)=>{
+        console.log(res, 'resupdated');
+        this.successmsg = res.message;
+      })
+    }else{
+      this.errormsg = 'all field is required';
     }
   }
 }
