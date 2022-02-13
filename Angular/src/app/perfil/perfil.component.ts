@@ -54,46 +54,12 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  userForm = new FormGroup({
-    'reason':new FormControl('', Validators.required),
-    
-  });
-
-  submit(){
-    if(this.userForm.valid){
-
-      const email =localStorage.getItem('email');
-      const mensagem = JSON.parse(`{"email":"${email}","reason":"${this.userForm.value.reason}"}`);
-      
-      this.service.makeRequest(mensagem).subscribe((res)=>{
-
-      })
-      document.querySelector<HTMLElement>('.bg-modal')!.style.display ="none";
-
-    }else{
-      this.errormsg="Pleasy specify the reason!"
-    }
-  }
-
-  pedirChave(){
-    const email = localStorage.getItem('email');
-    this.service.makeRequest(email).subscribe((res)=>{
-      if(res.message =='assigned'){
-        
-        document.querySelector<HTMLElement>('.bg-modal1')!.style.display ="flex";
-      } else{
-        this.mensagem = res.message; 
-      }
-    })
-  }
-
+  
    fechar() {
     this.mensagem = ""; 
   }
 
-  closeModal1(){
-    document.querySelector<HTMLElement>('.bg-modal1')!.style.display ="none";
-  }
+
 
   closeModal2(){
     document.querySelector<HTMLElement>('.bg-modal2')!.style.display ="none";

@@ -32,9 +32,6 @@
         </div>
         <div class="row justify-content-between my-row my-row2">
             <div class="col-3 my-col">
-                <button id="pedirChave"   (click)="pedirChave()">Criar chave</button>
-            </div>
-            <div class="col-3 my-col">
                 <button id="historicoContentor"   (click)="historicoDeposicaoPorContentor()">Histórico de contentores</button>
             </div>
             <div class="col-3 my-col">
@@ -56,36 +53,6 @@
 
     </div>
 
-<div class="bg-modal bg-modal1">
-    <div class="modal-content">
-
-        <div class="close" (click)="closeModal1()">+</div>
-
-        <h1>You already have key assigned!</h1>
-
-        <div *ngIf="errormsg" class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>{{errormsg}}</strong>
-          </div>
-
-        <form [formGroup]="userForm"  class="mx-1 mx-md-4" (ngSubmit)="submit()">
-      
-            <div class="d-flex flex-row align-items-center mb-4">
-              <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-              <div class="form-outline flex-fill mb-0">
-                <input type="text" id="reason" formControlName="reason" class="form-control" />
-                <label class="form-label" for="form3Example1c">Please especify your reason for a new key request</label>
-              </div>
-            </div>
-
-            
-            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-              <button  class="btn btn-primary btn-sm">submit</button>
-            </div>
-
-          </form>
-        
-    </div>
-</div>
 
 
 <div class="bg-modal bg-modal2">
