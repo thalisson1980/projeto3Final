@@ -1,27 +1,55 @@
-<div class="container mt-5">
+<body>
+    <header class="p-3 bg-dark text-white">
+        <div class="container ">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                </a>
 
-    <h2>List Collection</h2>
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="https://www.apambiente.pt/residuos/estrategia-dos-biorresiduos" class="nav-link px-2 text-secondary">Biowastes</a></li>
+                    <li><a href="https://enea.apambiente.pt/" class="nav-link px-2 text-white">Educação Ambiental</a></li>
+                    <!-- <li><a href="/readCollection" class="nav-link px-2 text-white">Collection</a></li>
+              <li><a href="/readContainer" class="nav-link px-2 text-white">Container</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">Key</a></li> -->
+                </ul>
 
-    <table class="table mt-3">
-        <thead>
-            <tr>
-                <th scope="col">_id</th>
-                <th scope="col">Employees</th>
-                <th scope="col">Ocuppation</th>
-                <th scope="col">Circuit</th>
-                <th scope="col">Date Start Time</th>
-                <th scope="col">Date End Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor='let collection of read_collection'>
-                <th scope="row">{{collection._id}}</th>
-                <td *ngFor='let employee of collection.employees'>{{employee.name}}</td>
-                <td *ngFor='let employee of collection.employees'>{{employee.occupation}}</td>
-                <td *ngFor='let circuit of collection.circuit'>{{collection.circuit_cod}}</td>
-                <!-- <td *ngFor='let circuit of collection.circuit'>{{circuit.circuit_cod}}</td> -->
-            </tr>
+                <form class="col-md-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 offset-md-3 py-4">
+                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                </form>
 
-        </tbody>
-    </table>
-</div>
+                <div class="text-right offset-md-1 py-4">
+                    <button routerLink="/logout" type="button" class="btn btn-outline-light me-2 ">Logout</button>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container mt-5">
+
+        <h2>List Collection</h2>
+
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">_id</th>
+                    <th scope="col">Employees</th>
+                    <th scope="col">Ocuppation</th>
+                    <th scope="col">Circuit</th>
+                    <th scope="col">Date Start Time</th>
+                    <th scope="col">Date End Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let collection of read_collection'>
+                    <th scope="row">{{collection._id}}</th>
+                    <td *ngFor='let employee of collection.employees'>{{employee.name}}</td>
+                    <td *ngFor='let employee of collection.employees'>{{employee.occupation}}</td>
+                    <td *ngFor='let circuit of collection.circuit'>{{collection.circuit_cod}}</td>
+                    <!-- <td *ngFor='let circuit of collection.circuit'>{{circuit.circuit_cod}}</td> -->
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</body>

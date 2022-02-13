@@ -30,7 +30,7 @@ router.get('/', async(req, res) => {
             return res.status(400).send("You are not authorized to do this");
         }
 
-        const keys = await Key.find();
+        const keys = await Key.find().populate('user');
         return res.json(keys);
 
     } catch (error) {
@@ -77,12 +77,12 @@ router.post('/', async(req, res) => {
         }
 
 
-        const { code } = req.body;
-        if (await Key.findOne({ code }))
-            return res.status(400).send({ error: 'Key already exists' });
+        // const { id } = req.body;
+        // if (await Key.findOne({ id }))
+        //     return res.status(400).send({ error: 'Key already exists' });
         const _id = uuidv4();
-        const key = await Key.create({...req.body, _id });
-        return res.send({ key });
+        const admin = await Key.create({...req.body, _id });
+        return res.send({ admin });
 
 
     } catch (err) {
@@ -139,7 +139,7 @@ router.delete('/:keyId', authMiddleware, async(req, res) => {
 
         return res.status(200).send({ message: 'User deleted' });
     } catch (err) {
-        return res.status(400).send({ error: 'Error deleting user' });
+        return res.status(400).send({ error: 'Error deleting key' });
     }
     // let employee = req.params.employeeId;
     // let collections = await Collection.find({ Employees: employee })

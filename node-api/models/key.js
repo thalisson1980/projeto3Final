@@ -1,18 +1,10 @@
 const mongoose = require('mongoose');
 
+
 const KeySchema = new mongoose.Schema({
 
     _id: {
         type: String,
-    },
-    code: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    DDCCFF: {
-        type: mongoose.SchemaTypes.String,
-        ref: 'DDCCFF'
     },
     startDate: {
         type: Date,

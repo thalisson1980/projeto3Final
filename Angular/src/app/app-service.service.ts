@@ -165,14 +165,39 @@ export class AppServiceService {
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }
-  deleteContainer(id:any):Observable<any>
+
+  getOneContainer(id:any):Observable<any>
   {
     let ids=id;
-    return this._http.delete(`http://localhost:3000/container/${ids}`,{ headers: new HttpHeaders({
+    return this._http.get(`http://localhost:3000/user/${ids}`,{ headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': 'true',
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
+
+  deleteContainer(id:any):Observable<any>
+  {
+    let ids=id;
+    return this._http.delete(`http://localhost:3000/user/${ids}`,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
+
+  updateContainer(data:any,id:any):Observable<any>
+  {
+    let ids=id;
+    return this._http.put(`http://localhost:3000/user/${ids}`,data,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }

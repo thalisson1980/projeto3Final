@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Document</title>
-</head>
-
 <body>
     <header class="p-3 bg-dark text-white">
         <div class="container ">
@@ -18,19 +7,19 @@
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-secondary">Biowastes</a></li>
-                    <li><a href="https://www.resulima.pt/pt/sustentabilidade/ecopontos-resulima/" class="nav-link px-2 text-white">Ecopontos</a></li>
+                    <li><a href="https://www.apambiente.pt/residuos/estrategia-dos-biorresiduos" class="nav-link px-2 text-secondary">Biowastes</a></li>
+                    <li><a href="https://enea.apambiente.pt/" class="nav-link px-2 text-white">Educação Ambiental</a></li>
                     <!-- <li><a href="/readCollection" class="nav-link px-2 text-white">Collection</a></li>
-                    <li><a href="/readContainer" class="nav-link px-2 text-white">Container</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Key</a></li> -->
+                <li><a href="/readContainer" class="nav-link px-2 text-white">Container</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Key</a></li> -->
                 </ul>
 
-                <form class="col-md-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                <form class="col-md-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 offset-md-3 py-4">
                     <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                 </form>
 
-                <div class="text-right">
-                    <button routerLink="/logout" type="button" class="btn btn-outline-light me-2">Logout</button>
+                <div class="text-right offset-md-1 py-4">
+                    <button routerLink="/logout" type="button" class="btn btn-outline-light me-2 ">Logout</button>
 
                 </div>
             </div>
@@ -46,7 +35,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create Circuit</p>
+                                    <p class="text h2 fw-bold mb-4 mx-1 mx-md-4 mt-4">Create Circuit</p>
 
 
                                     <div *ngIf="errormsg" class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -65,31 +54,122 @@
                                             <label for="circuit_cod" class="form-label">Circuit code</label>
                                             <input type="text" class="form-control" formControlName="circuit_cod" placeholder="Enter name">
                                         </div>
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                       Containers
-                                      </button>
+                                        <div class="dropdown mb-2">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                 <li>
                                                     <a class="dropdown-item" value="#"></a>
                                                 </li>
                                             </ul>
-                                            <div class="d-flex justify-content-end mx-4 mb-3 mb-lg-4" *ngIf="!getparamid" (click)="circuitSubmit()">
-
-                                                <button class="btn btn-primary btn-sm">Create</button> &nbsp; &nbsp;
-                                                <button routerLink="/readCircuit" class="btn btn-secondary btn-sm">Read</button>
-                                            </div>
-                                            <div class="d-flex justify-content-end mx-4 mb-3 mb-lg-4" *ngIf="getparamid" (click)="circuitUpdate()">
-
-                                                <button class="btn btn-success btn-sm">Edit</button> &nbsp; &nbsp;
-                                                <button routerLink="/readCircuit" class="btn btn-secondary btn-sm">Read</button>
-                                            </div>
-
                                         </div>
+                                        <div class="dropdown mb-2">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a class="dropdown-item" value="#"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown mb-2">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a class="dropdown-item" value="#"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="dropdown mb-2">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a class="dropdown-item" value="#"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown mb-2">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a class="dropdown-item" value="#"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown mb-2">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a class="dropdown-item" value="#"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown mb-2">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a class="dropdown-item" value="#"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown mb-2">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a class="dropdown-item" value="#"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown mb-2">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a class="dropdown-item" value="#"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown mb-2">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a class="dropdown-item" value="#"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown mb-2">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a class="dropdown-item" value="#"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown mb-2">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a class="dropdown-item" value="#"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+
+                                        <div class="d-flex justify-content-end mx-4 mb-3 mb-lg-4" *ngIf="!getparamid" (click)="circuitSubmit()">
+
+                                            <button class="btn btn-primary btn-sm">Create</button> &nbsp; &nbsp;
+                                            <button routerLink="/readCircuit" class="btn btn-secondary btn-sm">Read</button>
+                                        </div>
+                                        <div class="d-flex justify-content-end mx-4 mb-3 mb-lg-4" *ngIf="getparamid" (click)="circuitUpdate()">
+
+                                            <button class="btn btn-success btn-sm">Edit</button> &nbsp; &nbsp;
+                                            <button routerLink="/readCircuit" class="btn btn-secondary btn-sm">Read</button>
+                                        </div>
+
+
                                     </form>
 
                                 </div>
                                 <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
 
                                     <img id="contentor" src="https://ambiente.cascais.pt/sites/default/files/styles/760x380/public/biorresiduos.png?itok=ZExIAnD6" class="contentor" alt="Sample image">
 
@@ -103,5 +183,3 @@
     </section>
 
 </body>
-
-</html>

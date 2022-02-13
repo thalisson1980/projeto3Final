@@ -25,9 +25,9 @@ const UserSchema = new mongoose.Schema({
         required: false,
         default: Date.now
     },
-    key: {
-        type: mongoose.SchemaTypes.String,
-        ref: 'key'
+    location: {
+        type: String,
+        required: true
     },
     permission: {
         type: String,

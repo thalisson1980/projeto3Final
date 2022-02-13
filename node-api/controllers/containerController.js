@@ -28,6 +28,8 @@ router.get('/', async(req, res) => {
         if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
             return res.status(400).send("You are not authorized to do this");
         }
+        const containers = await Container.find();
+        return res.json(containers);
 
     } catch (error) {
         return res.status(400).send({ error: 'Error loading containers' })

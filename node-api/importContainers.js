@@ -16,8 +16,9 @@ containerCod.forEach(item => {
             const newContainer = new Container({
                 _id,
                 container_cod: item.ecopont_tipo,
-                gpsLocation: item.ecopont_coord_latitude + ";" + item.ecopont_coord_longitude,
+                gpsLocation: item.ecopont_coord_latitude + "," + item.ecopont_coord_longitude,
                 adress: "Viana",
+                ddccff: "null"
             })
 
             rotas.push(newContainer)
