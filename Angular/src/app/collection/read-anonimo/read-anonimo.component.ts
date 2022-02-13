@@ -155,7 +155,7 @@ export class ReadAnonimoComponent implements OnInit {
       data: {
         labels: listOfDate, 
         datasets: [{
-            label: 'Minhas deposições',
+            label: 'All depositions',
             data: listOfMyKG,
             borderWidth: 1,
             backgroundColor: ['rgba(75, 192, 192, 0.6)']
