@@ -20,6 +20,7 @@ import { ReadUserComponent } from './user/read-user/read-user.component';
 import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
 import { CompararComponent } from './comparar/comparar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReadAnonimoComponent } from './collection/read-anonimo/read-anonimo.component';
 
 const routes: Routes = [
   {path: 'login', component:LoginComponent},
@@ -40,7 +41,8 @@ const routes: Routes = [
   {path: 'createUser', component:CreateUserComponent},
   {path: 'readUser', component:ReadUserComponent},
   {path: '', component:MenuPrincipalComponent},
-  {path: 'comparar',component:CompararComponent}
+  {path: 'comparar',component:CompararComponent},
+  {path: 'readAnonimo', component:ReadAnonimoComponent}
 
 ];
 

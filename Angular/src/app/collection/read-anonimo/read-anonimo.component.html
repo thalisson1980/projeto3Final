@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header class="p-3 bg-dark text-white">
+        <div class="container ">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 text-secondary">Biowastes</a></li>
+                    <li><a href="https://www.resulima.pt/pt/sustentabilidade/ecopontos-resulima/" class="nav-link px-2 text-white">Ecopontos</a></li>
+                    <!-- <li><a href="/readCollection" class="nav-link px-2 text-white">Collection</a></li>
+                    <li><a href="/readContainer" class="nav-link px-2 text-white">Container</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Key</a></li> -->
+                </ul>
+
+                <form class="col-md-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                </form>
+
+                <div class="text-right">
+                    <button routerLink="/login" type="button" class="btn btn-outline-light me-2">Login</button>
+                    <button routerLink="/registar" type="button" class="btn btn-warning">Sign-up</button>
+                    <button routerLink="" type="button" class="btn btn-warning">Main page</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container my-container">
+            <div class="row my-row">
+              <div class="col my-col">
+                  <h1>Gráfico de deposições</h1>
+              </div>
+            </div>
+                   
+                    <div *ngIf="dateAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <strong>{{dateAlert}}</strong>
+                    </div>
+   
+                    <div class="row my-row1">
+                      <a >Prefere comparar entre:</a>
+                      <div class="col-1 my-col">
+                      
+                       
+                        <select   style="width: 80px;" [(ngModel)]="choice" name="choice" id="choice" (ngModelChange)="choiceMade()">
+                          <option hidden selected  >List by</option>
+                          <option value="county">County</option>
+                          <option value="parish">Parish</option>
+                          <option id="container" value="container">Container</option>
+                        </select>
+    
+                        
+                        
+                      </div>  
+                      
+              
+                    <div *ngIf="(choice)=='container' || (choice)=='parish' || (choice)=='county' ">
+                      <div class="col-2  my-col">
+                        <select style="width: 150px;" [(ngModel)]="county" name="county" id="county" (ngModelChange)="countyChosen()" >
+                          <option selected hidden >Choose a county</option>
+                          <option *ngFor="let county of counties" value={{county.code}}>{{county.location}}</option>
+                        </select>
+                      </div>
+                    </div>
+              
+                
+                    <div *ngIf="(choice)=='container' || (choice)=='parish'">
+                    <div class="col-4 my-col">
+                      <select style="width: 150px;" [(ngModel)]="parish" name="parish" id="parish" (ngModelChange)="parishChosen()" >
+                        <option selected hidden >Choose a parish</option>
+                        <option *ngFor="let parish of parishList" value={{parish.code}}>{{parish.location}}</option>
+                      </select>
+                    </div>
+                  </div>
+              
+                    <div *ngIf="(choice)=='container'">
+                      <div class="col-1 my-col">
+                        <select  [(ngModel)]="container" style="width: 150px;" name="container" id="container" (ngModelChange)="containerChosen()" >
+                          <option selected hidden >Choose a container</option>
+                          <option *ngFor="let container of containers" value={{container.container_cod}}>{{container.container_cod}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    </div>
+    
+                  
+                    <div class="row my-row">
+                      <div class="col-2.4 my-col">
+                        <button class="button" id="compare" name="compare" (click)="compararMes()">Comparar ultimo mês</button>
+                      </div>
+                      <div class="col-2.4 my-col">
+                        <button class="button" id="compare" name="compare" (click)="compararTrimestre(0)">Comparar ultimo trimestre</button>
+                      </div>
+                      <div class="col-2.4 my-col">
+                        <button class="button" id="compare" name="compare" (click)="compararTrimestre(1)">Comparar ultimo semestre</button>
+                      </div>
+                      <div class="col-2.4 my-col">
+                        <button class="button" id="compare" name="compare" (click)="compararAno(0)">Comparar ultimo ano</button>
+                      </div>
+                      <div class="col-2.4 my-col">
+                        <button class="button" id="compare" name="compare" (click)="compararAno(1)">Comparar tudo</button>
+                      </div>
+                    </div>
+                  
+    
+                    <div class="row my-row myChartRow ">
+                      <canvas id="myChart" width="400" height="150" #mychart></canvas>
+                    </div>
+                  </div>
+    </main>
+    
+</body>
+</html>

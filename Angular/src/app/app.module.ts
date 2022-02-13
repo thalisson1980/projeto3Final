@@ -23,6 +23,7 @@ import { ReadUserComponent } from './user/read-user/read-user.component';
 import { CreateUserComponent } from './user/create-user/create-user.component';
 import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
 import { CompararComponent } from './comparar/comparar.component';
+import { ReadAnonimoComponent } from './collection/read-anonimo/read-anonimo.component';
 
 
 
@@ -48,7 +49,8 @@ import { CompararComponent } from './comparar/comparar.component';
     ReadUserComponent,
     CreateUserComponent,
     MenuPrincipalComponent,
-    CompararComponent
+    CompararComponent,
+    ReadAnonimoComponent
 
 
 
