@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const keyRequest = require('../models/keyRequest');
 const user = require('../models/user');
+const Key = require('../models/key');
 
 
 router.post('/',async (req,res) =>{
-    
+    console.log(req.body)
     if(req.body.email){
         var query1 = { email: req.body.email };
 
@@ -31,8 +32,9 @@ router.post('/',async (req,res) =>{
         var query1 = { email: req.body };
 
     const User1 =  await user.findOne(query1); 
-    if(User1){
-        if(User1.key==null){
+    const chave = await keyRequest.findOne({userEmail:User1.email})
+    if(!chave){
+        
             
             const request = new keyRequest({
                 userEmail: req.body,
@@ -44,9 +46,10 @@ router.post('/',async (req,res) =>{
                 res.json({message:"The key request was made succesfully"});
             }catch(error){
                 res.json({message : error});
-            }        
-        }else{
-            var client = { userEmail: req.body };
+            } 
+    }       
+    else{
+         var client = { userEmail: req.body };
             requests = await keyRequest.find(client);
             var activeRequest;
             requests.forEach(element => {
@@ -62,10 +65,8 @@ router.post('/',async (req,res) =>{
         }
                
     }
-    }
     
-    
-    
+
 }); 
 
 module.exports = router;

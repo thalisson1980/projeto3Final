@@ -8,8 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class MenuPrincipalComponent implements OnInit {
 
   constructor() { }
-
+  user:any;
+  anonimo:any;
   ngOnInit(): void {
+
+    if(localStorage.getItem('email')){
+      this.user= true;
+    }else{
+      this.anonimo = true;
+    }
+    console.log("teste"+this.user)
   }
 
 }

@@ -45,8 +45,16 @@ export class ReadAnonimoComponent implements OnInit {
   ctx: any;
   @ViewChild('mychart') mychart:any;
 
+  user:any;
+  anonimo:any;
+
   ngOnInit(): void {
-    
+    if(localStorage.getItem('email')){
+      this.user= true;
+    }else{
+      this.anonimo = true;
+    }
+    console.log("teste"+this.user)
   }
 
   choiceMade(){
