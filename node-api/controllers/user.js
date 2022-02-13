@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authToken = require('../token/secret.json');
 const User = require('../models/user');
+const Key = require('../models/key');
 const { v4: uuidv4 } = require('uuid');
 const authMiddleware = require('../middlewares/auth');
 
@@ -64,7 +65,20 @@ router.get('/:userId', authMiddleware, async(req, res) => {
             return res.status(400).send("You are not authorized to do this");
         }
         const user_id = await User.findById(req.params.userId);
-        res.json({ user_id });
+        const chaves = await Key.find({user:user_id._id});
+
+        let userKey;
+        let existe = false;
+        for(const chave of chaves ){
+            if(chave.ativo == true ){
+                userKey = chave
+                existe = true;
+            }
+        }
+        if(!existe){
+            userKey = "No valid key"
+        }
+        res.json({ user_id,userKey});
 
     } catch (error) {
         return res.status(400).send({ error: 'Error loading user' })

@@ -51,8 +51,27 @@ export class PerfilComponent implements OnInit {
   ctx: any;
   @ViewChild('mychart') mychart:any;
   
+  user:any;
+  userKey:any;
+  escolheuUpdate:any;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    this.service.getOneUser(localStorage.getItem('id')).subscribe((res)=>{
+      if(res.collections){
+        
+        
+         this.user = res.user_id;
+         if(res.userKey !== "No valid key"){
+           this.userKey = res.userKey;
+         }
+        
+      } else{
+        this.mensagem = res.ERROR;; 
+      }
+    })
+
+  }
 
   
    fechar() {
@@ -60,7 +79,26 @@ export class PerfilComponent implements OnInit {
   }
 
 
+  ativarUpdate(){
+    this.escolheuUpdate = true;
+    const nome = document.getElementById('paiNome');
+    const email= document.getElementById('paiEmail');
+    const antigoNome = document.getElementById('userName')!;
+    const antigoEmail = document.getElementById('userEmail')!;
+    nome?.removeChild(antigoNome)
+    email?.removeChild(antigoEmail)
 
+    const botaoUpdate = document.getElementById('update');
+    botaoUpdate?.parentNode?.removeChild(botaoUpdate);
+
+    const novoNome = document.createElement('input');
+    novoNome.setAttribute('value',"teste");
+    const novoEmail = document.createElement('input');
+    novoEmail.setAttribute('value',"teste");
+    nome?.appendChild(novoNome);
+    email?.appendChild(novoEmail);
+
+  }
   closeModal2(){
     document.querySelector<HTMLElement>('.bg-modal2')!.style.display ="none";
   }

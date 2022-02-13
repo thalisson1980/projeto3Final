@@ -27,7 +27,7 @@
 
         <div class="row  my-row my-row1">
             <div class="col my-col">
-                Perfil
+               <h1>Welcome to your profile!</h1> 
             </div>
         </div>
         <div class="row justify-content-between my-row my-row2">
@@ -45,11 +45,40 @@
               <button routerLink="/comparar" ><a></a>Comparar deposições</button>
             </div>
         </div>
-        <div class="row  my-row my-row3">
-            <div class="col my-col">
-                informaçao
+        <div id="info" class="row  my-row my-row">
+            <div id="paiNome" class="col-12 my-col">
+                <label >Nome: </label>
+                <label id="userName" >tt</label>
             </div>
-        </div>
+          
+          
+            <div id="paiEmail" class="col-12 my-col">
+              <label >Email: </label>
+              <label id="userEmail" >ss</label>
+          </div>
+        
+        
+          <div *ngIf="userKey" >
+            <div class="col-12 my-col">
+              <label >Key: </label>
+            </div>
+          </div>
+        
+            <div class="col-12 my-col">
+              <button id="update" (click)="ativarUpdate()">Update</button>
+            </div>
+
+            <div *ngIf="escolheuUpdate" >
+              <div class="col my-col">
+                <button id="update" (click)="ativarUpdate()">Cancel</button>
+              </div>
+              <div class="col my-col">
+                <button id="update" (click)="ativarUpdate()">Save</button>
+              </div>
+            </div>
+          </div>
+
+       
 
     </div>
 
