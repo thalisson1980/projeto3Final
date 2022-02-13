@@ -10,11 +10,11 @@
 <body >
 
   <header>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar bg-dark text-white">
       <a class="navbar-brand">Biowastes</a>
       <form class="form-inline">
-        <button class="btn btn-outline-success" routerLink="/paginaInicialUser" type="button">Página inicial</button>
-        <button class="btn btn-outline-success" routerLink="/logout" type="button">Logout</button>
+        <button class="btn btn-outline-light me-2" routerLink="/menuUser" type="button">Main page</button>
+        <button class="btn btn-outline-light me-2" routerLink="/logout" type="button">Logout</button>
       </form>
     </nav>
 </header>
@@ -32,22 +32,25 @@
         </div>
         <div class="row justify-content-between my-row my-row2">
             <div class="col-3 my-col">
-                <button id="historicoContentor"   (click)="historicoDeposicaoPorContentor()">Histórico de contentores</button>
+                <button id="historicoContentor"   (click)="historicoDeposicaoPorContentor()">Compare by containers</button>
             </div>
             <div class="col-3 my-col">
-              <button id="historicoRecolha"   (click)="historicoDeposicaoPorRecolha()">Histórico de recolhas</button>
+              <button id="historicoRecolha"   (click)="historicoDeposicaoPorRecolha()">Compare by collections</button>
           </div>
 
           <div class="col-3 my-col">
-            <button id="historicoMensal"   (click)="historicoDeposicaoPorMes()">Histórico por mês</button>
+            <button id="historicoMensal"   (click)="historicoDeposicaoPorMes()">Compare by month</button>
         </div>
             <div class="col-3 my-col">
-              <button routerLink="/comparar" ><a></a>Comparar deposições</button>
+              <button routerLink="/comparar" ><a></a>Compare depositions</button>
             </div>
         </div>
         <div id="info" class="row  my-row my-row">
+          <div class="col-12">
+            <h5 id="userInfo">User information</h5>
+          </div>
             <div id="paiNome" class="col-12 my-col">
-                <label >Nome: </label>
+                <label >Name: </label>
                 <label id="userName" >tt</label>
             </div>
           
@@ -70,7 +73,7 @@
 
             <div *ngIf="escolheuUpdate" >
               <div class="col my-col">
-                <button id="update" (click)="ativarUpdate()">Cancel</button>
+                <button id="update" onClick="window.location.reload();">Cancel</button>
               </div>
               <div class="col my-col">
                 <button id="update" (click)="ativarUpdate()">Save</button>
@@ -89,7 +92,7 @@
 
         <div class="close" (click)="closeModal2()">+</div>
 
-        <h1>Histórico de contentores</h1>
+        <h1>Container history</h1>
 
         <div class="container">
             <table class="table">
@@ -120,12 +123,12 @@
 
       <div class="close" (click)="closeModal4()">+</div>
 
-      <h1>Histórico de recolhas</h1>
+      <h1>Collection history</h1>
 
       <div class="container">
           <table class="table">
               <thead>
-                <th scope="col">Numero de deposiçoes</th>
+                <th scope="col">Number of depositions</th>
                 <th scope="col">Kgs deposited</th>
                 <th scope="col">Date</th>
               </thead>
@@ -156,7 +159,7 @@
       <div class="container">
           <table class="table">
               <thead>
-                <th scope="col">Numero de deposiçoes</th>
+                <th scope="col">Number of depositions</th>
                 <th scope="col">Kgs deposited</th>
                 <th scope="col">Data</th>
               </thead>

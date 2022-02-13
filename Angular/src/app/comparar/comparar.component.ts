@@ -168,26 +168,34 @@ export class CompararComponent implements OnInit {
       data: {
         labels: listOfDate, 
         datasets: [{
-            label: 'Minhas deposições',
+            label: 'My depositions',
             data: listOfMyKG,
             borderWidth: 1,
-            backgroundColor: ['rgba(75, 192, 192, 0.2)']
+            backgroundColor: ['rgba(75, 192, 192, 0.6)'],
+            
         },
         {
-          label: 'Outras deposições',
+          label: 'Other users AVG depositions',
           data: listOfOther,
           borderWidth: 1,
-          backgroundColor: ['rgba(75, 75, 75, 0.2)']
+          backgroundColor: ['rgba(91, 33, 50, 0.6)']
       }
       ]
     } ,
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true
-              }
+    options: {
+      plugins: { 
+      legend: {
+        labels: {
+          color: "white", 
+          font: {
+            size: 18
           }
+        },
+        
       }
+    }
+  }
+
   });
     
   }

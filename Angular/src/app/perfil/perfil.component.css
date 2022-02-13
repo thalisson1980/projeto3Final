@@ -1,9 +1,16 @@
 .my-container{
     border: 1px solid black;
+    background-color:#343a40;
+    color:white;
+}
+
+#userInfo{
+    margin-left:40%;
 }
 
 .my-row{
-    border:3px solid black
+    border-bottom:3px solid black;
+    margin: 2%;
 }
 
 .my-row1{

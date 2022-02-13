@@ -158,17 +158,23 @@ export class ReadAnonimoComponent implements OnInit {
             label: 'Minhas deposições',
             data: listOfMyKG,
             borderWidth: 1,
-            backgroundColor: ['rgba(75, 192, 192, 0.2)']
+            backgroundColor: ['rgba(75, 192, 192, 0.6)']
         }
       ]
     } ,
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true
-              }
+    options: {
+      plugins: { 
+      legend: {
+        labels: {
+          color: "white", 
+          font: {
+            size: 18
           }
+        },
+        
       }
+    }
+  }
   });
     
   }

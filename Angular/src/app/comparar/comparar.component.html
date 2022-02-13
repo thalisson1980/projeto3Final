@@ -10,23 +10,20 @@
 <body>
 
     <header>
-          <div class="navbar navbar-dark bg-dark shadow-sm">
-            <div class="container">
-                <a href="#" class="navbar-brand d-flex align-items-center">
-                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> -->
-                    <strong>User</strong>
-                    
-                </a>
-                <button  class="btn btn-outline-light me-2" routerLink="/menuUser" type="button">Página inicial</button>
-                <button  class="btn btn-outline-light me-2" routerLink="/perfil"  type="button">Perfil</button>
-                <button  class="btn btn-outline-light me-2" routerLink="/logout" type="button">Logout</button>
-            </div>
-        </div>
+        <nav class="navbar bg-dark text-white">
+          <a class="navbar-brand">Biowastes</a>
+          <form class="form-inline">
+                 <button  class="btn btn-outline-light" routerLink="/menuUser" type="button">Página inicial</button>
+                <button  class="btn btn-outline-light " routerLink="/perfil"  type="button">Perfil</button>
+                <button  class="btn btn-warning" routerLink="/logout" type="button">Logout</button>
+          </form>
+        </nav>
     </header>
+
     <div class="container my-container">
-        <div class="row my-row">
-          <div class="col my-col">
-              <h1>Gráfico de deposições</h1>
+        <div class=" row my-row">
+          <div class="title col my-col">
+              <h1>Depositions graph</h1>
           </div>
         </div>
                
@@ -36,16 +33,16 @@
 
                 <div class="row my-row">
                     <div class="col my-col">
-                      <a >Prefere comparar por:</a>
+                      <a >Would you like to compare by</a>
                       <select  [(ngModel)]="tipoComparacao" name="tipoComparacao" id="tipoComparacao" >
-                          <option value="duasDatas">Comparar entre duas datas</option>
-                          <option value="periodo">Listar por periodos</option>
+                          <option value="duasDatas">two dates</option>
+                          <option value="periodo">Last..</option>
                       </select>
                   </div>
                 </div>
           
                 <div class="row my-row1">
-                  <a >Prefere comparar entre:</a>
+                  <a >And by</a>
                   <div class="col-1 my-col">
                   
                    
@@ -93,7 +90,7 @@
                 <div *ngIf="(tipoComparacao) == 'duasDatas'" >
                 <div class="row my-row">
                   <div class="col-1.6">
-                    <a >Escolha duas datas</a>
+                    <a >Choose 2 dates</a>
                   </div>
                   <div class="col-2 my-col">
                     
@@ -115,22 +112,23 @@
 
               <div *ngIf="(tipoComparacao) == 'periodo'" >
                 <div class="row my-row">
-                  <div class="col-2.4 my-col">
-                    <button class="button" id="compare" name="compare" (click)="compararMes()">Comparar ultimo mês</button>
+                  <div class="col my-col">
+                        <input type="radio" id="radio1" name="radios" value="all" checked>
+                        <label (click)="compararAno(1)" for="radio1">Compare last month</label>
+
+                      <input type="radio" id="radio2" name="radios"value="false">
+                        <label (click)="compararTrimestre(0)" for="radio2">Compare last trimester</label>
+
+                      <input type="radio" id="radio3" name="radios" value="true">
+                        <label (click)="compararTrimestre(1)" for="radio3">Compare last semester</label>
+
+                        <input type="radio" id="radio4" name="radios" value="true">
+                        <label (click)="compararAno(0)" for="radio4">Compare last year</label>
+
+                        <input type="radio" id="radio5" name="radios" value="true">
+                        <label  (click)="compararAno(1)" for="radio5">Compare all information</label>
                   </div>
-                  <div class="col-2.4 my-col">
-                    <button class="button" id="compare" name="compare" (click)="compararTrimestre(0)">Comparar ultimo trimestre</button>
-                  </div>
-                  <div class="col-2.4 my-col">
-                    <button class="button" id="compare" name="compare" (click)="compararTrimestre(1)">Comparar ultimo semestre</button>
-                  </div>
-                  <div class="col-2.4 my-col">
-                    <button class="button" id="compare" name="compare" (click)="compararAno(0)">Comparar ultimo ano</button>
-                  </div>
-                  <div class="col-2.4 my-col">
-                    <button class="button" id="compare" name="compare" (click)="compararAno(1)">Comparar tudo</button>
-                  </div>
-                </div>
+              </div>
               </div>
 
                 <div class="row my-row myChartRow ">
