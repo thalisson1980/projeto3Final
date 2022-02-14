@@ -104,8 +104,8 @@ export class PerfilComponent implements OnInit {
   historicoContentor(){
 
     const dados = {
-      email:localStorage.getItem('email'),
-      token:localStorage.getItem('token')
+      email:sessionStorage.getItem('email'),
+      token:sessionStorage.getItem('token')
 
     }
     this.service.listContainers(dados).subscribe((res)=>{

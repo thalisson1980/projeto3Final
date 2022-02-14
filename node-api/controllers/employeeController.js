@@ -9,11 +9,11 @@ const User = require('../models/user');
 const Collection = require('../models/collection');
 const { v4: uuidv4 } = require('uuid');
 const authMiddleware = require('../middlewares/auth');
-// const { Collection } = require('mongoose');
 
 
 
-// router.use(authMiddleware);
+
+router.use(authMiddleware);
 
 router.get('/', async(req, res) => {
     try {
@@ -134,21 +134,25 @@ router.delete('/:employeeId', authMiddleware, async(req, res) => {
         if (user.permission !== 'admin') {
             return res.status(400).send("You are not authorized to do this");
         }
-        await Employee.findByIdAndRemove(req.params.employeeId);
+        //     await Employee.findByIdAndRemove(req.params.employeeId);
 
-        return res.status(200).send({ message: 'User deleted' });
+        //     return res.status(200).send({ message: 'User deleted' });
+        // } catch (err) {
+        //     return res.status(400).send({ error: 'Error deleting user' });
+        // }
+        let employee = req.params.employeeId;
+        let collections = await Collection.find({ employees: employee })
+
+        console.log(collections)
+        if (collections[0]) {
+            return res.status(201).send({ error: 'Employee in collection' });
+        } else {
+            await Employee.findByIdAndRemove(req.params.employeeId);
+            return res.status(200).send({ error: 'Employee Deleted' });
+        }
     } catch (err) {
         return res.status(400).send({ error: 'Error deleting user' });
     }
-    // let employee = req.params.employeeId;
-    // let collections = await Collection.find({ Employees: employee })
-    // if (collections[0]) {
-    //     return res.status(400).send({ error: 'Employee in collection' });
-    // } else {
-    //     await Employee.findByIdAndRemove(req.params.employeeId);
-    //     return res.status(200).send({ error: 'Employee Deleted' });
-    // }
-
 });
 
 module.exports = router;

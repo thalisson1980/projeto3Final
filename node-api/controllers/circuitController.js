@@ -6,12 +6,13 @@ const jwt = require('jsonwebtoken');
 const authToken = require('../token/secret.json');
 const Circuit = require('../models/circuit');
 const User = require('../models/user');
-const Container = require('../models/container');
+const container = require('../models/container');
 const { v4: uuidv4 } = require('uuid');
-// const authMiddleware = require('../middlewares/auth');
+const Collection = require('../models/collection');
+const authMiddleware = require('../middlewares/auth');
 
 
-// router.use(authMiddleware);
+router.use(authMiddleware);
 
 router.get('/', async(req, res) => {
     try {
@@ -23,8 +24,8 @@ router.get('/', async(req, res) => {
             return res.status(400).send("User not found");
         }
 
-        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
-            return res.status(400).send("You are not authorized to do this");
+        if (user.permission === 'view') {
+            return res.status(201).send({ error: "You are not authorized to do this" });
         }
 
 
@@ -105,7 +106,7 @@ router.put('/:circuitId', async(req, res) => {
         if (await Circuit.findOne({ circuit_cod }))
             return res.status(400).send({ error: 'Circuit already exists' });
 
-        let cont = req.body.containers;
+        let cont = req.body.container;
         const circuit = await Circuit.findByIdAndUpdate(req.params.circuitId, {
             circuit_cod,
             containers: cont
@@ -121,32 +122,32 @@ router.put('/:circuitId', async(req, res) => {
 });
 
 router.delete('/:circuitId', async(req, res) => {
-    try {
-        const { token } = req.session
-        const payload = jwt.verify(token, authToken.secret);
-        const user = await User.findById(payload.id);
+    // try {
+    const { token } = req.session
+    const payload = jwt.verify(token, authToken.secret);
+    const user = await User.findById(payload.id);
 
-        if (!user) {
-            return res.status(400).send("User not found");
-        }
-
-        if (user.permission !== 'admin') {
-            return res.status(400).send("You are not authorized to do this");
-        }
-        await Circuit.findByIdAndRemove(req.params.circuitId);
-
-        return res.status(200).send({ message: 'User deleted' });
-    } catch (err) {
-        return res.status(400).send({ error: 'Error deleting user' });
+    if (!user) {
+        return res.status(400).send("User not found");
     }
-    // let circuit = req.params.circuitId;
-    // let collections = await Circuit.find({ Circuit: circuit })
-    // if (collections[0]) {
-    //     return res.status(400).send({ error: 'Circuit in collection' });
-    // } else {
-    //     await Circuit.findByIdAndRemove(req.params.employeeId);
-    //     return res.status(200).send({ error: 'Circuit Deleted' });
+
+    if (user.permission !== 'admin') {
+        return res.status(400).send("You are not authorized to do this");
+    }
+    //     await Circuit.findByIdAndRemove(req.params.circuitId);
+
+    //     return res.status(200).send({ message: 'Circuit deleted' });
+    // } catch (err) {
+    //     return res.status(400).send({ error: 'Error deleting circuit' });
     // }
+    let circuit = req.params.circuitId;
+    let collections = await Collection.find({ circuit: circuit })
+    if (collections[0]) {
+        return res.status(400).send({ error: 'Circuit in collection' });
+    } else {
+        await Circuit.findByIdAndRemove(circuit);
+        return res.status(200).send({ error: 'Circuit Deleted' });
+    }
 
 });
 

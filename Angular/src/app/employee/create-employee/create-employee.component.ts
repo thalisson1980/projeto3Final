@@ -20,15 +20,18 @@ export class CreateEmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getparamid = this.activatedRoute.snapshot.paramMap.get('id');
+
     if(this.getparamid){
     this.service.getOneEmployee(this.getparamid).subscribe((res)=>{
-      console.log(res, 'res==>');
+      // console.log(res, 'res==>');
+      console.log('res',res.employee.name)
       this.employeeForm.patchValue({
-        name: res.employee[0].name,
-        adress: res.employee[0].adress,
-        postalCode: res.employee[0].postalCode,
-        occupation: res.employee[0].occupation,
-        permission: res.employee[0].permission
+        name: res.employee.name,
+        adress: res.employee.adress,
+        postalCode: res.employee.postalCode,
+        occupation: res.employee.occupation,
+        permission: res.employee.permission,
+        ativo:res.employee.ativo
       });
     });
   }
@@ -38,8 +41,10 @@ export class CreateEmployeeComponent implements OnInit {
     'name':new FormControl('',Validators.required),
     'adress':new FormControl('',Validators.required),
     'postalCode':new FormControl('',Validators.required),
-    'occupation':new FormControl('',Validators.required)
+    'occupation':new FormControl('',Validators.required),
+    'ativo':new FormControl('',Validators.required),
   });
+
 
   employeeSubmit()
   {

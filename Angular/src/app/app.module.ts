@@ -21,7 +21,9 @@ import { MenuEmployeeComponent } from './menuEmployee/menu-employee/menu-employe
 import { MenuUserComponent } from './menuUser/menu-user/menu-user.component';
 import { ReadUserComponent } from './user/read-user/read-user.component';
 import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
-import { ReadOneEmployeeComponent } from './employee/read-one-employee/read-one-employee.component';
+import { ReadOneCollectionComponent } from './collection/read-one-collection/read-one-collection.component';
+import { ReadOneCircuitComponent } from './circuit/read-one-circuit/read-one-circuit.component';
+
 
 
 
@@ -47,11 +49,8 @@ import { ReadOneEmployeeComponent } from './employee/read-one-employee/read-one-
     MenuUserComponent,
     ReadUserComponent,
     MenuPrincipalComponent,
-    ReadOneEmployeeComponent,
-
-
-
-
+    ReadOneCollectionComponent,
+    ReadOneCircuitComponent,
 
 
     ],
@@ -60,7 +59,7 @@ import { ReadOneEmployeeComponent } from './employee/read-one-employee/read-one-
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [AppServiceService],
   bootstrap: [AppComponent]

@@ -15,6 +15,7 @@ export class CreateCircuitComponent implements OnInit {
   errormsg:any;
   successmsg:any;
   getparamid:any;
+  readCircuit:any;
 
   ngOnInit(): void {
 
@@ -29,6 +30,12 @@ export class CreateCircuitComponent implements OnInit {
     });
   });
 }
+
+this.service.getCircuit().subscribe((res)=>{
+  console.log(res,"res==>");
+
+  this.readCircuit = res;
+});
 }
 
 

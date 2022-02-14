@@ -10,18 +10,35 @@ import { Router } from '@angular/router'
 export class ReadCircuitComponent implements OnInit {
   readCircuit:any;
   successmsg:any;
+  readOneCircuit:any;
+  getparamid:any
   constructor(private service : AppServiceService,private Router:Router) { }
 
   ngOnInit(): void {
+    console.log('entrou')
     this.service.getCircuit().subscribe((res)=>{
       console.log(res,"res==>");
+      if(res.error){
+        this.successmsg = res.error;
+      }else{
 
-      this.readCircuit = res;
+                      this.readCircuit = res;
+      }
     });
   }
 
 
+  getCircuitId(id:any)
+  {
+    // console.log(id, 'resId==>');
+   this.service.getOneCircuit(id).subscribe((res)=>{
+     this.successmsg = res.message;
+     this.readOneCircuit=[res.circuit]
+     console.log(res.circuit, "res==>");
 
+
+   });
+  }
 
 delete_id(id:any)
 {

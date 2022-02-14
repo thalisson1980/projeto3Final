@@ -91,6 +91,18 @@ export class AppServiceService {
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }
+  getOneCircuit(id:any):Observable<any>
+  {
+    let ids=id;
+    return this._http.get(`http://localhost:3000/circuit/${ids}`,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
+
   deleteCircuit(id:any):Observable<any>
   {
     let ids=id;
@@ -134,6 +146,18 @@ export class AppServiceService {
       'Access-Control-Allow-Credentials': 'true',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
+
+  getOneCollection(id:any):Observable<any>
+  {
+    let ids=id;
+    return this._http.get(`http://localhost:3000/collection/${ids}`,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }
@@ -319,4 +343,27 @@ export class AppServiceService {
      }),withCredentials:true});
  }
 
+ //CRUD DDCCFF
+ getDDCCFF():Observable<any>
+ {
+   return this._http.get("http://localhost:3000/list_DCF",{ headers: new HttpHeaders({
+     'Content-Type': 'application/json',
+     'Access-Control-Allow-Credentials': 'true',
+     'Access-Control-Allow-Origin': '*',
+     'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+     'Access-Control-Allow-Headers': '*'
+     }),withCredentials:true});
+ }
+
+ getOneDDCCFF(id:any):Observable<any>
+ {
+   let ids=id;
+   return this._http.get(`http://localhost:3000/list_DCF/${ids}`,{ headers: new HttpHeaders({
+     'Content-Type': 'application/json',
+     'Access-Control-Allow-Credentials': 'true',
+     'Access-Control-Allow-Origin': '*',
+     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+     'Access-Control-Allow-Headers': '*'
+     }),withCredentials:true});
+ }
 }

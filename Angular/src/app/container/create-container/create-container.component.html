@@ -50,37 +50,57 @@
                                     <form [formGroup]="containerForm" class="mx-1 mx-md-4">
 
                                         <div class="mb-3">
-                                            <label for="circuit_cod" class="form-label">Container code</label>
+                                            <label for="container_cod" class="form-label">Container code</label>
                                             <input type="text" class="form-control" formControlName="container_cod" placeholder="Enter name">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="circuit_cod" class="form-label">GPS Location</label>
-                                            <input type="text" class="form-control" formControlName="container_cod" placeholder="Enter name">
+                                            <label for="gpsLocation" class="form-label">GPS Location</label>
+                                            <input type="text" class="form-control" formControlName="gpsLocation" placeholder="Enter name">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="circuit_cod" class="form-label">Adress</label>
-                                            <input type="text" class="form-control" formControlName="container_cod" placeholder="Enter name">
+                                            <label for="adress" class="form-label">Adress</label>
+                                            <input type="text" class="form-control" formControlName="adress" placeholder="Enter name">
                                         </div>
-                                        <div class="dropdown mb-4">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Freguesia</button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li>
-                                                    <a class="dropdown-item" value="#"></a>
-                                                </li>
-                                            </ul>
+
+
+
+                                        <div class="container mt-3">
+                                            <div class="row">
+
+                                                <div class="col-2">
+                                                    <!-- <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="ddccff" data-bs-toggle="dropdown" aria-expanded="false">
+                                                          Select one</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                            <li>
+                                                                <a class="dropdown-item" formControlName='ddccff' *ngFor='let DDCCFF of readDDCCFF'>{{DDCCFF.location}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div> -->
+
+                                                    <select matNativeControl [(ngModel)]="readDDCCFF" name="ddccff">
+                                                      <!-- <option value="" selected></option> -->
+                                                      <option *ngFor="let ddccff of readDDCCFF" [value]="ddccff.location">
+                                                        {{ddccff.location}}
+                                                      </option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
+
+
 
 
 
                                         <div class="d-flex justify-content-end mx-4 mb-3 mb-lg-4" *ngIf="!getparamid" (click)="containerSubmit()">
 
                                             <button class="btn btn-primary btn-sm">Create</button> &nbsp; &nbsp;
-                                            <button routerLink="/readCircuit" class="btn btn-secondary btn-sm">Read</button>
+                                            <button routerLink="/readContainer" class="btn btn-secondary btn-sm">Read</button>
                                         </div>
                                         <div class="d-flex justify-content-end mx-4 mb-3 mb-lg-4" *ngIf="getparamid" (click)="containerUpdate()">
 
                                             <button class="btn btn-success btn-sm">Edit</button> &nbsp; &nbsp;
-                                            <button routerLink="/readCircuit" class="btn btn-secondary btn-sm">Read</button>
+                                            <button routerLink="/readContainer" class="btn btn-secondary btn-sm">Read</button>
                                         </div>
 
 

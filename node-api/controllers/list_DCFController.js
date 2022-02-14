@@ -103,14 +103,11 @@ router.put('/:list_DCFId', authMiddleware, async(req, res) => {
         if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
             return res.status(400).send("You are not authorized to do this");
         }
-        const { name, adress, postalCode, occupation, permission } = req.body;
+        const { code, location } = req.body;
         const key = await List_DCF.findByIdAndUpdate(req.params.list_DCFId, {
 
-            name,
-            adress,
-            postalCode,
-            occupation,
-            permission
+            code,
+            location
         }, { new: true });
 
         await key.save();

@@ -36,7 +36,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                    <p class="text-left h2 fw-bold mb-4 mx-1 mx-md-4 mt-4">Create Employee</p>
+                                    <p class="text-left h2 fw-bold mb-4 mx-1 mx-md-4 mt-4">{{getparamid?'Edit':'Create'}} Employee</p>
 
                                     <div *ngIf="errormsg" class="alert alert-warning alert-dismissible fade show" role="alert">
                                         <strong>{{errormsg}}</strong>
@@ -99,8 +99,8 @@
                                             <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
 
-                                                <input type="checkbox" class="form-check-input" placeholder="Enter status">
-                                                <label for="status" class="form-check-label">Ativo</label>
+                                                <input type="checkbox" class="form-check-input" formControlName="ativo" name='status'>
+                                                <label for="status" class="form-check-label">Active</label>
 
 
                                             </div>

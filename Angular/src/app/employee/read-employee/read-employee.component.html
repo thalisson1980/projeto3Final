@@ -122,7 +122,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor='let employee1 of readOneEmployee'>
+                                            <tr *ngFor='let employee1 of readEmployee'>
                                                 <th scope="row">{{employee1._id}}</th>
                                                 <td>{{employee1.name}}</td>
                                                 <td>{{employee1.adress}}</td>
@@ -134,6 +134,7 @@
                                                 <!-- <td><a [routerLink]="['/readEmployee', employee._id]" class="btn btn-sm btn-secondary">Read</a></td> -->
                                                 <td><button button class="btn btn-sm btn-secondary" (click)="getEmployeeId([employee1._id])">Read</button></td>
                                                 <!-- <td> <button routerLink="['/createEmployee', employee._id]" type="button" class="btn btn-sm btn-success">Edit</button></td> -->
+
                                                 <td><a [routerLink]="['/createEmployee', employee1._id]" class="btn btn-sm btn-success">Edit</a></td>
                                                 <td><button button class="btn btn-sm btn-danger" (click)="deleteID(employee1._id)">Delete</button></td>
                                             </tr>

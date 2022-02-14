@@ -33,20 +33,21 @@
             <thead>
                 <tr>
                     <th scope="col">_id</th>
-                    <th scope="col">Employees</th>
-                    <th scope="col">Ocuppation</th>
                     <th scope="col">Circuit</th>
                     <th scope="col">Date Start Time</th>
                     <th scope="col">Date End Time</th>
+                    <th scope="col">Employee</th>
+                    <th scope="col">Container </th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor='let collection of read_collection'>
-                    <th scope="row">{{collection._id}}</th>
-                    <td *ngFor='let employee of collection.employees'>{{employee.name}}</td>
-                    <td *ngFor='let employee of collection.employees'>{{employee.occupation}}</td>
-                    <td *ngFor='let circuit of collection.circuit'>{{collection.circuit_cod}}</td>
-                    <!-- <td *ngFor='let circuit of collection.circuit'>{{circuit.circuit_cod}}</td> -->
+                    <td scope="row">{{collection._id}}</td>
+                    <td>{{collection.circuit?collection.circuit.circuit_cod:""}}</td>
+                    <td>{{collection.dateStartTime}}</td>
+                    <td>{{collection.dateEndTime}}</td>
+                    <td><a [routerLink]="['/readOneCollection', collection._id]" class="btn btn-sm btn-success">View</a></td>
+                    <td><a [routerLink]="['/readOneCircuit', collection.circuit._id]" class="btn btn-sm btn-success">View</a></td>
                 </tr>
 
             </tbody>

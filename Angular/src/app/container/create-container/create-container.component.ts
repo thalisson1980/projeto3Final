@@ -13,6 +13,8 @@ export class CreateContainerComponent implements OnInit {
   errormsg:any;
   successmsg:any;
   getparamid:any;
+  readContainer:any;
+  readDDCCFF:any;
 
   constructor(private service : AppServiceService,private router:Router, private activatedRoute: ActivatedRoute) { }
 
@@ -30,6 +32,18 @@ export class CreateContainerComponent implements OnInit {
     });
   });
 }
+
+this.service.getContainer().subscribe((res)=>{
+  console.log(res,"res==>");
+
+  this.readContainer = res;
+});
+
+this.service.getDDCCFF().subscribe((res)=>{
+  console.log(res,"res==>");
+
+  this.readDDCCFF = res;
+});
   }
 
 containerForm = new FormGroup({
