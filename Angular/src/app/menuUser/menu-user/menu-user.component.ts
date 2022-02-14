@@ -23,7 +23,7 @@ export class MenuUserComponent implements OnInit {
   submit(){
     if(this.userForm.valid){
 
-      const email =localStorage.getItem('email');
+      const email =sessionStorage.getItem('email');
       const mensagem = JSON.parse(`{"email":"${email}","reason":"${this.userForm.value.reason}"}`);
       
       this.service.makeRequest(mensagem).subscribe((res)=>{

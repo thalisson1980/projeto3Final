@@ -49,7 +49,7 @@ export class ReadAnonimoComponent implements OnInit {
   anonimo:any;
 
   ngOnInit(): void {
-    if(localStorage.getItem('email')){
+    if(sessionStorage.getItem('email')){
       this.user= true;
     }else{
       this.anonimo = true;
@@ -71,7 +71,7 @@ export class ReadAnonimoComponent implements OnInit {
 
   countyChosen(){
     if(this.choice == 'county'){
-      var data = {choice: this.choice,code:this.county,email: localStorage.getItem('email')}
+      var data = {choice: this.choice,code:this.county,email: sessionStorage.getItem('email')}
       this.service.getDates(data).subscribe((res)=>{
         
         if(res){
@@ -98,7 +98,7 @@ export class ReadAnonimoComponent implements OnInit {
 
   parishChosen(){
     if(this.choice == 'parish'){
-      var data = {choice: this.choice,code:this.parish,email: localStorage.getItem('email')}
+      var data = {choice: this.choice,code:this.parish,email: sessionStorage.getItem('email')}
 
        this.service.getDates(data).subscribe((res)=>{
         
@@ -125,7 +125,7 @@ export class ReadAnonimoComponent implements OnInit {
 
   containerChosen(){
     if(this.choice == 'container'){
-      var data = {choice: this.choice,id:this.container,email: localStorage.getItem('email')}
+      var data = {choice: this.choice,id:this.container,email: sessionStorage.getItem('email')}
     
       this.service.getDates(data).subscribe((res)=>{
         

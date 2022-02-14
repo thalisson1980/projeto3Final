@@ -92,6 +92,7 @@ router.post('/findByUser', async (req,res)=>{
 });
 
 router.post('/dates',async (req,res)=>{
+    console.log(req.body)
     var firstCollect = new Date();
     var lastCollect = new Date();
     lastCollect.setFullYear('1900');
