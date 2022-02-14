@@ -11,7 +11,7 @@ import { Chart,registerables  } from 'chart.js';
 })
 export class ReadAnonimoComponent implements OnInit {
 
-  constructor(private service:AppServiceService) { 
+  constructor(private service:AppServiceService) {
     Chart.register(...registerables)
   }
 
@@ -49,7 +49,7 @@ export class ReadAnonimoComponent implements OnInit {
   anonimo:any;
 
   ngOnInit(): void {
-    if(localStorage.getItem('email')){
+    if(sessionStorage.getItem('email')){
       this.user= true;
     }else{
       this.anonimo = true;
@@ -60,37 +60,37 @@ export class ReadAnonimoComponent implements OnInit {
   choiceMade(){
     this.service.listCounties().subscribe((res)=>{
       if(res){
-        
+
          this.counties= res;
-        
+
       } else{
-        this.mensagem = res.ERROR;; 
+        this.mensagem = res.ERROR;;
       }
-    }) 
+    })
   }
 
   countyChosen(){
     if(this.choice == 'county'){
-      var data = {choice: this.choice,code:this.county,email: localStorage.getItem('email')}
+      var data = {choice: this.choice,code:this.county,email: sessionStorage.getItem('email')}
       this.service.getDates(data).subscribe((res)=>{
-        
+
         if(res){
           this.collectionsList = res.collections;
         } else{
-          this.mensagem = res.ERROR;; 
+          this.mensagem = res.ERROR;;
         }
       })
     }
     if(this.choice == 'parish' || this.choice == 'container' ){
 
-    
+
     this.service.listParish(this.county).subscribe((res)=>{
-      
+
       if(res){
-        
+
          this.parishList = res;
       } else{
-        this.mensagem = res.ERROR;; 
+        this.mensagem = res.ERROR;;
       }
     })
   }
@@ -98,26 +98,26 @@ export class ReadAnonimoComponent implements OnInit {
 
   parishChosen(){
     if(this.choice == 'parish'){
-      var data = {choice: this.choice,code:this.parish,email: localStorage.getItem('email')}
+      var data = {choice: this.choice,code:this.parish,email: sessionStorage.getItem('email')}
 
        this.service.getDates(data).subscribe((res)=>{
-        
+
         if(res){
           this.collectionsList = res.collections;
         } else{
-          this.mensagem = res.ERROR;; 
+          this.mensagem = res.ERROR;;
         }
       })
       }
 
     if(this.choice == 'parish' || this.choice == 'container'){
     this.service.listContainersByParish(this.parish).subscribe((res)=>{
-      
+
       if(res){
         console.log(res)
          this.containers = res;
       } else{
-        this.mensagem = res.ERROR;; 
+        this.mensagem = res.ERROR;;
       }
     })
   }
@@ -125,15 +125,15 @@ export class ReadAnonimoComponent implements OnInit {
 
   containerChosen(){
     if(this.choice == 'container'){
-      var data = {choice: this.choice,id:this.container,email: localStorage.getItem('email')}
-    
+      var data = {choice: this.choice,id:this.container,email: sessionStorage.getItem('email')}
+
       this.service.getDates(data).subscribe((res)=>{
-        
+
         if(res){
           this.collectionsList = res.collections;
-        
+
         } else{
-          this.mensagem = res.ERROR;; 
+          this.mensagem = res.ERROR;;
         }
       })
     }
@@ -144,16 +144,16 @@ export class ReadAnonimoComponent implements OnInit {
     try{
       this.chart.destroy();
     }catch(err){
-  
+
     }
-   
-    this.canvas = this.mychart.nativeElement; 
+
+    this.canvas = this.mychart.nativeElement;
     this.ctx = this.canvas.getContext('2d');
 
     this.chart= new Chart(this.ctx, {
       type: 'bar',
       data: {
-        labels: listOfDate, 
+        labels: listOfDate,
         datasets: [{
             label: 'All depositions',
             data: listOfMyKG,
@@ -163,20 +163,20 @@ export class ReadAnonimoComponent implements OnInit {
       ]
     } ,
     options: {
-      plugins: { 
+      plugins: {
       legend: {
         labels: {
-          color: "white", 
+          color: "white",
           font: {
             size: 18
           }
         },
-        
+
       }
     }
   }
   });
-    
+
   }
 
   criarArrayDuasDatas(){
@@ -194,7 +194,7 @@ export class ReadAnonimoComponent implements OnInit {
     }
     this.createChart(listOfDate,listOfKG)
   }
- 
+
 
 compararMes(){
  this.list = [];
@@ -218,7 +218,7 @@ compararTrimestre(escolha:any){
   let listAux = [];
   for (let i = 0; i<this.collectionsList.length ; i++){
     var primeira= new Date(this.collectionsList[i].collectionDate);
-    
+
     try{
       if(i%2 == 0){
         var segunda = new Date(this.collectionsList[i+1].collectionDate);
@@ -230,7 +230,7 @@ compararTrimestre(escolha:any){
             numberCollections: this.collectionsList[i].numberCollections + this.collectionsList[i+1].numberCollections,
             totalCollections: this.collectionsList[i].totalCollections + this.collectionsList[i+1].totalCollections,
         })
-      } 
+      }
     }catch(err){
       listAux.push({
         colecoesUnicas:this.collectionsList[i].colecoesUnicas,
@@ -264,16 +264,16 @@ compararAno(escolha:any){
     var data= new Date(this.collectionsList[i].collectionDate);
     let existe = false;
     for(let j =0; j<listAux.length;j++){
-      
+
 
       if(data.getFullYear() == listAux[j].ano && data.getMonth()+1== listAux[j].mes){
         existe = true;
-           listAux[j].colecoesUnicas=listAux[j].colecoesUnicas + this.collectionsList[i].colecoesUnicas 
-           listAux[j].colecoesZona= listAux[j].colecoesZona + this.collectionsList[i].colecoesZona 
+           listAux[j].colecoesUnicas=listAux[j].colecoesUnicas + this.collectionsList[i].colecoesUnicas
+           listAux[j].colecoesZona= listAux[j].colecoesZona + this.collectionsList[i].colecoesZona
            listAux[j].collectionDate = this.collectionsList[i].collectionDate
            listAux[j].massaCollect_kg=  listAux[j].massaCollect_kg +this.collectionsList[i].massaCollect_kg
-           listAux[j].numberCollections=listAux[j].numberCollections+  this.collectionsList[i].numberCollections 
-           listAux[j].totalCollections= listAux[j].totalCollections+  this.collectionsList[i].totalCollections 
+           listAux[j].numberCollections=listAux[j].numberCollections+  this.collectionsList[i].numberCollections
+           listAux[j].totalCollections= listAux[j].totalCollections+  this.collectionsList[i].totalCollections
       }
     }
     if(!existe){
@@ -288,7 +288,7 @@ compararAno(escolha:any){
         ano:data.getFullYear()
       })
     }
-   
+
   }
 
   for(let i=0; i<listAux.length;i++){
