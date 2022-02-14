@@ -13,6 +13,7 @@ export class ReadCollectionComponent implements OnInit {
   read_collection:any;
   successmsg:any;
 
+
   ngOnInit(): void {
     this.service.getCollection().subscribe((res)=>{
       console.log(res,"res==>");
@@ -20,6 +21,7 @@ export class ReadCollectionComponent implements OnInit {
       this.read_collection = res;
     });
   }
+
 
 
 

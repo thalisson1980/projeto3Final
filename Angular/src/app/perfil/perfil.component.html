@@ -20,10 +20,10 @@
 </header>
   
     <div class="container my-container">
-       
-        <div *ngIf="mensagem" (click)="fechar()" id="alert"  class="alert alert-info alert-dismissible fade show" role="alert">
+
+        <div *ngIf="mensagem" (click)="fechar()" id="alert" class="alert alert-info alert-dismissible fade show" role="alert">
             <strong>{{mensagem}}</strong>
-          </div>
+        </div>
 
         <div class="row  my-row my-row1">
             <div class="col my-col">
@@ -87,36 +87,36 @@
 
 
 
-<div class="bg-modal bg-modal2">
-    <div class="modal-content modal-content2">
+    <div class="bg-modal bg-modal2">
+        <div class="modal-content modal-content2">
 
-        <div class="close" (click)="closeModal2()">+</div>
+            <div class="close" (click)="closeModal2()">+</div>
 
-        <h1>Container history</h1>
+            <h1>Container history</h1>
 
-        <div class="container">
-            <table class="table">
-                <thead>
-                  <th scope="col">Container</th>
-                  <th scope="col">Kgs deposited</th>
-                  <th scope="col">Date</th>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let collection of collections">
-                    <td>{{collection.container}}</td>
-                    <td>{{collection.massaCollect_kg}}</td>
-                    <td>{{collection.collectionDate}}</td>
-                    
-                  </tr>
-                </tbody>
-              </table>
+            <div class="container">
+                <table class="table">
+                    <thead>
+                        <th scope="col">Container</th>
+                        <th scope="col">Kgs deposited</th>
+                        <th scope="col">Date</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let collection of collections">
+                            <td>{{collection.container}}</td>
+                            <td>{{collection.massaCollect_kg}}</td>
+                            <td>{{collection.collectionDate}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+
 
         </div>
-
-            
-            
     </div>
-</div>
 
 <div class="bg-modal bg-modal4">
   <div class="modal-content modal-content4">
@@ -183,4 +183,3 @@
 
 
 </body>
-</html>

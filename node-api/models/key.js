@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const KeySchema = new mongoose.Schema({
     _id: {
         type: String
@@ -20,6 +21,7 @@ const KeySchema = new mongoose.Schema({
     },
     ativo: {
         type: Boolean,
+        required: false,
         default: true,
     }
 

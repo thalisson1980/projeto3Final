@@ -9,7 +9,7 @@ const Container = require('../models/container');
 const code = require('../models/DDCCFF');
 const { v4: uuidv4 } = require('uuid');
 const authMiddleware = require('../middlewares/auth');
-
+const ddccff = require('../models/DDCCFF');
 
 
 
@@ -28,6 +28,8 @@ router.get('/', async(req, res) => {
         if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
             return res.status(400).send("You are not authorized to do this");
         }
+        const containers = await Container.find().populate('ddccff');
+        return res.json(containers);
 
     } catch (error) {
         return res.status(400).send({ error: 'Error loading containers' })
@@ -49,7 +51,7 @@ router.post('/containers/byParish', async(req, res) => {
         }
 
         var code = { ddccff: req.body };
-        const containers = await Container.find(code)
+        const containers = await Container.find(code).populate('ddccff');
 
 
         res.json(containers);
@@ -74,7 +76,7 @@ router.get('/:containerId', async(req, res) => {
             return res.status(400).send("You are not authorized to do this");
         }
 
-        const container = await Container.findById(req.params.containerId);
+        const container = await Container.findById(req.params.containerId).populate(['ddccff']);
         return res.json({ container });
 
     } catch (error) {
@@ -124,7 +126,7 @@ router.put('/:containerId', authMiddleware, async(req, res) => {
             return res.status(400).send("You are not authorized to do this");
         }
 
-        let code = req.body.code;
+        let code = req.body.ddccff;
 
         const { container_cod, gpsLocation, adress } = req.body;
         const containers = await Container.findByIdAndUpdate(req.params.containerId, {

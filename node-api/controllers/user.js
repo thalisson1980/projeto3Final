@@ -157,13 +157,17 @@ router.put('/:userId', authMiddleware, async(req, res) => {
             return res.status(400).send("You are not authorized to do this");
         }
 
-        const { userId, permission } = req.body;
-        const admin = await User.findByIdAndUpdate(req.params.userId, {
-            userId,
+        const { name, email, key, permission } = req.body;
+        const users = await User.findByIdAndUpdate(req.params.userId, {
+
+            name,
+            email,
+            key,
             permission
         }, { new: true });
+        await user.save();
 
-        return res.send({ admin });
+        return res.send({ users });
 
     } catch (err) {
         return res.status(400).send({ error: 'Error updating user' })

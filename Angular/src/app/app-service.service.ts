@@ -11,11 +11,16 @@ export class AppServiceService {
 
   apiURL = 'http://localhost:3000/user'
 
+
   getUsers():Observable<any>
   {
     return this._http.get(`${this.apiURL}`)
   }
 
+  // criarUser(dados:any):Observable<any>
+  // {
+  //   return this._http.post(`${this.apiURL}`,dados);
+  // }
 
   login(dados:any):Observable<any>
   {
@@ -86,10 +91,40 @@ export class AppServiceService {
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }
+  getOneCircuit(id:any):Observable<any>
+  {
+    let ids=id;
+    return this._http.get(`http://localhost:3000/circuit/${ids}`,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
+
   deleteCircuit(id:any):Observable<any>
   {
     let ids=id;
-    return this._http.delete(`http://localhost:3000/circuit/${ids}`);
+    return this._http.delete(`http://localhost:3000/circuit/${ids}`, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
+
+  updateCircuit(data:any,id:any):Observable<any>
+  {
+    let ids=id;
+    return this._http.put(`http://localhost:3000/employee/${ids}`,data,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
   }
 
   //CRUD collection
@@ -111,6 +146,18 @@ export class AppServiceService {
       'Access-Control-Allow-Credentials': 'true',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
+
+  getOneCollection(id:any):Observable<any>
+  {
+    let ids=id;
+    return this._http.get(`http://localhost:3000/collection/${ids}`,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }
@@ -142,14 +189,39 @@ export class AppServiceService {
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }
-  deleteContainer(id:any):Observable<any>
+
+  getOneContainer(id:any):Observable<any>
   {
     let ids=id;
-    return this._http.delete(`http://localhost:3000/container/${ids}`,{ headers: new HttpHeaders({
+    return this._http.get(`http://localhost:3000/user/${ids}`,{ headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': 'true',
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST, DELETE',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
+
+  deleteContainer(id:any):Observable<any>
+  {
+    let ids=id;
+    return this._http.delete(`http://localhost:3000/user/${ids}`,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
+
+  updateContainer(data:any,id:any):Observable<any>
+  {
+    let ids=id;
+    return this._http.put(`http://localhost:3000/user/${ids}`,data,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }
@@ -176,6 +248,19 @@ export class AppServiceService {
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }
+
+  getOneEmployee(id:any):Observable<any>
+  {
+    let ids=id;
+    return this._http.get(`http://localhost:3000/employee/${ids}`,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
+
   deleteEmployee(id:any):Observable<any>
   {
     let ids=id;
@@ -183,7 +268,7 @@ export class AppServiceService {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': 'true',
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST, DELETE',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }
@@ -195,12 +280,11 @@ export class AppServiceService {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': 'true',
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST, DELETE,UPDATE',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }
-
-   //CRUD user
+ //CRUD user
  criarUser(data:any):Observable<any>
  {
    console.log(data,'createapi=>')
@@ -251,6 +335,30 @@ export class AppServiceService {
  {
    let ids=id;
    return this._http.put(`http://localhost:3000/user/${ids}`,data,{ headers: new HttpHeaders({
+     'Content-Type': 'application/json',
+     'Access-Control-Allow-Credentials': 'true',
+     'Access-Control-Allow-Origin': '*',
+     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+     'Access-Control-Allow-Headers': '*'
+     }),withCredentials:true});
+ }
+
+ //CRUD DDCCFF
+ getDDCCFF():Observable<any>
+ {
+   return this._http.get("http://localhost:3000/list_DCF",{ headers: new HttpHeaders({
+     'Content-Type': 'application/json',
+     'Access-Control-Allow-Credentials': 'true',
+     'Access-Control-Allow-Origin': '*',
+     'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+     'Access-Control-Allow-Headers': '*'
+     }),withCredentials:true});
+ }
+
+ getOneDDCCFF(id:any):Observable<any>
+ {
+   let ids=id;
+   return this._http.get(`http://localhost:3000/list_DCF/${ids}`,{ headers: new HttpHeaders({
      'Content-Type': 'application/json',
      'Access-Control-Allow-Credentials': 'true',
      'Access-Control-Allow-Origin': '*',
