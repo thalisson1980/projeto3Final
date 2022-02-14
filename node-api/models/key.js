@@ -2,14 +2,8 @@ const mongoose = require('mongoose');
 
 
 const KeySchema = new mongoose.Schema({
-<<<<<<< HEAD
     _id: {
         type: String
-=======
-
-    _id: {
-        type: String,
->>>>>>> marcia
     },
     startDate: {
         type: Date,
@@ -27,10 +21,7 @@ const KeySchema = new mongoose.Schema({
     },
     ativo: {
         type: Boolean,
-<<<<<<< HEAD
-=======
         required: false,
->>>>>>> marcia
         default: true,
     }
 

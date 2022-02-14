@@ -1,11 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Key = require('../models/key');
-<<<<<<< HEAD
-const db = require('../bd/ligacao');
-const { v4: uuidv4 } = require('uuid');
-const User = require('../models/user');
-=======
 const bd = require('../bd/ligacao');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -16,7 +11,6 @@ const Collection = require('../models/collection');
 const { v4: uuidv4 } = require('uuid');
 const authMiddleware = require('../middlewares/auth');
 // const { Collection } = require('mongoose');
->>>>>>> marcia
 
 router.post('/', async(req, res) => {
 
@@ -28,18 +22,15 @@ router.post('/', async(req, res) => {
 
 // router.use(authMiddleware);
 
-<<<<<<< HEAD
     } catch (err) {
         return res.status(400).send({ error: 'Error creating new container' });
     }
 });
-=======
 router.get('/', async(req, res) => {
     try {
         const { token } = req.session
         const payload = jwt.verify(token, authToken.secret);
         const user = await User.findById(payload.id);
->>>>>>> marcia
 
         if (!user) {
             return res.status(400).send("User not found");

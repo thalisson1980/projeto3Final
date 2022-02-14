@@ -18,13 +18,10 @@ import { MenuEmployeeComponent } from './menuEmployee/menu-employee/menu-employe
 import { MenuUserComponent } from './menuUser/menu-user/menu-user.component';
 import { ReadUserComponent } from './user/read-user/read-user.component';
 import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
-<<<<<<< HEAD
 import { CompararComponent } from './comparar/comparar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReadAnonimoComponent } from './collection/read-anonimo/read-anonimo.component';
-=======
 import { ReadOneCircuitComponent } from './circuit/read-one-circuit/read-one-circuit.component';
->>>>>>> marcia
 
 const routes: Routes = [
   {path: 'login', component:LoginComponent},

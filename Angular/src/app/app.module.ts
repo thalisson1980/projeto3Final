@@ -21,15 +21,12 @@ import { MenuEmployeeComponent } from './menuEmployee/menu-employee/menu-employe
 import { MenuUserComponent } from './menuUser/menu-user/menu-user.component';
 import { ReadUserComponent } from './user/read-user/read-user.component';
 import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
-<<<<<<< HEAD
 import { CompararComponent } from './comparar/comparar.component';
 import { ReadAnonimoComponent } from './collection/read-anonimo/read-anonimo.component';
-=======
 import { ReadOneCollectionComponent } from './collection/read-one-collection/read-one-collection.component';
 import { ReadOneCircuitComponent } from './circuit/read-one-circuit/read-one-circuit.component';
 
 
->>>>>>> marcia
 
 
 
@@ -54,16 +51,10 @@ import { ReadOneCircuitComponent } from './circuit/read-one-circuit/read-one-cir
     MenuUserComponent,
     ReadUserComponent,
     MenuPrincipalComponent,
-<<<<<<< HEAD
     CompararComponent,
-    ReadAnonimoComponent
-
-
-
-=======
+    ReadAnonimoComponent,
     ReadOneCollectionComponent,
     ReadOneCircuitComponent,
->>>>>>> marcia
 
 
     ],

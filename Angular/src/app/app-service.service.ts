@@ -17,13 +17,10 @@ export class AppServiceService {
     return this._http.get(`${this.apiURL}`)
   }
 
-<<<<<<< HEAD
-=======
   // criarUser(dados:any):Observable<any>
   // {
   //   return this._http.post(`${this.apiURL}`,dados);
   // }
->>>>>>> marcia
 
   login(dados:any):Observable<any>
   {
@@ -287,12 +284,7 @@ export class AppServiceService {
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }
-<<<<<<< HEAD
-
-   //CRUD user
-=======
  //CRUD user
->>>>>>> marcia
  criarUser(data:any):Observable<any>
  {
    console.log(data,'createapi=>')
@@ -350,8 +342,6 @@ export class AppServiceService {
      'Access-Control-Allow-Headers': '*'
      }),withCredentials:true});
  }
-<<<<<<< HEAD
-=======
 
  //CRUD DDCCFF
  getDDCCFF():Observable<any>
@@ -376,5 +366,4 @@ export class AppServiceService {
      'Access-Control-Allow-Headers': '*'
      }),withCredentials:true});
  }
->>>>>>> marcia
 }
