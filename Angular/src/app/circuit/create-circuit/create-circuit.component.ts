@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppServiceService} from '../../app-service.service';
 import { Router } from '@angular/router'
 import {  FormControl,FormGroup, Validators} from '@angular/forms'
+import { ActivatedRoute} from '@angular/router'
 
 @Component({
   selector: 'app-create-circuit',
@@ -10,13 +11,35 @@ import {  FormControl,FormGroup, Validators} from '@angular/forms'
 })
 export class CreateCircuitComponent implements OnInit {
 
-  constructor(private service : AppServiceService,private router:Router) { }
+  constructor(private service : AppServiceService,private router:Router, private activatedRoute: ActivatedRoute) { }
   errormsg:any;
   successmsg:any;
+  getparamid:any;
+  readCircuit:any;
 
   ngOnInit(): void {
-  }
-  circuitForm = new FormGroup({
+
+  this.getparamid = this.activatedRoute.snapshot.paramMap.get('id');
+  if(this.getparamid){
+  this.service.getOneEmployee(this.getparamid).subscribe((res)=>{
+    console.log(res, 'res==>');
+    this.circuitForm.patchValue({
+      circuit_cod: res.circuit[0].circuit_cod,
+      containers: res.containers[0].adress,
+
+    });
+  });
+}
+
+this.service.getCircuit().subscribe((res)=>{
+  console.log(res,"res==>");
+
+  this.readCircuit = res;
+});
+}
+
+
+circuitForm = new FormGroup({
 
     'circuit_cod':new FormControl('',Validators.required),
     'containers':new FormControl('',Validators.required),
@@ -34,8 +57,8 @@ export class CreateCircuitComponent implements OnInit {
       this.successmsg = res.message;
 
 
-            localStorage.setItem('permission', res.permission);
-            localStorage.setItem('token',res.token)
+            sessionStorage.setItem('permission', res.permission);
+            sessionStorage.setItem('token',res.token)
 
 
             if(res.permission==='view'){
@@ -62,6 +85,20 @@ export class CreateCircuitComponent implements OnInit {
       this.errormsg = 'All field is required';
     }
   }
+
+
+
+circuitUpdate()
+  {
+    console.log(this.circuitForm.value,'updatedForm');
+    if(this.circuitForm.valid)
+    {
+      this.service.updateCircuit(this.circuitForm.value, this.getparamid).subscribe((res)=>{
+        console.log(res, 'resupdated');
+        this.successmsg = res.message;
+      })
+    }else{
+      this.errormsg = 'all field is required';
+    }
+  }
 }
-
-

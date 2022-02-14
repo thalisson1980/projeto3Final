@@ -1,75 +1,488 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <meta charset="UTF-8">
-
-
-</head>
-
 <body>
+    <header class="p-3 bg-dark text-white">
+        <div class="container ">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                </a>
 
-    <section class="vh-100" style="background-color: #eee;">
-        <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="https://www.apambiente.pt/residuos/estrategia-dos-biorresiduos" class="nav-link px-2 text-secondary">Biowastes</a></li>
+                    <li><a href="https://enea.apambiente.pt/" class="nav-link px-2 text-white">Educação Ambiental</a></li>
+                    <!-- <li><a href="/readCollection" class="nav-link px-2 text-white">Collection</a></li>
+                <li><a href="/readContainer" class="nav-link px-2 text-white">Container</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Key</a></li> -->
+                </ul>
+
+                <form class="col-md-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 offset-md-3 py-4">
+                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                </form>
+
+                <div class="text-right offset-md-1 py-4">
+                    <button routerLink="/logout" type="button" class="btn btn-outline-light me-2 ">Logout</button>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="v h-25" style="background-color: #eee;">
+        <div class="container h-25">
+            <div class="row d-flex justify-content-center align-items-center h-25">
                 <div class="col-lg-12 col-xl-11">
                     <div class="card text-black" style="border-radius: 25px;">
                         <div class="card-body p-md-5">
                             <div class="row justify-content-center">
-                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                <div class="col-md-10 col-lg-6 col-xl-12 order-2 order-lg-1">
 
-                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create Circuit</p>
+                                    <p class="text h2 fw-bold mb-4 mx-1 mx-md-4 mt-4">Create Circuit</p>
 
-                                    <div *ngIf="errormsg" class="alert alert-danger alert-dismissible fade show" role="alert">
+
+                                    <div *ngIf="errormsg" class="alert alert-warning alert-dismissible fade show" role="alert">
                                         <strong>{{errormsg}}</strong>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
 
-                                    <div *ngIf="successmsg" class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <div *ngIf="successmsg" class="alert alert-warning alert-sucess fade show" role="alert">
                                         <strong>{{successmsg}}</strong>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
 
-                                    <div class="container mt-5">
+                                    <form [formGroup]="circuitForm" class="mx-1 mx-md-4">
 
-                                        <div *ngIf="errormsg" class="alert alert-warning alert-dismissible fade show" role="alert">
-                                            <strong>{{errormsg}}</strong>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        <div class="mt-4">
+                                            <label for="circuit_cod" class="form-label h5">Circuit code</label>
+                                            <input type="text" class="form-control" formControlName="circuit_cod" placeholder="Enter name">
                                         </div>
+                                        <div class="container mt-4">
+                                            <div class="row">
+                                                <!-- *ngFor='let circuit of readCircuit' -->
+                                                <div class="col-2">
+                                                    <!-- *ngFor='let container of circuit.containers' -->
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="containers" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                            <li>
+                                                                <a class="dropdown-item" value=""></a>
+                                                                <!-- {{container.container_cod}} -->
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
 
-                                        <div *ngIf="successmsg" class="alert alert-warning alert-sucess fade show" role="alert">
-                                            <strong>{{successmsg}}</strong>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="row">
+
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="containers" data-bs-toggle="dropdown" aria-expanded="false">
+                                                      Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="containers" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="containers" data-bs-toggle="dropdown" aria-expanded="false">
+                                                  Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="row">
+
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="containers" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="containers" data-bs-toggle="dropdown" aria-expanded="false">
+                                              Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="dropdown mb-2">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
+                                                            <li>
+                                                                <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+
+
+
+
+
+                                            <div class="d-flex justify-content-end mx-4 mb-3 mb-lg-4 " *ngIf="!getparamid" (click)="circuitSubmit()">
+
+                                                <button class="btn btn-primary btn-sm">Create</button> &nbsp; &nbsp;
+                                                <button routerLink="/readCircuit" class="btn btn-secondary btn-sm">Read</button>
+                                            </div>
+                                            <div class="d-flex justify-content-end mx-4 mb-3 mb-lg-4" *ngIf="getparamid" (click)="circuitUpdate()">
+
+                                                <button class="btn btn-success btn-sm">Edit</button> &nbsp; &nbsp;
+                                                <button routerLink="/readCircuit" class="btn btn-secondary btn-sm">Read</button>
+                                            </div>
+
                                         </div>
-
-                                        <form [formGroup]="circuitForm" (ngSubmit)="circuitSubmit()">
-
-                                            <div class="mb-3">
-                                                <label for="circuit_cod" class="form-label">Circuit code</label>
-                                                <input type="text" class="form-control" formControlName="circuit_cod" placeholder="Enter name">
-                                            </div>
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                       Containers
-                                      </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                    <li>
-                                                        <a class="dropdown-item" value="#"></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <button class="btn btn-primary  mt-3">Create</button>
-                                        </form>
-                                    </div>
-
+                                    </form>
 
                                 </div>
-                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                                <!-- <div class="col-md-10 col-lg-6 col-xl-5 d-flex align-items-center order-1 order-lg-2">
+
 
                                     <img id="contentor" src="https://ambiente.cascais.pt/sites/default/files/styles/760x380/public/biorresiduos.png?itok=ZExIAnD6" class="contentor" alt="Sample image">
 
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -79,5 +492,3 @@
     </section>
 
 </body>
-
-</html>

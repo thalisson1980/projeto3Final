@@ -25,6 +25,13 @@ const UserSchema = new mongoose.Schema({
         required: false,
         default: Date.now
     },
+<<<<<<< HEAD
+=======
+    location: {
+        type: String,
+        required: true
+    },
+>>>>>>> marcia
     permission: {
         type: String,
         required: true,

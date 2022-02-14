@@ -17,10 +17,17 @@ const ContainerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+<<<<<<< HEAD
      ddccff: {
          type: mongoose.SchemaTypes.String,
         ref: 'DDCCFF'
      }
+=======
+    ddccff: {
+        type: mongoose.SchemaTypes.String,
+        ref: 'DDCCFF'
+    }
+>>>>>>> marcia
 });
 
 const Container = mongoose.model('Container', ContainerSchema);

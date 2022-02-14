@@ -20,10 +20,16 @@ import { ManagerComponent } from './menuManager/manager/manager.component';
 import { MenuEmployeeComponent } from './menuEmployee/menu-employee/menu-employee.component';
 import { MenuUserComponent } from './menuUser/menu-user/menu-user.component';
 import { ReadUserComponent } from './user/read-user/read-user.component';
-import { CreateUserComponent } from './user/create-user/create-user.component';
 import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
+<<<<<<< HEAD
 import { CompararComponent } from './comparar/comparar.component';
 import { ReadAnonimoComponent } from './collection/read-anonimo/read-anonimo.component';
+=======
+import { ReadOneCollectionComponent } from './collection/read-one-collection/read-one-collection.component';
+import { ReadOneCircuitComponent } from './circuit/read-one-circuit/read-one-circuit.component';
+
+
+>>>>>>> marcia
 
 
 
@@ -47,13 +53,17 @@ import { ReadAnonimoComponent } from './collection/read-anonimo/read-anonimo.com
     MenuEmployeeComponent,
     MenuUserComponent,
     ReadUserComponent,
-    CreateUserComponent,
     MenuPrincipalComponent,
+<<<<<<< HEAD
     CompararComponent,
     ReadAnonimoComponent
 
 
 
+=======
+    ReadOneCollectionComponent,
+    ReadOneCircuitComponent,
+>>>>>>> marcia
 
 
     ],
@@ -62,7 +72,7 @@ import { ReadAnonimoComponent } from './collection/read-anonimo/read-anonimo.com
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [AppServiceService],
   bootstrap: [AppComponent]

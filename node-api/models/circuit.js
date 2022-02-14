@@ -13,7 +13,8 @@ const CircuitSchema = new mongoose.Schema({
     containers: [{
         type: mongoose.SchemaTypes.String,
         ref: 'Container'
-    }],
+    }]
+
 
 });
 

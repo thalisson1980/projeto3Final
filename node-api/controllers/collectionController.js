@@ -8,11 +8,13 @@ const User = require('../models/user');
 const Collection = require('../models/collection');
 const { v4: uuidv4 } = require('uuid');
 const authMiddleware = require('../middlewares/auth');
+const Employee = require('../models/employee');
+const Circuit = require('../models/circuit');
 
 
 // router.use(authMiddleware);
 
-router.get('/', async(req, res) => {
+router.get('/', authMiddleware, async(req, res) => {
     try {
         const { token } = req.session
         const payload = jwt.verify(token, authToken.secret);
@@ -47,7 +49,7 @@ router.get('/:collectionId', async(req, res) => {
         if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
             return res.status(400).send("You are not authorized to do this");
         }
-        const collection = await Collection.findById(req.params.collectionId).populate(['employees']).populate('circuit').populate('[containers]');;
+        const collection = await Collection.findById(req.params.collectionId).populate(['employees']).populate('circuit');
         return res.json({ collection });
 
     } catch (error) {
@@ -73,8 +75,8 @@ router.post('/', async(req, res) => {
         }
 
         const _id = uuidv4();
-        const container = await Collection.create({...req.body, _id });
-        return res.send({ container });
+        const collection = await Collection.create({...req.body, _id });
+        return res.send({ collection });
 
 
     } catch (err) {
