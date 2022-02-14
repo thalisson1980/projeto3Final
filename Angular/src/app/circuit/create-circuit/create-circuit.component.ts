@@ -15,13 +15,14 @@ export class CreateCircuitComponent implements OnInit {
   errormsg:any;
   successmsg:any;
   getparamid:any;
+  readContainer:any;
   readCircuit:any;
 
   ngOnInit(): void {
 
   this.getparamid = this.activatedRoute.snapshot.paramMap.get('id');
   if(this.getparamid){
-  this.service.getOneEmployee(this.getparamid).subscribe((res)=>{
+  this.service.getOneContainer(this.getparamid).subscribe((res)=>{
     console.log(res, 'res==>');
     this.circuitForm.patchValue({
       circuit_cod: res.circuit[0].circuit_cod,
@@ -30,11 +31,16 @@ export class CreateCircuitComponent implements OnInit {
     });
   });
 }
-
 this.service.getCircuit().subscribe((res)=>{
   console.log(res,"res==>");
 
   this.readCircuit = res;
+});
+
+this.service.getContainer().subscribe((res)=>{
+  console.log(res,"res==>");
+
+  this.readContainer = res;
 });
 }
 
