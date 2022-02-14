@@ -14,7 +14,7 @@ const containerCollectionSchema = new mongoose.Schema({
     },
     key: {
         type: mongoose.SchemaTypes.String,
-        ref: 'Key'
+        ref: 'key'
     }
 
 });

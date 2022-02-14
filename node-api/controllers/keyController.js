@@ -12,20 +12,20 @@ const { v4: uuidv4 } = require('uuid');
 const authMiddleware = require('../middlewares/auth');
 // const { Collection } = require('mongoose');
 
-router.post('/', async(req, res) => {
+// router.post('/', async(req, res) => {
 
-    try {
-       
-        const _id = uuidv4();
-        const key = await Key.create({...req.body,_id });
-        return res.send({ key });
+//     try {
 
-// router.use(authMiddleware);
+//         const _id = uuidv4();
+//         const key = await Key.create({...req.body,_id });
+//         return res.send({ key });
 
-    } catch (err) {
-        return res.status(400).send({ error: 'Error creating new container' });
-    }
-});
+// // router.use(authMiddleware);
+
+//     } catch (err) {
+//         return res.status(400).send({ error: 'Error creating new Key' });
+//     }
+// });
 router.get('/', async(req, res) => {
     try {
         const { token } = req.session
