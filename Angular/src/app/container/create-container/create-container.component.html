@@ -78,9 +78,9 @@
                                                         </ul>
                                                     </div> -->
 
-                                                    <select matNativeControl [(ngModel)]="readDDCCFF" name="ddccff">
+                                                    <select matNativeControl [(ngModel)]="ddccff" name="ddccff" formControlName="ddccff">
                                                       <!-- <option value="" selected></option> -->
-                                                      <option *ngFor="let ddccff of readDDCCFF" [value]="ddccff.location">
+                                                      <option *ngFor="let ddccff of readDDCCFF" [value]="ddccff._id">
                                                         {{ddccff.location}}
                                                       </option>
                                                     </select>

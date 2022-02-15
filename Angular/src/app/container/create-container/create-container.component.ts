@@ -15,6 +15,7 @@ export class CreateContainerComponent implements OnInit {
   getparamid:any;
   readContainer:any;
   readDDCCFF:any;
+  ddccff:any="";
 
   constructor(private service : AppServiceService,private router:Router, private activatedRoute: ActivatedRoute) { }
 
@@ -60,7 +61,8 @@ containerSubmit()
   if(this.containerForm.valid)
   {
   console.log(this.containerForm.value);
-  this.service.createCircuit(this.containerForm.value).subscribe((res)=>{
+
+  this.service.createContainer(this.containerForm.value).subscribe((res)=>{
     console.log(res, 'res==>');
     this.containerForm.reset();
     this.successmsg = res.message;

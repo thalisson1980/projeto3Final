@@ -103,14 +103,15 @@ router.put('/:employeeId', authMiddleware, async(req, res) => {
         if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
             return res.status(400).send("You are not authorized to do this");
         }
-        const { name, adress, postalCode, occupation, permission } = req.body;
+        const { name, adress, postalCode, occupation, permission, ativo } = req.body;
         const employee = await Employee.findByIdAndUpdate(req.params.employeeId, {
 
             name,
             adress,
             postalCode,
             occupation,
-            permission
+            permission,
+            ativo
         }, { new: true });
 
         await employee.save();

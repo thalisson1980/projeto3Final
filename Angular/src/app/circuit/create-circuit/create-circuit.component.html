@@ -56,16 +56,14 @@
                                         </div>
                                         <div class="container mt-4">
                                             <div class="row">
-                                                <!-- *ngFor='let circuit of readCircuit' -->
+
+
                                                 <div class="col-2">
-                                                    <!-- *ngFor='let container of circuit.containers' -->
                                                     <div class="dropdown mb-2">
-                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="containers" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Containers</button>
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Containers</button>
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                             <li>
-                                                                <a class="dropdown-item" value=""></a>
-                                                                <!-- {{container.container_cod}} -->
+                                                                <a class="dropdown-item" *ngFor='let container of readContainer' value="">{{container.container_cod}}</a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -394,8 +392,8 @@
 
                                                 <div class="col-2">
                                                     <div class="dropdown mb-2">
-                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="containers" data-bs-toggle="dropdown" aria-expanded="false">
-                                              Containers</button>
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="containers" data-bs-toggle="dropdown" aria-expanded="false"> Containers</button>
+
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor='let circuit of readCircuit'>
                                                             <li>
                                                                 <a class="dropdown-item" *ngFor='let container of circuit.containers' value="">{{container.container_cod}}</a>
@@ -455,7 +453,6 @@
                                                 </div>
 
                                             </div>
-
 
 
 

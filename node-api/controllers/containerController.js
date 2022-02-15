@@ -102,6 +102,10 @@ router.post('/', async(req, res) => {
         }
 
         const _id = uuidv4();
+
+        console.log(req.body)
+
+
         const container = await Container.create({...req.body, _id });
         return res.send({ container });
 
