@@ -50,12 +50,13 @@ export class ReadAnonimoComponent implements OnInit {
   anonimo:any;
 
   ngOnInit(): void {
+
     if(sessionStorage.getItem('email')){
       this.user= true;
     }else{
       this.anonimo = true;
     }
-    console.log("teste"+this.user)
+  
   }
 
   choiceMade(){
@@ -317,6 +318,11 @@ compararAno(escolha:any){
 
   this.criarArrayDuasDatas();
 
+}
+
+logout(){
+  sessionStorage.clear();
+  location.reload();
 }
 
 }

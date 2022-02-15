@@ -71,8 +71,16 @@ export class PerfilComponent implements OnInit {
       }
     })
 
-  }
+    if(!sessionStorage.getItem('email')){
+      
+      window.location.href = "http://localhost:4200/";
+    }
 
+  }
+  logout(){
+    sessionStorage.clear();
+    location.reload();
+  }
   
    fechar() {
     this.mensagem = ""; 

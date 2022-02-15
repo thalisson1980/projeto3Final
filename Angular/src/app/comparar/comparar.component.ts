@@ -49,6 +49,10 @@ export class CompararComponent implements OnInit {
   @ViewChild('mychart') mychart:any;
 
   ngOnInit(): void {
+    if(!sessionStorage.getItem('email')){
+      
+      window.location.href = "http://localhost:4200/";
+    }
     
   }
 
@@ -66,7 +70,7 @@ export class CompararComponent implements OnInit {
 
   countyChosen(){
     if(this.choice == 'county'){
-      var data = {choice: this.choice,code:this.county,email: localStorage.getItem('email')}
+      var data = {choice: this.choice,code:this.county,email: sessionStorage.getItem('email')}
       this.service.getDates(data).subscribe((res)=>{
         
         if(res){
@@ -93,7 +97,7 @@ export class CompararComponent implements OnInit {
 
   parishChosen(){
     if(this.choice == 'parish'){
-      var data = {choice: this.choice,code:this.parish,email: localStorage.getItem('email')}
+      var data = {choice: this.choice,code:this.parish,email: sessionStorage.getItem('email')}
 
        this.service.getDates(data).subscribe((res)=>{
         
@@ -120,7 +124,7 @@ export class CompararComponent implements OnInit {
 
   containerChosen(){
     if(this.choice == 'container'){
-      var data = {choice: this.choice,id:this.container,email: localStorage.getItem('email')}
+      var data = {choice: this.choice,id:this.container,email: sessionStorage.getItem('email')}
     
       this.service.getDates(data).subscribe((res)=>{
         
@@ -391,5 +395,8 @@ compararAno(escolha:any){
 
 }
 
-
+logout(){
+  sessionStorage.clear();
+  location.reload();
+}
 }

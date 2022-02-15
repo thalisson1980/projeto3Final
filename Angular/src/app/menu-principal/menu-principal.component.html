@@ -19,14 +19,15 @@
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="https://www.apambiente.pt/residuos/estrategia-dos-biorresiduos" class="nav-link px-2 text-secondary">Biowastes</a></li>
-                    <li><a href="https://enea.apambiente.pt/" class="nav-link px-2 text-white">Educação Ambiental</a></li>
-                    <!-- <li><a href="/readCollection" class="nav-link px-2 text-white">Collection</a></li>
-                    <li><a href="/readContainer" class="nav-link px-2 text-white">Container</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Key</a></li> -->
+                    <li><a href="https://www.apambiente.pt/residuos/estrategia-dos-biorresiduos" class="nav-link px-2 text-secondary"><h5>Biowastes</h5></a></li>
+                    <li><a href="https://enea.apambiente.pt/" class="nav-link px-2 text-white"><h5>Educação Ambiental</h5></a></li>
+                    <li><a href="/readAnonimo" class="nav-link px-2 text-white"><h5>Collection</h5></a></li>
+                    <li><a href="https://enea.apambiente.pt/" class="nav-link px-2 text-white"><h5>Key</h5></a></li>
+                    
+    
                 </ul>
 
-                <form class="col-md-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 offset-md-2 py-4">
+                <form class="col-md-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 ">
                     <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                 </form>
 
@@ -48,7 +49,7 @@
                     <p class="lead text-muted">Take good care of the environment, the planet thanks you!</p>
                     <p>
 
-                        <img id="main" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU2NwWd-GDJtqZJ-aYysfEkD6v7rI23VcsUA&usqp=CAU" class="main" alt="Sample image">
+                        <img id="main" src="https://www.mdpi.com/catalysts/catalysts-11-01485/article_deploy/html/images/catalysts-11-01485-g002.png?fbclid=IwAR1bvfAnbN4njYzqB3OnWDvRuXz2ke9xP25Bzl9iOqdw_upHCMg65OTFEvc" class="img main" alt="Sample image">
                     </p>
                 </div>
             </div>
@@ -59,23 +60,7 @@
             <div class="container">
 
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <h5>Circuit</h5>
-
-                            <img id="contentor" src="./assets/img/biowaste.png" class="contentor" alt="Sample image">
-                            <div class="card-body">
-                                <p class="card-text">List.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button routerLink="/readCircuit" type="button" class="btn btn-sm btn-outline-secondary">View</button>
-
-                                    </div>
-                                    <small class="text-muted"></small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                 
 
 
                     <div class="col">
@@ -95,24 +80,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <h5>Container</h5>
-
-                            <img id="contentor" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoaVsWCL1Y1wxWX6AZrcWH0ltySQ8pPtv1zUQUwMcH9-MDDOtS29V5pmQFTaN8PewTcCU&usqp=CAU" class="contentor" alt="Sample image">
-
-                            <div class="card-body">
-                                <p class="card-text">List.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button routerLink="/readContainer" type="button" class="btn btn-sm btn-outline-secondary">View</button>
-
-                                    </div>
-                                    <small class="text-muted"></small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                 
 
 
                     <div class="col">
@@ -126,7 +94,7 @@
                                 <p class="card-text">List</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button routerLink="/readUser" type="button" class="btn btn-sm btn-outline-secondary">Ask</button>
+                                        <button (click)="abrirModal()" type="button" class="btn btn-sm btn-outline-secondary">Key</button>
                                         <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
                                     </div>
                                     <small class="text-muted"></small>
@@ -138,6 +106,26 @@
             </div>
         </div>
     </main>
+
+    <div class="bg-modal bg-modal">
+        <div class="modal-content modal-content">
+      
+            <div class="close" (click)="closeModal()">+</div>
+      
+            <h1>Key</h1>
+      
+            <div class="container">
+                <h5>Once you create an account and get a key, you will be able to see your depositions hitory as well as compare yourself to other users!</h5>
+                <br>
+                <br>
+                <button  (click)="closeModal()" type="button" class="btn btn-sm btn-outline-secondary">Ok</button>
+      
+            </div>
+      
+                
+                
+        </div>
+      </div>
 
     <footer class="text-muted py-5">
         <div class="container">

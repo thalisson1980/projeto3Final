@@ -11,6 +11,10 @@ export class MenuUserComponent implements OnInit {
   constructor(private service:AppServiceService) { }
 
   ngOnInit(): void {
+    if(!sessionStorage.getItem('email')){
+      
+      window.location.href = "http://localhost:4200/";
+    }
   }
   errormsg:any;
   mensagem:any;
@@ -19,6 +23,10 @@ export class MenuUserComponent implements OnInit {
     'reason':new FormControl('', Validators.required),
     
   });
+  logout(){
+    sessionStorage.clear();
+    location.reload();
+  }
 
   submit(){
     if(this.userForm.valid){
