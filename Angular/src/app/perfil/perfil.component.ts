@@ -57,9 +57,9 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.service.getOneUser(localStorage.getItem('id')).subscribe((res)=>{
+    this.service.getOneUser(sessionStorage.getItem('id')).subscribe((res)=>{
       if(res.collections){
-        
+        console.log(res.collections)
         
          this.user = res.user_id;
          if(res.userKey !== "No valid key"){

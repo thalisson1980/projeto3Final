@@ -168,7 +168,7 @@ router.post('/dates', async(req, res) => {
         if (req.body.choice == 'parish') {
             const containers = await container.find({ ddccff: req.body.code });
             for (const Element of containers) {
-                var collections = await containerCollection.find({ container: Element.container_cod, key: chaveUser._id });
+                var collections = await containerCollection.find({ container: Element._id, key: chaveUser._id });
                 for (const collect of collections) {
                     let collectAtual = await Collection.findOne({ _id: collect.collectionID })
                     let aux = await containerCollection.find({ collectionID: collect.collectionID })
@@ -191,7 +191,7 @@ router.post('/dates', async(req, res) => {
                         let colecoesUnicas = [];
                         let nColecoesZona = 0;
                         for (const colecao of aux) {
-                            const contentor = await container.findOne({ container_cod: colecao.container })
+                            const contentor = await container.findOne({_id: colecao.container })
                             if (contentor.ddccff == req.body.code) {
                                 let existe = false;
                                 if (colecao.key != chaveUser._id) {
@@ -242,7 +242,7 @@ router.post('/dates', async(req, res) => {
                     let colecoesUnicas = [];
                     let nColecoesZona = 0;
                     for (const colecao of aux) {
-                        const contentor = await container.findOne({ container_cod: colecao.container })
+                        const contentor = await container.findOne({ _id: colecao.container })
                         if (contentor.container_cod == req.body.id) {
                             let existe = false;
                             if (colecao.key != chaveUser._id) {

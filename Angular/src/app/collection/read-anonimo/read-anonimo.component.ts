@@ -33,6 +33,7 @@ export class ReadAnonimoComponent implements OnInit {
   lastCollect:any;
 
   collectionsList:any;
+  collectionsListAux:any;
   minDate:any;
   maxDate:any;
   dateAlert:any;
@@ -76,6 +77,7 @@ export class ReadAnonimoComponent implements OnInit {
 
         if(res){
           this.collectionsList = res.collections;
+          this.collectionsListAux =  res.collections;
         } else{
           this.mensagem = res.ERROR;;
         }
@@ -104,6 +106,7 @@ export class ReadAnonimoComponent implements OnInit {
 
         if(res){
           this.collectionsList = res.collections;
+          this.collectionsListAux =  res.collections;
         } else{
           this.mensagem = res.ERROR;;
         }
@@ -131,6 +134,7 @@ export class ReadAnonimoComponent implements OnInit {
 
         if(res){
           this.collectionsList = res.collections;
+          this.collectionsListAux =  res.collections;
 
         } else{
           this.mensagem = res.ERROR;;
@@ -194,9 +198,18 @@ export class ReadAnonimoComponent implements OnInit {
     }
     this.createChart(listOfDate,listOfKG)
   }
+filtrar(data:any){
 
+  for(let i=0;i<this.collectionsList.length;i++){
+    var collectDate= new Date(this.collectionsList[i].collectionDate);
+      if(collectDate.getTime() < data.getTime() ){
+          this.collectionsList.splice(i,1)
+      }
+  }
+}
 
 compararMes(){
+  this.collectionsList =  this.collectionsListAux.slice(0);
  this.list = [];
  var hoje = new Date();
  var ultimaSemana = new Date(hoje.getFullYear(), hoje.getMonth()-1, hoje.getDate());
@@ -206,20 +219,22 @@ compararMes(){
     this.list.push(this.collectionsList[i])
   }
 }
-console.log(this.list)
+
 this.criarArrayDuasDatas();
 }
 
 compararTrimestre(escolha:any){
+  this.collectionsList =  this.collectionsListAux.slice(0);
   this.list = [];
   var hoje = new Date();
   var ultimoSemestre= new Date(hoje.getFullYear(), hoje.getMonth()-3, hoje.getDate());
   if(escolha==1)ultimoSemestre= new Date(hoje.getFullYear(), hoje.getMonth()-6, hoje.getDate());
+ this.filtrar(ultimoSemestre)
   let listAux = [];
   for (let i = 0; i<this.collectionsList.length ; i++){
-    var primeira= new Date(this.collectionsList[i].collectionDate);
-
+    var collectDate= new Date(this.collectionsList[i].collectionDate);
     try{
+     
       if(i%2 == 0){
         var segunda = new Date(this.collectionsList[i+1].collectionDate);
         listAux.push({
@@ -231,6 +246,7 @@ compararTrimestre(escolha:any){
             totalCollections: this.collectionsList[i].totalCollections + this.collectionsList[i+1].totalCollections,
         })
       }
+    
     }catch(err){
       listAux.push({
         colecoesUnicas:this.collectionsList[i].colecoesUnicas,
@@ -249,17 +265,18 @@ compararTrimestre(escolha:any){
       this.list.push(listAux[i])
     }
   }
-  console.log(this.list)
   this.criarArrayDuasDatas();
 }
 
 compararAno(escolha:any){
+  this.collectionsList =  this.collectionsListAux.slice(0);
   this.list = [];
   var hoje = new Date();
   var ultimoSemestre= new Date(hoje.getFullYear()-1, hoje.getMonth(), hoje.getDate());
   if(escolha==1)ultimoSemestre= new Date(hoje.getFullYear()-50, hoje.getMonth(), hoje.getDate());
   let listAux = [];
-
+  this.filtrar(ultimoSemestre)
+  console.log(this.collectionsList)
   for (let i = 0; i<this.collectionsList.length ; i++){
     var data= new Date(this.collectionsList[i].collectionDate);
     let existe = false;
@@ -297,7 +314,7 @@ compararAno(escolha:any){
       this.list.push(listAux[i])
     }
   }
-  console.log(this.list)
+
   this.criarArrayDuasDatas();
 
 }

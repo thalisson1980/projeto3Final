@@ -54,7 +54,8 @@ router.post('/',async (req,res) =>{
             var activeRequest;
             requests.forEach(element => {
                 if(element.state == "pending"){
-                   activeRequest = res.json({message:"You already made the request for a key! Please wait."})
+                   activeRequest =true;
+                    res.json({message:"You already made the request for a key! Please wait."})
                 }
             });
 
