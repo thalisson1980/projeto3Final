@@ -14,7 +14,7 @@ export class ReadEmployeeComponent implements OnInit {
   successmsg:any;
   readOneEmployee:any;
 
-  getparamid:any
+
   constructor(private service : AppServiceService,private Router:Router, private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit(): void {

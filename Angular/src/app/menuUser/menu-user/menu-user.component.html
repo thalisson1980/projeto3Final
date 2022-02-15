@@ -37,7 +37,7 @@
 
 <body>
 
-    <header>
+    <!-- <header>
         <div class="collapse bg-dark" id="navbarHeader">
             <div class="container">
                 <div class="row">
@@ -50,8 +50,7 @@
                         <h4 class="text-white"></h4>
                         <ul class="list-unstyled">
                             <li><a href="#" class="text-white h5">Logout</a></li>
-                            <!-- <li><a href="#" class="text-white">Like on Facebook</a></li>
-                        <li><a href="#" class="text-white">Email me</a></li> -->
+
                         </ul>
                     </div>
                 </div>
@@ -60,20 +59,48 @@
         <div class="navbar navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a href="#" class="navbar-brand d-flex align-items-center">
-                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> -->
+
                     <strong>User</strong>
-                    
+
                 </a>
-               
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                    
+
                     <span class="navbar-toggler-icon"></span>
       </button>
-      <button routerLink="/perfil" type="button" class="btn btn-outline-light me-2">Perfil</button>
+                <button routerLink="/perfil" type="button" class="btn btn-outline-light me-2">Perfil</button>
+            </div>
+        </div>
+    </header> -->
+    <header class="p-3 bg-dark text-white">
+        <div class="container ">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="https://www.apambiente.pt/residuos/estrategia-dos-biorresiduos" class="nav-link px-2 text-secondary">Biowastes</a></li>
+                    <li><a href="https://enea.apambiente.pt/" class="nav-link px-2 text-white">Educação Ambiental</a></li>
+                    <!-- <li><a href="/readCollection" class="nav-link px-2 text-white">Collection</a></li>
+            <li><a href="/readContainer" class="nav-link px-2 text-white">Container</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Key</a></li> -->
+                </ul>
+
+                <form class="col-md-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 offset-md-2 py-4">
+                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                </form>
+                <div class="text-right offset-md-1 py-4">
+                    <button routerLink="/perfil" type="button" class="btn btn-outline-light me-2 ">Perfil</button>
+
+                </div>
+                <div class="text-right offset-md-1 py-4">
+                    <button routerLink="/logout" type="button" class="btn btn-outline-light me-2 ">Logout</button>
+
+                </div>
             </div>
         </div>
     </header>
-
     <main>
 
         <section class="py-5 text-center container">
@@ -88,7 +115,7 @@
                 </div>
             </div>
         </section>
-
+        <!-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU2NwWd-GDJtqZJ-aYysfEkD6v7rI23VcsUA&usqp=CAU -->
 
         <div class="album py-5 bg-light">
             <div class="container">
@@ -189,32 +216,32 @@
 
     <div class="bg-modal bg-modal1">
         <div class="modal-content">
-    
+
             <div class="close" (click)="closeModal1()">+</div>
-    
+
             <h1>You already have key assigned!</h1>
-    
+
             <div *ngIf="errormsg" class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>{{errormsg}}</strong>
-              </div>
-    
-            <form [formGroup]="userForm"  class="mx-1 mx-md-4" (ngSubmit)="submit()">
-          
+            </div>
+
+            <form [formGroup]="userForm" class="mx-1 mx-md-4" (ngSubmit)="submit()">
+
                 <div class="d-flex flex-row align-items-center mb-4">
-                  <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                  <div class="form-outline flex-fill mb-0">
-                    <input type="text" id="reason" formControlName="reason" class="form-control" />
-                    <label class="form-label" for="form3Example1c">Please especify your reason for a new key request</label>
-                  </div>
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                        <input type="text" id="reason" formControlName="reason" class="form-control" />
+                        <label class="form-label" for="form3Example1c">Please especify your reason for a new key request</label>
+                    </div>
                 </div>
-    
-                
+
+
                 <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                  <button  class="btn btn-primary btn-sm">submit</button>
+                    <button class="btn btn-primary btn-sm">submit</button>
                 </div>
-    
-              </form>
-            
+
+            </form>
+
         </div>
     </div>
 </body>

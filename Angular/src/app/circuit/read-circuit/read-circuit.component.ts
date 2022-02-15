@@ -11,20 +11,23 @@ export class ReadCircuitComponent implements OnInit {
   readCircuit:any;
   successmsg:any;
   readOneCircuit:any;
-  getparamid:any
+
+
   constructor(private service : AppServiceService,private Router:Router) { }
 
   ngOnInit(): void {
-    console.log('entrou')
+
     this.service.getCircuit().subscribe((res)=>{
       console.log(res,"res==>");
       if(res.error){
         this.successmsg = res.error;
       }else{
 
-                      this.readCircuit = res;
+      this.readCircuit = res;
       }
     });
+
+
   }
 
 
@@ -45,14 +48,17 @@ delete_id(id:any)
   console.log(id, 'deleteid==>');
   this.service.deleteCircuit(id).subscribe((res)=>{
     console.log(res,'deleteres==>');
-    this.successmsg = res.message;
+    if(res.error){
+      this.successmsg=res.error
+    }
 
+});
     this.service.getCircuit().subscribe((res)=>{
       console.log(res,"res==>");
       this.readCircuit= res;
     });
 
-  });
+
 }
 
 }

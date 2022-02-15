@@ -25,6 +25,7 @@ import { CompararComponent } from './comparar/comparar.component';
 import { ReadAnonimoComponent } from './collection/read-anonimo/read-anonimo.component';
 import { ReadOneCollectionComponent } from './collection/read-one-collection/read-one-collection.component';
 import { ReadOneCircuitComponent } from './circuit/read-one-circuit/read-one-circuit.component';
+import { BioPontosComponent } from './circuit/bio-pontos/bio-pontos.component';
 
 
 
@@ -55,6 +56,7 @@ import { ReadOneCircuitComponent } from './circuit/read-one-circuit/read-one-cir
     ReadAnonimoComponent,
     ReadOneCollectionComponent,
     ReadOneCircuitComponent,
+    BioPontosComponent,
 
 
     ],

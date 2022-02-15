@@ -1,117 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
 <body>
     <header class="p-3 bg-dark text-white">
-      <div *ngIf="anonimo">
-        <nav class="navbar bg-dark text-white">
-          <a class="navbar-brand">Biowastes</a>
-          <form class="form-inline">
-            <button class="btn btn-outline-light me-2" routerLink="" type="button">Página inicial</button>
-          </form>
-        </nav>
-    </div>
-    <div *ngIf="user">
-        <nav class="navbar bg-dark text-white">
-          <a class="navbar-brand">Biowastes</a>
-          <form class="form-inline">
-            <button class="btn btn-outline-light me-2" routerLink="/menuUser" type="button">Página inicial</button>
-            <button routerLink="/perfil" type="button" class="btn btn-outline-light me-2">Perfil</button>
-            <button class="btn btn-outline-light me-2" routerLink="/logout" type="button">Logout</button>
-          </form>
-        </nav>
-    </div>
+        <div class="container ">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="https://www.apambiente.pt/residuos/estrategia-dos-biorresiduos" class="nav-link px-2 text-secondary">Biowastes</a></li>
+                    <li><a href="https://enea.apambiente.pt/" class="nav-link px-2 text-white">Educação Ambiental</a></li>
+                    <!-- <li><a href="/readCollection" class="nav-link px-2 text-white">Collection</a></li>
+          <li><a href="/readContainer" class="nav-link px-2 text-white">Container</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Key</a></li> -->
+                </ul>
+
+                <form class="col-md-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 offset-md-3 py-4">
+                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                </form>
+
+                <div class="text-right offset-md-1 py-4">
+                    <button routerLink="/logout" type="button" class="btn btn-outline-light me-2 ">Logout</button>
+
+                </div>
+            </div>
+        </div>
     </header>
 
     <main>
         <div class="container my-container">
             <div class="row my-row">
-              <div class="col my-col">
-                  <h1>Depositions graph</h1>
-              </div>
+                <div class="col my-col">
+                    <h1>Depositions graph</h1>
+                </div>
             </div>
-                   
-                    <div *ngIf="dateAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
-                      <strong>{{dateAlert}}</strong>
-                    </div>
-   
-                    <div class="row my-row1">
-                      <a >Would you like to compare by:</a>
-                      <div class="col-1 my-col">
-                      
-                       
-                        <select   style="width: 80px;" [(ngModel)]="choice" name="choice" id="choice" (ngModelChange)="choiceMade()">
+
+            <div *ngIf="dateAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{dateAlert}}</strong>
+            </div>
+
+            <div class="row my-row1">
+                <a>Would you like to compare by:</a>
+                <div class="col-1 my-col">
+
+
+                    <select style="width: 80px;" [(ngModel)]="choice" name="choice" id="choice" (ngModelChange)="choiceMade()">
                           <option hidden selected  >List by</option>
                           <option value="county">County</option>
                           <option value="parish">Parish</option>
                           <option id="container" value="container">Container</option>
                         </select>
-    
-                        
-                        
-                      </div>  
-                      
-              
-                    <div *ngIf="(choice)=='container' || (choice)=='parish' || (choice)=='county' ">
-                      <div class="col-2  my-col">
-                        <select style="width: 150px;" [(ngModel)]="county" name="county" id="county" (ngModelChange)="countyChosen()" >
+
+
+
+                </div>
+
+
+                <div *ngIf="(choice)=='container' || (choice)=='parish' || (choice)=='county' ">
+                    <div class="col-2  my-col">
+                        <select style="width: 150px;" [(ngModel)]="county" name="county" id="county" (ngModelChange)="countyChosen()">
                           <option selected hidden >Choose a county</option>
                           <option *ngFor="let county of counties" value={{county.code}}>{{county.location}}</option>
                         </select>
-                      </div>
                     </div>
-              
-                
-                    <div *ngIf="(choice)=='container' || (choice)=='parish'">
+                </div>
+
+
+                <div *ngIf="(choice)=='container' || (choice)=='parish'">
                     <div class="col-4 my-col">
-                      <select style="width: 150px;" [(ngModel)]="parish" name="parish" id="parish" (ngModelChange)="parishChosen()" >
+                        <select style="width: 150px;" [(ngModel)]="parish" name="parish" id="parish" (ngModelChange)="parishChosen()">
                         <option selected hidden >Choose a parish</option>
                         <option *ngFor="let parish of parishList" value={{parish.code}}>{{parish.location}}</option>
                       </select>
                     </div>
-                  </div>
-              
-                    <div *ngIf="(choice)=='container'">
-                      <div class="col-1 my-col">
-                        <select  [(ngModel)]="container" style="width: 150px;" name="container" id="container" (ngModelChange)="containerChosen()" >
+                </div>
+
+                <div *ngIf="(choice)=='container'">
+                    <div class="col-1 my-col">
+                        <select [(ngModel)]="container" style="width: 150px;" name="container" id="container" (ngModelChange)="containerChosen()">
                           <option selected hidden >Choose a container</option>
                           <option *ngFor="let container of containers" value={{container.container_cod}}>{{container.container_cod}}</option>
                         </select>
-                      </div>
                     </div>
-                    </div>
-    
-                  
-                    <div class="row my-row">
-                        <div class="col my-col">
-                              <input type="radio" id="radio1" name="radios" value="all" checked>
-                              <label (click)="compararAno(1)" for="radio1">Compare last month</label>
+                </div>
+            </div>
 
-                            <input type="radio" id="radio2" name="radios"value="false">
-                              <label (click)="compararTrimestre(0)" for="radio2">Compare last trimester</label>
 
-                            <input type="radio" id="radio3" name="radios" value="true">
-                              <label (click)="compararTrimestre(1)" for="radio3">Compare last semester</label>
+            <div class="row my-row">
+                <div class="col my-col">
+                    <input type="radio" id="radio1" name="radios" value="all" checked>
+                    <label (click)="compararAno(1)" for="radio1">Compare last month</label>
 
-                              <input type="radio" id="radio4" name="radios" value="true">
-                              <label (click)="compararAno(0)" for="radio4">Compare last year</label>
+                    <input type="radio" id="radio2" name="radios" value="false">
+                    <label (click)="compararTrimestre(0)" for="radio2">Compare last trimester</label>
 
-                              <input type="radio" id="radio5" name="radios" value="true">
-                              <label  (click)="compararAno(1)" for="radio5">Compare all information</label>
-                        </div>
-                    </div>
-                  
-    
-                    <div class="row my-row myChartRow ">
-                      <canvas id="myChart" width="400" height="150" #mychart></canvas>
-                    </div>
-                  </div>
+                    <input type="radio" id="radio3" name="radios" value="true">
+                    <label (click)="compararTrimestre(1)" for="radio3">Compare last semester</label>
+
+                    <input type="radio" id="radio4" name="radios" value="true">
+                    <label (click)="compararAno(0)" for="radio4">Compare last year</label>
+
+                    <input type="radio" id="radio5" name="radios" value="true">
+                    <label (click)="compararAno(1)" for="radio5">Compare all information</label>
+                </div>
+            </div>
+
+
+            <div class="row my-row myChartRow ">
+                <canvas id="myChart" width="400" height="150" #mychart></canvas>
+            </div>
+        </div>
     </main>
-    
+
 </body>
-</html>
