@@ -67,6 +67,10 @@ export class AppServiceService {
   {
     return this._http.post("http://localhost:3000/containerCollection/dates",data);
   }
+  getDatesAn(data:any):Observable<any>
+  {
+    return this._http.post("http://localhost:3000/containerCollection/datesAnonimo",data);
+  }
 
 
   //CRUD circuit

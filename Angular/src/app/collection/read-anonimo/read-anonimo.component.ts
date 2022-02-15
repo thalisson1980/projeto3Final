@@ -74,7 +74,7 @@ export class ReadAnonimoComponent implements OnInit {
   countyChosen(){
     if(this.choice == 'county'){
       var data = {choice: this.choice,code:this.county,email: sessionStorage.getItem('email')}
-      this.service.getDates(data).subscribe((res)=>{
+      this.service.getDatesAn(data).subscribe((res)=>{
 
         if(res){
           this.collectionsList = res.collections;
@@ -103,7 +103,7 @@ export class ReadAnonimoComponent implements OnInit {
     if(this.choice == 'parish'){
       var data = {choice: this.choice,code:this.parish,email: sessionStorage.getItem('email')}
 
-       this.service.getDates(data).subscribe((res)=>{
+       this.service.getDatesAn(data).subscribe((res)=>{
 
         if(res){
           this.collectionsList = res.collections;
@@ -131,7 +131,7 @@ export class ReadAnonimoComponent implements OnInit {
     if(this.choice == 'container'){
       var data = {choice: this.choice,id:this.container,email: sessionStorage.getItem('email')}
 
-      this.service.getDates(data).subscribe((res)=>{
+      this.service.getDatesAn(data).subscribe((res)=>{
 
         if(res){
           this.collectionsList = res.collections;
@@ -191,9 +191,8 @@ export class ReadAnonimoComponent implements OnInit {
       let aux = obj.collectionDate.split('T');
        listOfDate.push(aux[0]);
        let pesoPorDeposicao = obj.massaCollect_kg/obj.totalCollections;
-       let nDeposicoes = obj.colecoesZona +obj.numberCollections;
 
-       let pesoDepositado = nDeposicoes*pesoPorDeposicao;
+       let pesoDepositado = obj.numberCollections*pesoPorDeposicao;
        listOfKG.push(pesoDepositado);
 
     }
@@ -239,19 +238,16 @@ compararTrimestre(escolha:any){
       if(i%2 == 0){
         var segunda = new Date(this.collectionsList[i+1].collectionDate);
         listAux.push({
-            colecoesUnicas:this.collectionsList[i].colecoesUnicas + this.collectionsList[i+1].colecoesUnicas,
-            colecoesZona:this.collectionsList[i].colecoesZona + this.collectionsList[i+1].colecoesZona,
             collectionDate: this.collectionsList[i+1].collectionDate,
             massaCollect_kg:this.collectionsList[i].massaCollect_kg + this.collectionsList[i+1].massaCollect_kg,
-            numberCollections: this.collectionsList[i].numberCollections + this.collectionsList[i+1].numberCollections,
+            numberCollections: this.collectionsList[i].numberCollections + this.collectionsList[i+1].numberCollections ,
             totalCollections: this.collectionsList[i].totalCollections + this.collectionsList[i+1].totalCollections,
         })
       }
     
     }catch(err){
       listAux.push({
-        colecoesUnicas:this.collectionsList[i].colecoesUnicas,
-        colecoesZona:this.collectionsList[i].colecoesZona,
+
         collectionDate: this.collectionsList[i].collectionDate,
         massaCollect_kg:this.collectionsList[i].massaCollect_kg,
         numberCollections: this.collectionsList[i].numberCollections,
@@ -286,21 +282,17 @@ compararAno(escolha:any){
 
       if(data.getFullYear() == listAux[j].ano && data.getMonth()+1== listAux[j].mes){
         existe = true;
-           listAux[j].colecoesUnicas=listAux[j].colecoesUnicas + this.collectionsList[i].colecoesUnicas
-           listAux[j].colecoesZona= listAux[j].colecoesZona + this.collectionsList[i].colecoesZona
            listAux[j].collectionDate = this.collectionsList[i].collectionDate
            listAux[j].massaCollect_kg=  listAux[j].massaCollect_kg +this.collectionsList[i].massaCollect_kg
-           listAux[j].numberCollections=listAux[j].numberCollections+  this.collectionsList[i].numberCollections
+           listAux[j].numberCollections = listAux[j].numberCollections+this.collectionsList[i].numberCollections
            listAux[j].totalCollections= listAux[j].totalCollections+  this.collectionsList[i].totalCollections
       }
     }
     if(!existe){
       listAux.push({
-        colecoesUnicas: this.collectionsList[i].colecoesUnicas,
-        colecoesZona: this.collectionsList[i].colecoesZona,
         collectionDate:  this.collectionsList[i].collectionDate,
         massaCollect_kg: this.collectionsList[i].massaCollect_kg,
-        numberCollections:  this.collectionsList[i].numberCollections,
+        numberCollections: this.collectionsList[i].numberCollections,
         totalCollections:  this.collectionsList[i].totalCollections,
         mes: data.getMonth()+1,
         ano:data.getFullYear()

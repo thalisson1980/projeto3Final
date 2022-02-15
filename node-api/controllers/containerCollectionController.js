@@ -91,6 +91,88 @@ router.post('/findByUser', async(req, res) => {
 
 });
 
+router.post('/datesAnonimo',async (req, res) =>{
+    console.log("entrou")
+    let collectionsList = [];
+    if (req.body.choice == 'county') {
+        var queryCode = { ddccff: req.body.code.substring(0, 4) };
+        let containers = await container.find({ $regex: queryCode + ".*" });
+        for (const Element of containers) {
+            if (Element.ddccff.substring(0, 4) == req.body.code.substring(0, 4)){
+                var collections = await containerCollection.find({ container: Element._id});
+                for (const collect of collections) {
+                    let collectAtual = await Collection.findOne({ _id: collect.collectionID })
+                        let aux = await containerCollection.find({ collectionID: collect.collectionID })
+
+                        let existeCollect = false;
+                        for (const collection of collectionsList) {
+                            if (collection.collection === collectAtual._id.toString()) {
+
+                                collection.numberCollections = collection.numberCollections + 1;
+                                existeCollect = true;
+                            }
+
+                        }
+                        if (!existeCollect) {
+                            collectionsList.push({collection: collectAtual._id.toString(), massaCollect_kg: collectAtual.massaCollect_kg, numberCollections: 1, collectionDate: collectAtual.dateEndTime, totalCollections: aux.length });
+                            }
+
+                }
+            
+
+            }
+        }
+    }
+    if (req.body.choice == 'parish') {
+        const containers = await container.find({ ddccff: req.body.code });
+        for (const Element of containers) {
+            var collections = await containerCollection.find({ container: Element._id });
+            for (const collect of collections) {
+                let collectAtual = await Collection.findOne({ _id: collect.collectionID })
+                let aux = await containerCollection.find({ collectionID: collect.collectionID })
+   
+                let existeCollect = false;
+                for (const collection of collectionsList) {
+                    if (collection.collection === collectAtual._id.toString()) {
+
+                        collection.numberCollections = collection.numberCollections + 1;
+                        existeCollect = true;
+                    }
+                }
+                if (!existeCollect) {
+                    collectionsList.push({collection: collectAtual._id.toString(), massaCollect_kg: collectAtual.massaCollect_kg, numberCollections: 1, collectionDate: collectAtual.dateEndTime, totalCollections: aux.length });
+                    }
+            }
+
+        }
+
+    }
+    if (req.body.choice == 'container') {
+
+        var queryContainer = { container: req.body.id, key: chaveUser._id };
+        var collections = await containerCollection.find(queryContainer);
+        for (const collect of collections) {
+            let collectAtual = await Collection.findOne({ _id: collect.collectionID })
+            let aux = await containerCollection.find({ collectionID: collect.collectionID })
+
+            let existeCollect = false;
+            for (const collection of collectionsList) {
+                if (collection.collection === collectAtual._id.toString()) {
+
+                    collection.numberCollections = collection.numberCollections + 1;
+                    existeCollect = true;
+                }
+            }
+            if (!existeCollect) {
+                collectionsList.push({collection: collectAtual._id.toString(), massaCollect_kg: collectAtual.massaCollect_kg, numberCollections: 1, collectionDate: collectAtual.dateEndTime, totalCollections: aux.length });
+                }
+        }
+
+    }
+    console.log(collectionsList)
+    res.json({collections: collectionsList });
+})
+
 router.post('/dates', async(req, res) => {
     console.log(req.body)
     var firstCollect = new Date();
