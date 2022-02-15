@@ -53,17 +53,7 @@ router.get("/logout", async(req, res) => {
 
 router.get('/:userId', authMiddleware, async(req, res) => {
     try {
-        const { token } = req.session
-        const payload = jwt.verify(token, authToken.secret);
-        const user = await User.findById(payload.id);
-
-        if (!user) {
-            return res.status(400).send("User not found");
-        }
-
-        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
-            return res.status(400).send("You are not authorized to do this");
-        }
+     
         const user_id = await User.findById(req.params.userId);
         const chaves = await Key.find({user:user_id._id});
 
@@ -88,7 +78,7 @@ router.get('/:userId', authMiddleware, async(req, res) => {
 
 router.post('/', async(req, res) => {
 
-
+console.log(req.body)
 
     try {
         const { email } = req.body;

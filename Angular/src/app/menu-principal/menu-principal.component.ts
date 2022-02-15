@@ -12,12 +12,19 @@ export class MenuPrincipalComponent implements OnInit {
   anonimo:any;
   ngOnInit(): void {
 
-    if(localStorage.getItem('email')){
+    if(sessionStorage.getItem('email')){
       this.user= true;
     }else{
       this.anonimo = true;
     }
     console.log("teste"+this.user)
+  }
+
+  abrirModal(){
+    document.querySelector<HTMLElement>('.bg-modal')!.style.display ="flex";
+  }
+  closeModal(){
+    document.querySelector<HTMLElement>('.bg-modal')!.style.display ="none";
   }
 
 }

@@ -35,6 +35,7 @@ export class CompararComponent implements OnInit {
   lastCollect:any;
 
   collectionsList:any;
+  collectionsListAux:any;
   minDate:any;
   maxDate:any;
   dateAlert:any;
@@ -48,6 +49,10 @@ export class CompararComponent implements OnInit {
   @ViewChild('mychart') mychart:any;
 
   ngOnInit(): void {
+    if(!sessionStorage.getItem('email')){
+      
+      window.location.href = "http://localhost:4200/";
+    }
     
   }
 
@@ -65,7 +70,7 @@ export class CompararComponent implements OnInit {
 
   countyChosen(){
     if(this.choice == 'county'){
-      var data = {choice: this.choice,code:this.county,email: localStorage.getItem('email')}
+      var data = {choice: this.choice,code:this.county,email: sessionStorage.getItem('email')}
       this.service.getDates(data).subscribe((res)=>{
         
         if(res){
@@ -92,7 +97,7 @@ export class CompararComponent implements OnInit {
 
   parishChosen(){
     if(this.choice == 'parish'){
-      var data = {choice: this.choice,code:this.parish,email: localStorage.getItem('email')}
+      var data = {choice: this.choice,code:this.parish,email: sessionStorage.getItem('email')}
 
        this.service.getDates(data).subscribe((res)=>{
         
@@ -119,7 +124,7 @@ export class CompararComponent implements OnInit {
 
   containerChosen(){
     if(this.choice == 'container'){
-      var data = {choice: this.choice,id:this.container,email: localStorage.getItem('email')}
+      var data = {choice: this.choice,id:this.container,email: sessionStorage.getItem('email')}
     
       this.service.getDates(data).subscribe((res)=>{
         
@@ -135,6 +140,7 @@ export class CompararComponent implements OnInit {
 
   atribuirData(res:any){
     this.collectionsList = res.collections;
+    this.collectionsListAux =  res.collections;
 
     var datesFirst = res.first.split('-');
     var restFirst = datesFirst[2].split('T');
@@ -225,7 +231,7 @@ export class CompararComponent implements OnInit {
   }
  
 compare(){
-
+  this.collectionsList =  this.collectionsListAux.slice(0);
   this.dateAlert='';
   var startControl = document.getElementById('start')?.getAttribute('min');
   var endControl = document.getElementById('end')?.getAttribute('max');
@@ -268,8 +274,18 @@ compare(){
     this.criarArrayDuasDatas();
   }
 }
+filtrar(data:any){
+
+  for(let i=0;i<this.collectionsList.length;i++){
+    var collectDate= new Date(this.collectionsList[i].collectionDate);
+      if(collectDate.getTime() < data.getTime() ){
+          this.collectionsList.splice(i,1)
+      }
+  }
+}
 
 compararMes(){
+  this.collectionsList =  this.collectionsListAux.slice(0);
  this.list = [];
  var hoje = new Date();
  var ultimaSemana = new Date(hoje.getFullYear(), hoje.getMonth()-1, hoje.getDate());
@@ -284,10 +300,12 @@ this.criarArrayDuasDatas();
 }
 
 compararTrimestre(escolha:any){
+  this.collectionsList =  this.collectionsListAux.slice(0);
   this.list = [];
   var hoje = new Date();
   var ultimoSemestre= new Date(hoje.getFullYear(), hoje.getMonth()-3, hoje.getDate());
   if(escolha==1)ultimoSemestre= new Date(hoje.getFullYear(), hoje.getMonth()-6, hoje.getDate());
+  this.filtrar(ultimoSemestre)
   let listAux = [];
   for (let i = 0; i<this.collectionsList.length ; i++){
     var primeira= new Date(this.collectionsList[i].collectionDate);
@@ -327,10 +345,12 @@ compararTrimestre(escolha:any){
 }
 
 compararAno(escolha:any){
+  this.collectionsList =  this.collectionsListAux.slice(0);
   this.list = [];
   var hoje = new Date();
   var ultimoSemestre= new Date(hoje.getFullYear()-1, hoje.getMonth(), hoje.getDate());
   if(escolha==1)ultimoSemestre= new Date(hoje.getFullYear()-50, hoje.getMonth(), hoje.getDate());
+  this.filtrar(ultimoSemestre)
   let listAux = [];
 
   for (let i = 0; i<this.collectionsList.length ; i++){
@@ -375,5 +395,8 @@ compararAno(escolha:any){
 
 }
 
-
+logout(){
+  sessionStorage.clear();
+  location.reload();
+}
 }

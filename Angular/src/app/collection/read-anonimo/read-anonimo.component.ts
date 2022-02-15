@@ -33,6 +33,7 @@ export class ReadAnonimoComponent implements OnInit {
   lastCollect:any;
 
   collectionsList:any;
+  collectionsListAux:any;
   minDate:any;
   maxDate:any;
   dateAlert:any;
@@ -49,12 +50,13 @@ export class ReadAnonimoComponent implements OnInit {
   anonimo:any;
 
   ngOnInit(): void {
+
     if(sessionStorage.getItem('email')){
       this.user= true;
     }else{
       this.anonimo = true;
     }
-    console.log("teste"+this.user)
+  
   }
 
   choiceMade(){
@@ -72,10 +74,11 @@ export class ReadAnonimoComponent implements OnInit {
   countyChosen(){
     if(this.choice == 'county'){
       var data = {choice: this.choice,code:this.county,email: sessionStorage.getItem('email')}
-      this.service.getDates(data).subscribe((res)=>{
+      this.service.getDatesAn(data).subscribe((res)=>{
 
         if(res){
           this.collectionsList = res.collections;
+          this.collectionsListAux =  res.collections;
         } else{
           this.mensagem = res.ERROR;;
         }
@@ -100,10 +103,11 @@ export class ReadAnonimoComponent implements OnInit {
     if(this.choice == 'parish'){
       var data = {choice: this.choice,code:this.parish,email: sessionStorage.getItem('email')}
 
-       this.service.getDates(data).subscribe((res)=>{
+       this.service.getDatesAn(data).subscribe((res)=>{
 
         if(res){
           this.collectionsList = res.collections;
+          this.collectionsListAux =  res.collections;
         } else{
           this.mensagem = res.ERROR;;
         }
@@ -127,10 +131,11 @@ export class ReadAnonimoComponent implements OnInit {
     if(this.choice == 'container'){
       var data = {choice: this.choice,id:this.container,email: sessionStorage.getItem('email')}
 
-      this.service.getDates(data).subscribe((res)=>{
+      this.service.getDatesAn(data).subscribe((res)=>{
 
         if(res){
           this.collectionsList = res.collections;
+          this.collectionsListAux =  res.collections;
 
         } else{
           this.mensagem = res.ERROR;;
@@ -186,17 +191,25 @@ export class ReadAnonimoComponent implements OnInit {
       let aux = obj.collectionDate.split('T');
        listOfDate.push(aux[0]);
        let pesoPorDeposicao = obj.massaCollect_kg/obj.totalCollections;
-       let nDeposicoes = obj.colecoesZona +obj.numberCollections;
 
-       let pesoDepositado = nDeposicoes*pesoPorDeposicao;
+       let pesoDepositado = obj.numberCollections*pesoPorDeposicao;
        listOfKG.push(pesoDepositado);
 
     }
     this.createChart(listOfDate,listOfKG)
   }
+filtrar(data:any){
 
+  for(let i=0;i<this.collectionsList.length;i++){
+    var collectDate= new Date(this.collectionsList[i].collectionDate);
+      if(collectDate.getTime() < data.getTime() ){
+          this.collectionsList.splice(i,1)
+      }
+  }
+}
 
 compararMes(){
+  this.collectionsList =  this.collectionsListAux.slice(0);
  this.list = [];
  var hoje = new Date();
  var ultimaSemana = new Date(hoje.getFullYear(), hoje.getMonth()-1, hoje.getDate());
@@ -206,35 +219,35 @@ compararMes(){
     this.list.push(this.collectionsList[i])
   }
 }
-console.log(this.list)
+
 this.criarArrayDuasDatas();
 }
 
 compararTrimestre(escolha:any){
+  this.collectionsList =  this.collectionsListAux.slice(0);
   this.list = [];
   var hoje = new Date();
   var ultimoSemestre= new Date(hoje.getFullYear(), hoje.getMonth()-3, hoje.getDate());
   if(escolha==1)ultimoSemestre= new Date(hoje.getFullYear(), hoje.getMonth()-6, hoje.getDate());
+ this.filtrar(ultimoSemestre)
   let listAux = [];
   for (let i = 0; i<this.collectionsList.length ; i++){
-    var primeira= new Date(this.collectionsList[i].collectionDate);
-
+    var collectDate= new Date(this.collectionsList[i].collectionDate);
     try{
+     
       if(i%2 == 0){
         var segunda = new Date(this.collectionsList[i+1].collectionDate);
         listAux.push({
-            colecoesUnicas:this.collectionsList[i].colecoesUnicas + this.collectionsList[i+1].colecoesUnicas,
-            colecoesZona:this.collectionsList[i].colecoesZona + this.collectionsList[i+1].colecoesZona,
             collectionDate: this.collectionsList[i+1].collectionDate,
             massaCollect_kg:this.collectionsList[i].massaCollect_kg + this.collectionsList[i+1].massaCollect_kg,
-            numberCollections: this.collectionsList[i].numberCollections + this.collectionsList[i+1].numberCollections,
+            numberCollections: this.collectionsList[i].numberCollections + this.collectionsList[i+1].numberCollections ,
             totalCollections: this.collectionsList[i].totalCollections + this.collectionsList[i+1].totalCollections,
         })
       }
+    
     }catch(err){
       listAux.push({
-        colecoesUnicas:this.collectionsList[i].colecoesUnicas,
-        colecoesZona:this.collectionsList[i].colecoesZona,
+
         collectionDate: this.collectionsList[i].collectionDate,
         massaCollect_kg:this.collectionsList[i].massaCollect_kg,
         numberCollections: this.collectionsList[i].numberCollections,
@@ -249,17 +262,18 @@ compararTrimestre(escolha:any){
       this.list.push(listAux[i])
     }
   }
-  console.log(this.list)
   this.criarArrayDuasDatas();
 }
 
 compararAno(escolha:any){
+  this.collectionsList =  this.collectionsListAux.slice(0);
   this.list = [];
   var hoje = new Date();
   var ultimoSemestre= new Date(hoje.getFullYear()-1, hoje.getMonth(), hoje.getDate());
   if(escolha==1)ultimoSemestre= new Date(hoje.getFullYear()-50, hoje.getMonth(), hoje.getDate());
   let listAux = [];
-
+  this.filtrar(ultimoSemestre)
+  console.log(this.collectionsList)
   for (let i = 0; i<this.collectionsList.length ; i++){
     var data= new Date(this.collectionsList[i].collectionDate);
     let existe = false;
@@ -268,21 +282,17 @@ compararAno(escolha:any){
 
       if(data.getFullYear() == listAux[j].ano && data.getMonth()+1== listAux[j].mes){
         existe = true;
-           listAux[j].colecoesUnicas=listAux[j].colecoesUnicas + this.collectionsList[i].colecoesUnicas
-           listAux[j].colecoesZona= listAux[j].colecoesZona + this.collectionsList[i].colecoesZona
            listAux[j].collectionDate = this.collectionsList[i].collectionDate
            listAux[j].massaCollect_kg=  listAux[j].massaCollect_kg +this.collectionsList[i].massaCollect_kg
-           listAux[j].numberCollections=listAux[j].numberCollections+  this.collectionsList[i].numberCollections
+           listAux[j].numberCollections = listAux[j].numberCollections+this.collectionsList[i].numberCollections
            listAux[j].totalCollections= listAux[j].totalCollections+  this.collectionsList[i].totalCollections
       }
     }
     if(!existe){
       listAux.push({
-        colecoesUnicas: this.collectionsList[i].colecoesUnicas,
-        colecoesZona: this.collectionsList[i].colecoesZona,
         collectionDate:  this.collectionsList[i].collectionDate,
         massaCollect_kg: this.collectionsList[i].massaCollect_kg,
-        numberCollections:  this.collectionsList[i].numberCollections,
+        numberCollections: this.collectionsList[i].numberCollections,
         totalCollections:  this.collectionsList[i].totalCollections,
         mes: data.getMonth()+1,
         ano:data.getFullYear()
@@ -297,9 +307,14 @@ compararAno(escolha:any){
       this.list.push(listAux[i])
     }
   }
-  console.log(this.list)
+
   this.criarArrayDuasDatas();
 
+}
+
+logout(){
+  sessionStorage.clear();
+  location.reload();
 }
 
 }

@@ -38,17 +38,7 @@ router.get('/', async(req, res) => {
 
 router.post('/containers/byParish', async(req, res) => {
     try {
-        const { token } = req.session
-        const payload = jwt.verify(token, authToken.secret);
-        const user = await User.findById(payload.id);
-
-        if (!user) {
-            return res.status(400).send("User not found");
-        }
-
-        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
-            return res.status(400).send("You are not authorized to do this");
-        }
+    
 
         var code = { ddccff: req.body };
         const containers = await Container.find(code).populate('ddccff');
