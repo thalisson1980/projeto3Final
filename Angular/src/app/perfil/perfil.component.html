@@ -20,35 +20,30 @@
       </form>
     </nav>
 </header> -->
-    <header class="p-3 bg-dark text-white mb-5">
-        <div class="container ">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-                </a>
-
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="https://www.apambiente.pt/residuos/estrategia-dos-biorresiduos" class="nav-link px-2 text-secondary">Biowastes</a></li>
-                    <li><a href="https://enea.apambiente.pt/" class="nav-link px-2 text-white">Educação Ambiental</a></li>
-                    <!-- <li><a href="/readCollection" class="nav-link px-2 text-white">Collection</a></li>
-      <li><a href="/readContainer" class="nav-link px-2 text-white">Container</a></li>
-      <li><a href="#" class="nav-link px-2 text-white">Key</a></li> -->
-                </ul>
-
-                <form class="col-md-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 offset-md-2 py-4">
-                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-                </form>
-                <div class="text-right offset-md-1 py-4">
-                    <button routerLink="/perfil" type="button" routerLink="/menuUser" class="btn btn-outline-light me-2 ">Main Page</button>
-
-                </div>
-                <div class="text-right offset-md-1 py-4">
-                    <button routerLink="/logout" type="button" class="btn btn-outline-light me-2 ">Logout</button>
-
-                </div>
+<header class="p-3 bg-dark text-white">
+    <div class="container ">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+            </a>
+  
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="https://www.apambiente.pt/residuos/estrategia-dos-biorresiduos" class="nav-link px-2 text-secondary"><h5>Biowastes</h5></a></li>
+                <li><a href="https://enea.apambiente.pt/" class="nav-link px-2 text-white"><h5>Educação Ambiental</h5></a></li>
+            </ul>
+            <form class="col-md-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 ">
+              <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+          </form>
+  
+  
+            <div class="text-right offset-md-1 py-4">
+                <button routerLink="/menuUser" type="button" class="btn btn-outline-light me-2">Main page</button> &nbsp; &nbsp;
+                <button (click)="logout()" type="button" class="btn btn-warning">Logout</button>
             </div>
         </div>
-    </header>
+    </div>
+  
+  </header>
     <div class="container my-container">
 
         <div *ngIf="mensagem" (click)="fechar()" id="alert" class="alert alert-info alert-dismissible fade show" role="alert">
