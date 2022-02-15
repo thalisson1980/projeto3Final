@@ -98,7 +98,7 @@
                   <div class="col-1 my-col">
                     <select  [(ngModel)]="container" style="width: 150px;" name="container" id="container" (ngModelChange)="containerChosen()" >
                       <option selected hidden >Choose a container</option>
-                      <option *ngFor="let container of containers" value={{container.container_cod}}>{{container.container_cod}}</option>
+                      <option *ngFor="let container of containers" value={{container._id}}>{{container.container_cod}}</option>
                     </select>
                   </div>
                 </div>

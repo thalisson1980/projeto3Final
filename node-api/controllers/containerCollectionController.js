@@ -149,7 +149,7 @@ router.post('/datesAnonimo',async (req, res) =>{
     }
     if (req.body.choice == 'container') {
 
-        var queryContainer = { container: req.body.id, key: chaveUser._id };
+        var queryContainer = { container: req.body.id };
         var collections = await containerCollection.find(queryContainer);
         for (const collect of collections) {
             let collectAtual = await Collection.findOne({ _id: collect.collectionID })
@@ -174,7 +174,7 @@ router.post('/datesAnonimo',async (req, res) =>{
 })
 
 router.post('/dates', async(req, res) => {
-    console.log(req.body)
+
     var firstCollect = new Date();
     var lastCollect = new Date();
     lastCollect.setFullYear('1900');
