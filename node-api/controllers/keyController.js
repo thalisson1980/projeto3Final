@@ -26,6 +26,7 @@ const authMiddleware = require('../middlewares/auth');
 //         return res.status(400).send({ error: 'Error creating new Key' });
 //     }
 // });
+router.use(authMiddleware);
 router.get('/', async(req, res) => {
     try {
         const { token } = req.session

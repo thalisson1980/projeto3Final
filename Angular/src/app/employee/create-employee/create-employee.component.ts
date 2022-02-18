@@ -100,4 +100,8 @@ export class CreateEmployeeComponent implements OnInit {
       this.errormsg = 'all field is required';
     }
   }
+  logout(){
+    this.service.logout();
+
+  }
 }

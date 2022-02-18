@@ -23,14 +23,15 @@ export class RegistarComponent implements OnInit {
     this.getparamid = this.activatedRoute.snapshot.paramMap.get('id');
     if(this.getparamid){
     this.service.getOneUser(this.getparamid).subscribe((res)=>{
-      console.log(res, 'res==>');
+      // console.log(res, 'res==>');
+      console.log('res', res.user.name)
       this.userForm.patchValue({
-        name: res.user[0].name,
-        email: res.user[0].email,
-        // password: res.user[0].password,
-        // passwordControl: res.user[0].passwordControl
-        key: res.user[0].key,
-        permission: res.user[0].permission
+        name: res.user.name,
+        email: res.user.email,
+        password: res.user.password,
+        passwordControl: res.user.passwordControl
+        // key: res.user[0].key,
+        // permission: res.user[0].permission
       });
     });
   }
@@ -41,6 +42,8 @@ export class RegistarComponent implements OnInit {
     'email':new FormControl('', Validators.required),
     'password':new FormControl('', Validators.required),
     'passwordControl':new FormControl('', Validators.required)
+
+    // 'passwordControl':new FormControl('', Validators.required)
   });
 
   // uptadeForm = new FormGroup({

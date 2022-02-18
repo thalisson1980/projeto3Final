@@ -27,5 +27,8 @@ export class ReadOneCircuitComponent implements OnInit {
       });
 
   }
+  logout(){
+    this.service.logout();
 
+  }
 }

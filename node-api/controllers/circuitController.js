@@ -47,7 +47,7 @@ router.get('/:circuitId', async(req, res) => {
             return res.status(400).send("User not found");
         }
 
-        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
+        if (user.permission === 'view') {
             return res.status(400).send("You are not authorized to do this");
         }
 

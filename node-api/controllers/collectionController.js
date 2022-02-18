@@ -12,7 +12,7 @@ const Employee = require('../models/employee');
 const Circuit = require('../models/circuit');
 
 
-// router.use(authMiddleware);
+router.use(authMiddleware);
 
 router.get('/', authMiddleware, async(req, res) => {
     try {
@@ -46,7 +46,7 @@ router.get('/:collectionId', async(req, res) => {
             return res.status(400).send("User not found");
         }
 
-        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
+        if (user.permission === 'view') {
             return res.status(400).send("You are not authorized to do this");
         }
         const collection = await Collection.findById(req.params.collectionId).populate(['employees']).populate('circuit');

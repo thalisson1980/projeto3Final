@@ -9,7 +9,7 @@ const Key = require('../models/key');
 const { v4: uuidv4 } = require('uuid');
 const authMiddleware = require('../middlewares/auth');
 
-
+// router.use(authMiddleware);
 
 function generateToken(params = {}) {
     return jwt.sign(
@@ -52,33 +52,55 @@ router.get("/logout", async(req, res) => {
 })
 
 router.get('/:userId', authMiddleware, async(req, res) => {
-    try {
-     
-        const user_id = await User.findById(req.params.userId);
-        const chaves = await Key.find({user:user_id._id});
+        try {
+            const { token } = req.session
+            const payload = jwt.verify(token, authToken.secret);
+            const user = await User.findById(payload.id);
 
-        let userKey;
-        let existe = false;
-        for(const chave of chaves ){
-            if(chave.ativo == true ){
-                userKey = chave
-                existe = true;
+            if (!user) {
+                return res.status(400).send("User not found");
             }
-        }
-        if(!existe){
-            userKey = "No valid key"
-        }
-        res.json({ user_id,userKey});
 
-    } catch (error) {
-        return res.status(400).send({ error: 'Error loading user' })
-    }
-})
+            if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
+                return res.status(400).send("You are not authorized to do this");
+            }
+
+            const usuario = await User.findById(req.params.userId);
+            console.log({ usuario })
+            return res.json({ usuario });
+
+        } catch (error) {
+            return res.status(400).send({ error: 'Error loading user' })
+        }
+    })
+    // router.get('/:userId', authMiddleware, async(req, res) => {
+    //     try {
+
+//         const user_id = await User.findById(req.params.userId);
+//         const chaves = await Key.find({ user: user_id._id });
+
+//         let userKey;
+//         let existe = false;
+//         for (const chave of chaves) {
+//             if (chave.ativo == true) {
+//                 userKey = chave
+//                 existe = true;
+//             }
+//         }
+//         if (!existe) {
+//             userKey = "No valid key"
+//         }
+//         res.json({ user_id, userKey });
+
+//     } catch (error) {
+//         return res.status(400).send({ error: 'Error loading user' })
+//     }
+// })
 
 
 router.post('/', async(req, res) => {
 
-console.log(req.body)
+    console.log(req.body)
 
     try {
         const { email } = req.body;

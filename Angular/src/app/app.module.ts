@@ -26,6 +26,8 @@ import { ReadAnonimoComponent } from './collection/read-anonimo/read-anonimo.com
 import { ReadOneCollectionComponent } from './collection/read-one-collection/read-one-collection.component';
 import { ReadOneCircuitComponent } from './circuit/read-one-circuit/read-one-circuit.component';
 import { BioPontosComponent } from './circuit/bio-pontos/bio-pontos.component';
+import { LogoutComponent } from './logout/logout.component';
+import { UpdateUserComponent } from './user/update-user/update-user.component';
 
 
 
@@ -57,6 +59,8 @@ import { BioPontosComponent } from './circuit/bio-pontos/bio-pontos.component';
     ReadOneCollectionComponent,
     ReadOneCircuitComponent,
     BioPontosComponent,
+    LogoutComponent,
+    UpdateUserComponent,
 
 
     ],

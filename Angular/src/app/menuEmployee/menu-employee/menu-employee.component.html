@@ -36,36 +36,32 @@
 </head>
 
 <body>
-
-    <header>
-        <div class="collapse bg-dark" id="navbarHeader">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-8 col-md-7 py-4">
-                        <h4 class="text-white"></h4>
-                        <p class="text-muted">
-                        </p>
-                    </div>
-                    <div class="col-sm-4 offset-md-1 py-4">
-                        <h4 class="text-white"></h4>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="text-white h5">Logout</a></li>
-                            <!-- <li><a href="#" class="text-white">Like on Facebook</a></li>
-                        <li><a href="#" class="text-white">Email me</a></li> -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="navbar navbar-dark bg-dark shadow-sm">
-            <div class="container">
-                <a href="#" class="navbar-brand d-flex align-items-center">
-                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> -->
-                    <strong>Employee</strong>
+    <header class="p-3 bg-dark text-white">
+        <div class="container ">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="https://www.apambiente.pt/residuos/estrategia-dos-biorresiduos" class="nav-link px-2 text-secondary">Biowastes</a></li>
+                    <li><a href="https://enea.apambiente.pt/" class="nav-link px-2 text-white">Educação Ambiental</a></li>
+                    <!-- <li><a href="/readCollection" class="nav-link px-2 text-white">Collection</a></li>
+        <li><a href="/readContainer" class="nav-link px-2 text-white">Container</a></li>
+        <li><a href="#" class="nav-link px-2 text-white">Key</a></li> -->
+                </ul>
+
+                <form class="col-md-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 offset-md-2 py-4">
+                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                </form>
+                <div class="text-right offset-md-1 py-4">
+                    <button routerLink="/perfil" type="button" class="btn btn-outline-light me-2 ">Perfil</button>
+
+                </div>
+                <div class="text-right offset-md-1 py-4">
+                    <button routerLink="" role="button" (click)="logout()" type="button" class="btn btn-outline-light me-2 ">Logout</button>
+
+                </div>
             </div>
         </div>
     </header>
@@ -75,12 +71,33 @@
         <section class="py-5 text-center container">
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">Welcome</h1>
-                    <p class="lead text-muted">We thank you for your work! </p>
+                    <h1 class="fw-light">Welcome!</h1>
+                    <p class="lead text-muted">Take good care of the environment, the planet thanks you!</p>
                     <p>
                         <a href="#" class="btn btn-primary my-2">Main menu</a>
-                        <!-- <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
+
                     </p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="py-5 text-center container">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <h5>Collection</h5>
+                    <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Collections</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Collections</text></svg> -->
+                    <img id="contentor" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5FPrEcGtqBHQEBNDoa9P63ozyeD7TcxyvKd8lenKbtPS2F-6C2nkETmJ8SZ4PKS0h5VU&usqp=CAU" class="contentor" alt="Sample image">
+                    <div class="card-body">
+                        <p class="card-text">Update</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button routerLink="/readCollection" type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button routerLink="/createCollection" type="button" class="btn btn-sm btn-outline-secondary">Create</button>
+                            </div>
+                            <small class="text-muted"></small>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -106,7 +123,7 @@
                       </div>
                   </div> -->
                     <!-- <img id="contentor" src="https://ambiente.cascais.pt/sites/default/files/styles/760x380/public/biorresiduos.png?itok=ZExIAnD6" class="contentor" alt="Sample image"> -->
-                    <div class="col">
+                    <!-- <div class="col">
                         <div class="card shadow-sm">
                             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Collections</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Collection</text></svg>
 
@@ -121,7 +138,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

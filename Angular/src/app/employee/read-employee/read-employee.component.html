@@ -19,7 +19,7 @@
                 </form>
 
                 <div class="text-right offset-md-1 py-4">
-                    <button routerLink="/logout" type="button" class="btn btn-outline-light me-2 ">Logout</button>
+                    <button routerLink="" role="button" (click)="logout()" type="button" class="btn btn-outline-light me-2 ">Logout</button>
 
                 </div>
             </div>
@@ -71,9 +71,8 @@
                                                 <td>{{employee.permission}}</td>
                                                 <td>{{employee.ativo}}</td>
 
-                                                <!-- <td><a [routerLink]="['/readEmployee', employee._id]" class="btn btn-sm btn-secondary">Read</a></td> -->
+
                                                 <td><button button class="btn btn-sm btn-secondary" (click)="getEmployeeId([employee._id])">Read</button></td>
-                                                <!-- <td> <button routerLink="['/createEmployee', employee._id]" type="button" class="btn btn-sm btn-success">Edit</button></td> -->
                                                 <td><a [routerLink]="['/createEmployee', employee._id]" class="btn btn-sm btn-success">Edit</a></td>
                                                 <td><button button class="btn btn-sm btn-danger" (click)="deleteID(employee._id)">Delete</button></td>
                                             </tr>
@@ -122,21 +121,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor='let employee1 of readEmployee'>
-                                                <th scope="row">{{employee1._id}}</th>
-                                                <td>{{employee1.name}}</td>
-                                                <td>{{employee1.adress}}</td>
-                                                <td>{{employee1.postalCode}}</td>
-                                                <td>{{employee1.occupation}}</td>
-                                                <td>{{employee1.permission}}</td>
-                                                <td>{{employee1.ativo}}</td>
+                                            <tr *ngFor='let employee of readEmployee'>
+                                                <th scope="row">{{employee._id}}</th>
+                                                <td>{{employee.name}}</td>
+                                                <td>{{employee.adress}}</td>
+                                                <td>{{employee.postalCode}}</td>
+                                                <td>{{employee.occupation}}</td>
+                                                <td>{{employee.permission}}</td>
+                                                <td>{{employee.ativo}}</td>
 
-                                                <!-- <td><a [routerLink]="['/readEmployee', employee._id]" class="btn btn-sm btn-secondary">Read</a></td> -->
-                                                <td><button button class="btn btn-sm btn-secondary" (click)="getEmployeeId([employee1._id])">Read</button></td>
-                                                <!-- <td> <button routerLink="['/createEmployee', employee._id]" type="button" class="btn btn-sm btn-success">Edit</button></td> -->
 
-                                                <td><a [routerLink]="['/createEmployee', employee1._id]" class="btn btn-sm btn-success">Edit</a></td>
-                                                <td><button button class="btn btn-sm btn-danger" (click)="deleteID(employee1._id)">Delete</button></td>
+                                                <td><button button class="btn btn-sm btn-secondary" (click)="getEmployeeId([employee._id])">Read</button></td>
+                                                <td><a [routerLink]="['/createEmployee', employee._id]" class="btn btn-sm btn-success">Edit</a></td>
+                                                <td><button button class="btn btn-sm btn-danger" (click)="deleteID(employee._id)">Delete</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
