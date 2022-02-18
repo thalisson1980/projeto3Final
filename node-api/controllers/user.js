@@ -64,7 +64,9 @@ router.get('/:userId', authMiddleware, async(req, res) => {
             if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
                 return res.status(400).send("You are not authorized to do this");
             }
+
             const usuario = await User.findById(req.params.userId);
+            console.log({ usuario })
             return res.json({ usuario });
 
         } catch (error) {

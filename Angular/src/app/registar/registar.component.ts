@@ -23,7 +23,8 @@ export class RegistarComponent implements OnInit {
     this.getparamid = this.activatedRoute.snapshot.paramMap.get('id');
     if(this.getparamid){
     this.service.getOneUser(this.getparamid).subscribe((res)=>{
-      console.log(res, 'res==>');
+      // console.log(res, 'res==>');
+      console.log('res', res.user.name)
       this.userForm.patchValue({
         name: res.user.name,
         email: res.user.email,
