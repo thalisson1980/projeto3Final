@@ -13,7 +13,7 @@ const ddccff = require('../models/DDCCFF');
 
 
 
-// router.use(authMiddleware);
+router.use(authMiddleware);
 
 router.get('/', async(req, res) => {
     try {
@@ -25,7 +25,7 @@ router.get('/', async(req, res) => {
             return res.status(400).send("User not found");
         }
 
-        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
+        if (user.permission === 'view') {
             return res.status(400).send("You are not authorized to do this");
         }
         const containers = await Container.find().populate('ddccff');
@@ -38,7 +38,7 @@ router.get('/', async(req, res) => {
 
 router.post('/containers/byParish', async(req, res) => {
     try {
-    
+
 
         var code = { ddccff: req.body };
         const containers = await Container.find(code).populate('ddccff');

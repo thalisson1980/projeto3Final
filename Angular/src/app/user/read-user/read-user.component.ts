@@ -24,33 +24,16 @@ export class ReadUserComponent implements OnInit {
       this.readUser = res;
     });
 
-    this.readOneUser = this.activatedRoute.snapshot.paramMap.get('id');
-    if(this.readOneUser){
-    this.service.getOneUser(this.readOneUser).subscribe((res)=>{
-      console.log(res, 'res==>');
-      this.readOneUser.pathValue({
-          name: res.user[0].name,
-         email: res.user[0].email,
-          key: res.user[0].key,
-          permission: res.user[0].permission
-        });
-     });
-  }
 }
 
 getUserId(id:any)
 {
   // console.log(id, 'resId==>');
  this.service.getOneUser(id).subscribe((res)=>{
-   console.log(res, "res==>");
-   this.readOneUser = res;
-   this.successmsg = res.message;
+  console.log(res.user, "res==>");
+  this.successmsg = res.message;
+  this.readUser = [res.user];
 
-
-    // this.service.getuser().subscribe((res)=>{
-    //   console.log(res,"res==>");
-    //   this.readuser=res;
-    // })
  });
 }
 
@@ -72,4 +55,9 @@ deleteId(id:any)
 
   }
 
+
+  logout(){
+    this.service.logout();
+
+  }
 }

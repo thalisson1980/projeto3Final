@@ -22,10 +22,16 @@ import { CompararComponent } from './comparar/comparar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReadAnonimoComponent } from './collection/read-anonimo/read-anonimo.component';
 import { ReadOneCircuitComponent } from './circuit/read-one-circuit/read-one-circuit.component';
+import { LogoutComponent } from './logout/logout.component';
+import { UpdateUserComponent } from './user/update-user/update-user.component';
 
 const routes: Routes = [
   {path: 'login', component:LoginComponent},
   {path: 'registar', component:RegistarComponent},
+  {path: 'registar/:id', component:RegistarComponent},
+  {path: 'updateUser', component:UpdateUserComponent},
+  {path: 'readUser', component:ReadUserComponent},
+  // {path: 'readUser:id', component:ReadUserComponent},
   {path: 'perfil',component:PerfilComponent},
   {path: 'createCircuit', component:CreateCircuitComponent},
   {path: 'createCircuit/:id', component:CreateCircuitComponent},
@@ -39,16 +45,17 @@ const routes: Routes = [
   {path: 'createEmployee', component:CreateEmployeeComponent},
   {path: 'createEmployee/:id', component:CreateEmployeeComponent},
   {path: 'readEmployee', component:ReadEmployeeComponent},
-  {path: 'readEmployee:id', component:ReadEmployeeComponent},
+  // {path: 'readEmployee:id', component:ReadEmployeeComponent},
   {path: 'admin', component:AdminComponent},
   {path: 'manager', component:ManagerComponent},
   {path: 'menuEmployee', component:MenuEmployeeComponent},
   {path: 'menuUser', component:MenuUserComponent},
-  {path: 'readUser', component:ReadUserComponent},
-  {path: 'registar/:id', component:RegistarComponent},
   {path: '', component:MenuPrincipalComponent},
   {path: 'comparar',component:CompararComponent},
-  {path: 'readAnonimo', component:ReadAnonimoComponent}
+  {path: 'readAnonimo', component:ReadAnonimoComponent},
+  {path: 'logout', component:LogoutComponent}
+
+
 
 ];
 

@@ -14,7 +14,13 @@ export class AppServiceService {
 
   getUsers():Observable<any>
   {
-    return this._http.get(`${this.apiURL}`)
+    return this._http.get(`${this.apiURL}`,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true})
   }
 
   // criarUser(dados:any):Observable<any>
@@ -34,42 +40,95 @@ export class AppServiceService {
 
       }),withCredentials:true});
   }
+  logout():Observable<any>
+  {
+     return this._http.get("http://localhost:3000/user/logout",{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+      'Access-Control-Allow-Headers': '*',
+      'Access-Control-Expose-Headers': ['Set-Cookie'],
 
+      }),withCredentials:true});
+  }
   makeRequest(dados:any):Observable<any>
   {
 
-      return this._http.post("http://localhost:3000/keyRequest",dados);
+      return this._http.post("http://localhost:3000/keyRequest",dados,{ headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+        'Access-Control-Allow-Headers': '*'
+        }),withCredentials:true});
   }
 
   listContainers(dados:any):Observable<any>
   {
 
 
-    return this._http.post("http://localhost:3000/containerCollection/findByUser",dados);
+    return this._http.post("http://localhost:3000/containerCollection/findByUser",dados,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
   }
 
   listCounties():Observable<any>
   {
-    return this._http.get("http://localhost:3000/DDCCFF/allCounties");
+    return this._http.get("http://localhost:3000/DDCCFF/allCounties",{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
   }
 
   listParish(code:any):Observable<any>
   {
-    return this._http.post("http://localhost:3000/DDCCFF/parishList",code);
+    return this._http.post("http://localhost:3000/DDCCFF/parishList",code,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
   }
 
   listContainersByParish(code:any):Observable<any>
   {
-    return this._http.post("http://localhost:3000/container/containers/byParish",code);
+    return this._http.post("http://localhost:3000/container/containers/byParish",code,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
   }
 
   getDates(data:any):Observable<any>
   {
-    return this._http.post("http://localhost:3000/containerCollection/dates",data);
+    return this._http.post("http://localhost:3000/containerCollection/dates",data,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
   }
   getDatesAn(data:any):Observable<any>
   {
-    return this._http.post("http://localhost:3000/containerCollection/datesAnonimo",data);
+    return this._http.post("http://localhost:3000/containerCollection/datesAnonimo",data,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
   }
 
 

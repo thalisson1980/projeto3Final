@@ -59,5 +59,9 @@ deleteID(id:any)
 }
 
 
+logout(){
+  this.service.logout();
+
+}
 
 }

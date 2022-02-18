@@ -27,12 +27,15 @@ export class ReadCollectionComponent implements OnInit {
 
   deleteID(id:any)
   {
-    // console.log(id, 'deleteid==>');
-    // this.service.deleteCollection(id).subscribe((res)=>{
-    //   console.log(res,'deleteres==>');
-    //   this.successmsg = res.message;
+    console.log(id, 'deleteid==>');
+    this.service.deleteCollection(id).subscribe((res)=>{
+      console.log(res,'deleteres==>');
+      this.successmsg = res.message;
 
-    // })
+    })
   }
+  logout(){
+    this.service.logout();
 
+  }
   }

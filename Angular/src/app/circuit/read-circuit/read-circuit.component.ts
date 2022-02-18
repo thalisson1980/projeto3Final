@@ -61,4 +61,8 @@ delete_id(id:any)
 
 }
 
+logout(){
+  this.service.logout();
+
+}
 }

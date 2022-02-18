@@ -13,17 +13,17 @@ import { areAllEquivalent } from '@angular/compiler/src/output/output_ast';
 export class PerfilComponent implements OnInit {
 
 
-  constructor(private service:AppServiceService) { 
+  constructor(private service:AppServiceService) {
     Chart.register(...registerables)
   }
-  
+
   mensagem:any;
   errormsg:any;
 
 
   collections:any;
   collectionsV3:any;
- 
+
 
   choice:any;
   counties:any;
@@ -50,40 +50,40 @@ export class PerfilComponent implements OnInit {
   canvas: any;
   ctx: any;
   @ViewChild('mychart') mychart:any;
-  
+
   user:any;
   userKey:any;
   escolheuUpdate:any;
 
   ngOnInit(): void {
 
-    this.service.getOneUser(sessionStorage.getItem('id')).subscribe((res)=>{
-      if(res.collections){
-        console.log(res.collections)
-        
-         this.user = res.user_id;
-         if(res.userKey !== "No valid key"){
-           this.userKey = res.userKey;
-         }
-        
-      } else{
-        this.mensagem = res.ERROR;; 
-      }
-    })
+    // this.service.getOneUser(sessionStorage.getItem('id')).subscribe((res)=>{
+    //   if(res.collections){
+    //     console.log(res.collections)
 
-    if(!sessionStorage.getItem('email')){
-      
-      window.location.href = "http://localhost:4200/";
-    }
+    //      this.user = res.user_id;
+    //      if(res.userKey !== "No valid key"){
+    //        this.userKey = res.userKey;
+    //      }
+
+    //   } else{
+    //     this.mensagem = res.ERROR;;
+    //   }
+    // })
+
+    // if(!sessionStorage.getItem('email')){
+
+    //   window.location.href = "http://localhost:4200/";
+    // }
 
   }
   logout(){
     sessionStorage.clear();
     location.reload();
   }
-  
+
    fechar() {
-    this.mensagem = ""; 
+    this.mensagem = "";
   }
 
 
@@ -128,12 +128,12 @@ export class PerfilComponent implements OnInit {
     }
     this.service.listContainers(dados).subscribe((res)=>{
       if(res.collections){
-        
-        
+
+
          this.collections = res.collections;
-        
+
       } else{
-        this.mensagem = res.ERROR;; 
+        this.mensagem = res.ERROR;;
       }
     })
   }
@@ -154,13 +154,13 @@ export class PerfilComponent implements OnInit {
             collection.massaCollect_kg = collection.massaCollect_kg - ((collection.totalCollections-collection.numberCollections)*aux)
           }
         } else{
-          this.mensagem = res.ERROR;; 
+          this.mensagem = res.ERROR;;
         }
       })
   }
 
   historicoDeposicaoPorMes(){
-    
+
    var collectionsV2 = new Array;
     document.querySelector<HTMLElement>('.bg-modal5')!.style.display ="flex";
     const dados = {
@@ -170,14 +170,14 @@ export class PerfilComponent implements OnInit {
     var data = {choice: "recolha",code:"null",email: localStorage.getItem('email')}
       this.service.getDates(data).subscribe((res)=>{
         if(res){
-      
+
           this.collections = res.collections;
           let primeiro = true;
           for (const collection of this.collections){
             let aux = collection.massaCollect_kg/collection.totalCollections;
-            collection.massaCollect_kg = collection.massaCollect_kg - ((collection.totalCollections-collection.numberCollections)*aux);      
+            collection.massaCollect_kg = collection.massaCollect_kg - ((collection.totalCollections-collection.numberCollections)*aux);
             try{
-              
+
               if(primeiro){
                 var collectionAux = new Date(collection.collectionDate);
                 var obj = {
@@ -186,10 +186,10 @@ export class PerfilComponent implements OnInit {
                   pesoDepositado:collection.massaCollect_kg,
                   numeroDeposicoes:collection.numberCollections
                 }
-            
+
                 collectionsV2.push(obj)
                 primeiro=false;
-                
+
               }else{
                 var existe = false;
                 var collectionAux = new Date(collection.collectionDate);
@@ -213,22 +213,22 @@ export class PerfilComponent implements OnInit {
                 }
               }
 
-             
+
             }catch(err){
 
             }
-          
+
           }
-        
+
         } else{
-          this.mensagem = res.ERROR;; 
+          this.mensagem = res.ERROR;;
         }
       })
-     
+
       this.collectionsV3 = collectionsV2;
   }
 
- 
 
-  
+
+
 }

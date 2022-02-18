@@ -39,7 +39,10 @@ export class ReadContainerComponent implements OnInit {
 
     })
   }
+  logout(){
+    this.service.logout();
 
+  }
   }
 
 
