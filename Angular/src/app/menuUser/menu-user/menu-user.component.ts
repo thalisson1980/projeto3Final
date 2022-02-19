@@ -50,7 +50,7 @@ export class MenuUserComponent implements OnInit {
 
   pedirChave(){
     const email = localStorage.getItem('email');
-    
+    console.log("entrou")
     this.service.makeRequest(email).subscribe((res)=>{
       alert(res.message)
       if(res.message =='assigned'){
