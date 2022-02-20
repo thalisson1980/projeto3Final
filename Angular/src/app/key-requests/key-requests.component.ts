@@ -20,11 +20,11 @@ export class KeyRequestsComponent implements OnInit {
   }
 
 
- decision(idChave:any,decision:any){
+ decision(idChave:any,decision:any,user:any){
    let data = {
      idChave,
      decision,
-     user:sessionStorage.getItem('email')
+     user
    }
   this.service.updateKeyRequest(data).subscribe((res)=>{
     console.log(res)
