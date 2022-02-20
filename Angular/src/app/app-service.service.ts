@@ -130,6 +130,38 @@ export class AppServiceService {
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }
+  getKeyRequests():Observable<any>
+  {
+    return this._http.get("http://localhost:3000/keyRequest/getPending",{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
+
+  updateKeyRequest(data:any):Observable<any>
+  {
+    return this._http.put("http://localhost:3000/keyRequest",data,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST, PUT',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
+
+  assignKey(data:any):Observable<any>
+  {
+    return this._http.post("http://localhost:3000/key",data,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST, PUT',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
 
 
   //CRUD circuit

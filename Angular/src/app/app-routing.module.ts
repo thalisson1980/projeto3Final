@@ -24,6 +24,7 @@ import { ReadAnonimoComponent } from './collection/read-anonimo/read-anonimo.com
 import { ReadOneCircuitComponent } from './circuit/read-one-circuit/read-one-circuit.component';
 import { LogoutComponent } from './logout/logout.component';
 import { UpdateUserComponent } from './user/update-user/update-user.component';
+import { KeyRequestsComponent } from './key-requests/key-requests.component';
 
 const routes: Routes = [
   {path: 'login', component:LoginComponent},
@@ -53,7 +54,8 @@ const routes: Routes = [
   {path: '', component:MenuPrincipalComponent},
   {path: 'comparar',component:CompararComponent},
   {path: 'readAnonimo', component:ReadAnonimoComponent},
-  {path: 'logout', component:LogoutComponent}
+  {path: 'logout', component:LogoutComponent},
+  {path: 'keyRequest', component:KeyRequestsComponent}
 
 
 

@@ -72,7 +72,7 @@ router.get('/:keyId', authMiddleware, async(req, res) => {
 
 
 router.post('/', async(req, res) => {
-
+    console.log(res.body)
 
     try {
         const { token } = req.session
