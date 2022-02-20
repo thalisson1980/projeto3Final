@@ -30,11 +30,7 @@ getUserId(id:any)
 {
   // console.log(id, 'resId==>');
  this.service.getOneUser(id).subscribe((res)=>{
-<<<<<<< HEAD
   console.log(res.usario, "res==>");
-=======
-  console.log(res.usuario, "res==>");
->>>>>>> 5333f041718b3f2211874d67f5acca973236cc7e
   this.successmsg = res.message;
   this.readUser = [res.usuario];
 

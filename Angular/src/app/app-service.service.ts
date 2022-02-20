@@ -229,6 +229,17 @@ export class AppServiceService {
     let ids=id;
     return this._http.delete(`http://localhost:3000/collection/${ids}`);
   }
+  updateCollection(data:any,id:any):Observable<any>
+  {
+    let ids=id;
+    return this._http.put(`http://localhost:3000/user/${ids}`,data,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
 
   //CRUD container
   createContainer(data:any):Observable<any>

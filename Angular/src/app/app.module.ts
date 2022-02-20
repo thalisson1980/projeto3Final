@@ -28,6 +28,7 @@ import { ReadOneCircuitComponent } from './circuit/read-one-circuit/read-one-cir
 import { BioPontosComponent } from './circuit/bio-pontos/bio-pontos.component';
 import { LogoutComponent } from './logout/logout.component';
 import { UpdateUserComponent } from './user/update-user/update-user.component';
+import { ReadOneUserComponent } from './user/read-one-user/read-one-user.component';
 
 
 
@@ -61,6 +62,7 @@ import { UpdateUserComponent } from './user/update-user/update-user.component';
     BioPontosComponent,
     LogoutComponent,
     UpdateUserComponent,
+    ReadOneUserComponent,
 
 
     ],

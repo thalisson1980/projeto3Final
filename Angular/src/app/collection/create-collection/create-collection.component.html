@@ -23,6 +23,103 @@
                     <button routerLink="" role="button" (click)="logout()" type="button" class="btn btn-outline-light me-2 ">Logout</button>
 
                 </div>
+
             </div>
         </div>
     </header>
+    <section class="vh-100" style="background-color: #eee;">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <div class="row justify-content-center">
+                                <div class="col-md-5 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                    <p class="text-left h2 fw-bold mb-4 mx-1 mx-md-4 mt-4">{{getparamid?'Edit':'Create'}}Collection</p>
+
+                                    <div *ngIf="errormsg" class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <strong>{{errormsg}}</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+
+                                    <div *ngIf="successmsg" class="alert alert-warning alert-sucess fade show" role="alert">
+                                        <strong>{{successmsg}}</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+
+                                    <form [formGroup]="collectionForm" class="mx-1 mx-md-4">
+                                        <div class="container mt-3">
+                                            <div class="row">
+
+                                                <div class="col-2 ">
+
+                                                    <label for="employees" class="form-label">Employees</label>
+                                                    <select matNativeControl [(ngModel)]="employee" name="employees" formControlName="employees">
+                                                  <!-- <option value="" selected></option> -->
+                                                  <option *ngFor="let employee of readEmployee" [value]="employee._id">
+                                                    {{employee.name}}
+                                                  </option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2">
+
+                                                <label for="circuit" class="form-label">Circuit</label>
+                                                <select matNativeControl [(ngModel)]="circuit_cod" name="circuit" formControlName="circuit">
+                                              <!-- <option value="" selected></option> -->
+                                              <option *ngFor="let circuit of readCircuit" [value]="circuit._id">
+                                                {{circuit.circuit_cod}}
+                                              </option>
+                                            </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label for="dateStartTime" class="form-label">Date start time</label>
+                                                <input type="datetime-local" class="form-control" formControlName="dateStartTime" placeholder="Enter dateStartTime">
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label for="dateEndTime" class="form-label">Date end time</label>
+                                                <input type="datetime-local" class="form-control" formControlName="dateEndTime" placeholder="Enter dateEndTime">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label for="massaCollect_kg" class="form-label">Massa Collect_kg</label>
+                                                <input type="text" class="form-control" formControlName="massaCollect_kg" placeholder="texto">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-end mx-4 mb-3 mb-lg-4" *ngIf="!getparamid" (click)="collectionSubmit()">
+                                            <button class="btn btn-primary btn-sm">Create</button> &nbsp; &nbsp;
+                                            <button routerLink="/readCollection" class="btn btn-secondary btn-sm">Read</button>
+                                        </div>
+                                        <div class="d-flex justify-content-end mx-4 mb-3 mb-lg-1" *ngIf="getparamid" (click)="collectionUpdate()">
+                                            <button class="btn btn-success btn-sm">Edit</button> &nbsp; &nbsp;
+                                            <button routerLink="/readCollection" class="btn btn-secondary btn-sm">Read</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-md-7 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                    <img id="contentor" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5FPrEcGtqBHQEBNDoa9P63ozyeD7TcxyvKd8lenKbtPS2F-6C2nkETmJ8SZ4PKS0h5VU&usqp=CAU" class="contentor" alt="Sample image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</body>
