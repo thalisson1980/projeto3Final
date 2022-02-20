@@ -65,7 +65,7 @@ this.service.getCollection().subscribe((res)=>{
 
   collectionForm = new FormGroup({
     // '_id':new FormControl('',Validators.required),
-    'employees':new FormControl(['',Validators.required]),
+    'employees':new FormControl('',Validators.required),
     'circuit':new FormControl('',Validators.required),
     'dateStartTime':new FormControl('',Validators.required),
     'dateEndTime':new FormControl('',Validators.required),
