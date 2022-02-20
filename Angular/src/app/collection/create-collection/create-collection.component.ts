@@ -20,9 +20,13 @@ export class CreateCollectionComponent implements OnInit {
   readEmployee:any;
   readCircuit:any;
   readCollection:any;
-  employee: any = "";
+  employee1: any = "";
+  employee2: any = "";
+  employee3: any = "";
   circuit_cod: any = "";
+
   ngOnInit(): void {
+
     this.getparamid = this.activatedRoute.snapshot.paramMap.get('id');
 
     if(this.getparamid){
@@ -61,12 +65,14 @@ this.service.getCollection().subscribe((res)=>{
 
   collectionForm = new FormGroup({
     // '_id':new FormControl('',Validators.required),
-    'employees':new FormControl('',Validators.required),
+    'employees':new FormControl(['',Validators.required]),
     'circuit':new FormControl('',Validators.required),
     'dateStartTime':new FormControl('',Validators.required),
     'dateEndTime':new FormControl('',Validators.required),
     'massaCollect_kg':new FormControl('',Validators.required),
   });
+
+
  collectionSubmit()
   {
   if(this.collectionForm.valid)

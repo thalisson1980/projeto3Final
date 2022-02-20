@@ -58,26 +58,6 @@ export class CreateEmployeeComponent implements OnInit {
       this.successmsg = res.message;
 
 
-            sessionStorage.setItem('permission', res.permission);
-            sessionStorage.setItem('token',res.token)
-
-
-            if(res.permission==='view'){
-              this.router.navigate(['perfil']);
-
-
-            }
-            else if(res.permission==='viewEmployee'){
-
-              this.router.navigate(['readCollection']);
-
-            }
-            else if((res.permission ==='edit')||(res.permission==='admin')){
-
-              this.router.navigate(['readEmployee']);
-
-            }
-
     });
 
     }
