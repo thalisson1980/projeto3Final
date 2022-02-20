@@ -5,10 +5,11 @@ const User = require('../models/user');
 const Key = require('../models/key');
 const authToken = require('../token/secret.json');
 const authMiddleware = require('../middlewares/auth');
+const { findOneAndUpdate } = require('../models/keyRequest');
 
 
 router.post('/',authMiddleware,async (req,res) =>{
-     //Verificar oermissoes de user pelo cookie
+     //Verificar permissoes de user pelo cookie
      const { token } = req.session
      const payload = jwt.verify(token, authToken.secret);
      const user = await User.findById(payload.id);
@@ -80,5 +81,43 @@ router.post('/',authMiddleware,async (req,res) =>{
     
 
 }); 
+
+router.get('/getPending',async (req,res) =>{
+    const pedidos = await keyRequest.find({state:"pending"});
+    let aux = [];
+    try{
+    
+       for(const pedido of pedidos){
+           if(pedido.state){
+                aux.push(pedido)
+           }
+       }
+       res.json({pedidos:aux})
+    }catch(err){
+        res.json({message:"No peding key requests"})
+    }
+   
+}); 
+
+router.put('/',async (req,res) =>{
+    console.log(req.body)
+    const user = await User.findOne({email:req.body.user})
+    if(req.body.decision == 'atribuir' && user){
+         await keyRequest.findOneAndUpdate({_id:req.body.idChave},{$set:{state:'assigned'}})
+         let data = new Date();
+         const chaves = await Key.find({user:user._id})
+         for(const chave of chaves){
+             if(!chave.endDate){
+                 await Key.findOneAndUpdate({_id:chave._id},{$set:{ativo:false,endDate:data}})
+             }
+         }
+         res.json({idUser:user._id});
+
+    }
+    if(req.body.decision == 'negar' && user){
+        await keyRequest.findOneAndUpdate({_id:req.body.idChave},{$set:{state:'denied'}})
+        res.json("denied")
+    }
+});
 
 module.exports = router;

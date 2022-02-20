@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header class="p-3 bg-dark text-white">
+        <div class="container ">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="https://www.apambiente.pt/residuos/estrategia-dos-biorresiduos" class="nav-link px-2 text-secondary">Biowastes</a></li>
+                    <li><a href="https://enea.apambiente.pt/" class="nav-link px-2 text-white">Educação Ambiental</a></li>
+                    <!-- <li><a href="/readCollection" class="nav-link px-2 text-white">Collection</a></li>
+          <li><a href="/readContainer" class="nav-link px-2 text-white">Container</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Key</a></li> -->
+                </ul>
+
+
+                <form class="col-md-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 offset-md-3 py-4">
+                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                </form>
+
+                <div class="text-right offset-md-1 py-4">
+                    <button routerLink="" role="button" (click)="logout()" type="button" class="btn btn-outline-light me-2 ">Logout</button>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="vw-100" style="background-color: #eee;">
+
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-12">
+                    <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <div class="row ">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                    <p class="text-left h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">Pending requests list</p>
+
+
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+
+                                                <th scope="col">User</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Reason for request</th>
+                                              
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor='let key of keyRequests'>
+                                                <th scope="row">{{key.userEmail}}</th>
+                                                <td>{{key.requestDate}}</td>
+                                                <td>{{key.requestReason}}</td>
+                                                <td><button button class="btn btn-sm btn-secondary" (click)="decision(key._id,'atribuir')">Grant key </button></td>
+                                                <td><button button class="btn btn-sm btn-danger" (click)="decision(key._id,'negar')">Deny request</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    
+</body>
+</html>
