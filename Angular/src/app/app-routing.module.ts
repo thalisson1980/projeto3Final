@@ -37,6 +37,7 @@ const routes: Routes = [
   {path: 'createCircuit', component:CreateCircuitComponent},
   {path: 'createCircuit/:id', component:CreateCircuitComponent},
   {path: 'readCircuit', component:ReadCircuitComponent},
+  {path: 'readCircuit/:id', component:ReadCircuitComponent},
   {path: 'readOneCircuit/:id', component:ReadOneCircuitComponent},
   {path: 'createCollection', component:CreateCollectionComponent},
   {path: 'readCollection', component:ReadCollectionComponent},
