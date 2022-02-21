@@ -63,8 +63,8 @@
                                                 <th scope="row">{{key.userEmail}}</th>
                                                 <td>{{key.requestDate}}</td>
                                                 <td>{{key.requestReason}}</td>
-                                                <td><button button class="btn btn-sm btn-secondary" (click)="decision(key._id,'atribuir')">Grant key </button></td>
-                                                <td><button button class="btn btn-sm btn-danger" (click)="decision(key._id,'negar')">Deny request</button></td>
+                                                <td><button button class="btn btn-sm btn-secondary" (click)="decision(key._id,'atribuir',key.user)">Grant key </button></td>
+                                                <td><button button class="btn btn-sm btn-danger" (click)="decision(key._id,'negar',key.user)">Deny request</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
