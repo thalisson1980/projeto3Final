@@ -10,8 +10,8 @@
                     <li><a href="https://www.apambiente.pt/residuos/estrategia-dos-biorresiduos" class="nav-link px-2 text-secondary">Biowastes</a></li>
                     <li><a href="https://enea.apambiente.pt/" class="nav-link px-2 text-white">Educação Ambiental</a></li>
                     <!-- <li><a href="/readCollection" class="nav-link px-2 text-white">Collection</a></li>
-            <li><a href="/readContainer" class="nav-link px-2 text-white">Container</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Key</a></li> -->
+        <li><a href="/readContainer" class="nav-link px-2 text-white">Container</a></li>
+        <li><a href="#" class="nav-link px-2 text-white">Key</a></li> -->
                 </ul>
 
                 <form class="col-md-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 offset-md-3 py-4">
@@ -19,91 +19,50 @@
                 </form>
 
                 <div class="text-right offset-md-1 py-4">
-                    <button routerLink="" role="button" (click)="logout()" type="button" class="btn btn-outline-light me-2 ">Logout</button>
+                    <button routerLink="/logout" type="button" class="btn btn-outline-light me-2 ">Logout</button>
 
                 </div>
             </div>
         </div>
     </header>
-    <section class="vh-100" style="background-color: #eee;">
-        <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-lg-12 col-xl-11">
-                    <div class="card text-black" style="border-radius: 25px;">
-                        <div class="card-body p-md-5">
-                            <div class="row justify-content-center">
-                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+    <div class="container mt-5">
 
-                                    <p class="text h2 fw-bold mb-4 mx-1 mx-md-4 mt-4">List Container</p>
+        <h2>List Container </h2>
 
-
-                                    <div *ngIf="errormsg" class="alert alert-warning alert-dismissible fade show" role="alert">
-                                        <!-- <strong>{{errormsg}}</strong> -->
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-
-                                    <div *ngIf="successmsg" class="alert alert-warning alert-sucess fade show" role="alert">
-                                        <strong>{{successmsg}}</strong>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                    <form class="mx-1 mx-md-4">
-                                        <h5>Escolha freguesia</h5>
+        <table class="table mt-5 ">
+            <thead>
+                <tr>
+                    <th scope="col">_id</th>
+                    <th scope="col">Container code</th>
+                    <th scope="col">GPS</th>
+                    <th scope="col">Adress</th>
+                    <!-- <th scope="col">DDCCFF</th> -->
+                    <th scope="col"></th>
+                    <!-- <th scope="col"></th> -->
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
 
 
-                                        <div class="container mt-3">
-                                            <div class="row">
+                <tr *ngFor="let container of readContainer">
 
-                                                <div class="col-2">
-                                                    <div class="dropdown mb-2">
-                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="ddccff" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Freguesia</button>
-                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                            <li *ngFor='let DDCCFF of readDDCCFF'>
-                                                                <a class="dropdown-item" value="">{{DDCCFF.location}}</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- <div *ngFor='let container of readContainer'>
-                                              <div class="col-1 my-col">
-                                                  <select style="width: 150px;" name="container" id="container">
-                                    <option selected hidden >Choose a container</option>
-                                    <option *ngFor='let ddccff of container.ddccff' value={{container.container_cod}}>{{container.container_cod}}</option>
-                                  </select>
-                                              </div>
-                                          </div> -->
-                                        <!-- <div class="container">
-                                              <select style="width: 150px;" name="ddccff" id="ddccff" *ngFor='let container of readContainer'>
-                              <option selected hidden >Freguesia</option>
-                              <option *ngFor='let ddccff of container.ddccff' value= {{ddccff.code}}>{{ddccff.location}}></option>
-                            </select>
-                                          </div> -->
+                    <td scope="row">{{container._id}}</td>
+                    <td>{{container.container_cod}}</td>
+                    <td>{{container.gpsLocation}}</td>
+                    <td>{{container.adress}}</td>
+                    <!-- <td>{{container.ddccff}}</td> -->
 
 
 
+                    <td><button button class="btn btn-sm btn-secondary" (click)="getContainerId([container._id])">Read</button></td>
+                    <!-- <td><a [routerLink]="['/createContainer', container._id]" class="btn btn-sm btn-success">Edit</a></td> -->
+                    <td><button button class="btn btn-sm btn-danger" (click)="deleteID(container._id)">Delete</button></td>
 
-                                        <div class="d-flex justify-content-end mx-4 mb-3 mb-lg-4">
-
-                                            <button routerLink="/readOneContainer" button class="btn btn-sm btn-secondary">Read</button>
-
-
-                                            <!-- <td><a [routerLink]="['/createCircuit', circuit._id]" class="btn btn-sm btn-success">Edit</a></td> -->
-                                            <!-- <td><button button class="btn btn-sm btn-danger" (click)="delete_id(circuit._id)">Delete</button></td> -->
-                                        </div>
-
-                                    </form>
+                </tr>
 
 
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+            </tbody>
+        </table>
+    </div>
 </body>

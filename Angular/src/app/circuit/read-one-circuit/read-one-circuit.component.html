@@ -32,27 +32,17 @@
         <table class="table mt-5 ">
             <thead>
                 <tr>
-                    <!-- <th scope="col">_id</th> -->
-                    <th scope="col">Name</th>
+                    <th scope="col">Container code</th>
                     <th scope="col">GPS</th>
-                    <!-- <th scope="col">Date End Time</th> -->
                 </tr>
             </thead>
             <tbody>
                 <ng-container *ngFor="let collection of read_circuit">
-
                     <tr *ngFor='let container of collection.containers'>
-
-                        <!-- <td scope="row">{{collection._id}}</td> -->
                         <td>{{container.container_cod}}</td>
                         <td>{{container.gpsLocation}}</td>
-                        <!-- <td>{{collection.circuit?collection..employeescircuit.circuit_cod:""}}</td> -->
-
-
-
                     </tr>
                 </ng-container>
-
             </tbody>
         </table>
     </div>

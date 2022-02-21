@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppServiceService} from '../../app-service.service';
 import { Router } from '@angular/router'
 import {  FormControl,FormGroup, Validators} from '@angular/forms'
+import { FormArray } from '@angular/forms';
 import { ActivatedRoute} from '@angular/router'
 
 @Component({
@@ -17,16 +18,37 @@ export class CreateCircuitComponent implements OnInit {
   getparamid:any;
   readContainer:any;
   readCircuit:any;
+  container1: any = "";
+  container2: any = "";
+  container3: any = "";
+  container4: any = "";
+  container5: any = "";
+  container6: any = "";
+  container7: any = "";
+  container8: any = "";
+  container9: any = "";
+  container10: any = "";
+  container11: any = "";
+  container12: any = "";
+  container13: any = "";
+  container14: any = "";
+  container15: any = "";
+  container16: any = "";
+  container17: any = "";
+  container18: any = "";
+  container19: any = "";
+  container20: any = "";
+
 
   ngOnInit(): void {
 
   this.getparamid = this.activatedRoute.snapshot.paramMap.get('id');
   if(this.getparamid){
   this.service.getOneContainer(this.getparamid).subscribe((res)=>{
-    console.log(res, 'res==>');
+    // console.log(res, 'res==>');
     this.circuitForm.patchValue({
-      circuit_cod: res.circuit[0].circuit_cod,
-      containers: res.containers[0].adress,
+      circuit_cod: res.circuit_cod,
+      containers: res.containers,
 
     });
   });
@@ -63,33 +85,13 @@ circuitForm = new FormGroup({
       this.successmsg = res.message;
 
 
-            sessionStorage.setItem('permission', res.permission);
-            sessionStorage.setItem('token',res.token)
-
-
-            if(res.permission==='view'){
-              this.router.navigate(['perfil']);
-
-
-            }
-            else if(res.permission==='viewEmployee'){
-
-              this.router.navigate(['readCollection']);
-
-            }
-            else if((res.permission ==='edit')||(res.permission==='admin')){
-
-              this.router.navigate(['readEmployee']);
-
-            }
-
     });
 
     }
-    else
-    {
-      this.errormsg = 'All field is required';
-    }
+    // else
+    // {
+    //   this.errormsg = 'All field is required';
+    // }
   }
 
 
