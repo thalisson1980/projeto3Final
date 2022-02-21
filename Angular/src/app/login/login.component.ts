@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   errormsg:any;
   successmsg:any;
   ngOnInit(): void {
-
+    console.log(sessionStorage.getItem('email'))
   }
 
   userForm = new FormGroup({

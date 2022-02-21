@@ -35,15 +35,22 @@
         </div>
     </header>
 
+    
+
+    
+
     <section class="vw-100" style="background-color: #eee;">
 
         <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-lg-12 col-xl-12">
+            <div *ngIf="keyRequests<1">
+                <h3>There are no more key requests!</h3>
+            </div>
+            <div  class="row d-flex justify-content-center align-items-center h-100">
+                <div  class="col-lg-12 col-xl-12">
                     <div class="card text-black" style="border-radius: 25px;">
-                        <div class="card-body p-md-5">
-                            <div class="row ">
-                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                        <div  *ngIf="keyRequests>0" class="card-body p-md-5">
+                            <div  class="row ">
+                                <div  class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                                     <p class="text-left h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">Pending requests list</p>
 
@@ -63,8 +70,8 @@
                                                 <th scope="row">{{key.userEmail}}</th>
                                                 <td>{{key.requestDate}}</td>
                                                 <td>{{key.requestReason}}</td>
-                                                <td><button button class="btn btn-sm btn-secondary" (click)="decision(key._id,'atribuir',key.user)">Grant key </button></td>
-                                                <td><button button class="btn btn-sm btn-danger" (click)="decision(key._id,'negar',key.user)">Deny request</button></td>
+                                                <td><button button class="btn btn-sm btn-secondary" (click)="decision(key._id,'atribuir',key.userEmail)">Grant key </button></td>
+                                                <td><button button class="btn btn-sm btn-danger" (click)="decision(key._id,'negar',key.userEmail)">Deny request</button></td>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -23,8 +23,8 @@ export class MenuUserComponent implements OnInit {
     'reason':new FormControl('', Validators.required),
     
   });
-  logout(){
-    sessionStorage.clear();
+   logout(){
+    sessionStorage.clear()
     location.reload();
   }
 
@@ -49,8 +49,8 @@ export class MenuUserComponent implements OnInit {
   }
 
   pedirChave(){
-    const email = localStorage.getItem('email');
-    console.log("entrou")
+    const email = sessionStorage.getItem('email');
+    console.log(sessionStorage.getItem('email'))
     this.service.makeRequest(email).subscribe((res)=>{
       alert(res.message)
       if(res.message =='assigned'){
