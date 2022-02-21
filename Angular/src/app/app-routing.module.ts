@@ -8,6 +8,7 @@ import { ReadCircuitComponent } from './circuit/read-circuit/read-circuit.compon
 import { CreateCollectionComponent } from './collection/create-collection/create-collection.component';
 import { ReadCollectionComponent } from './collection/read-collection/read-collection.component';
 import { ReadOneCollectionComponent } from './collection/read-one-collection/read-one-collection.component';
+import { ReadOneColletionCircuitComponent } from './circuit/read-one-colletion-circuit/read-one-colletion-circuit.component';
 import { CreateContainerComponent } from './container/create-container/create-container.component';
 import { ReadContainerComponent } from './container/read-container/read-container.component';
 import { CreateEmployeeComponent } from './employee/create-employee/create-employee.component';
@@ -25,7 +26,9 @@ import { ReadOneCircuitComponent } from './circuit/read-one-circuit/read-one-cir
 import { LogoutComponent } from './logout/logout.component';
 import { UpdateUserComponent } from './user/update-user/update-user.component';
 import { KeyRequestsComponent } from './key-requests/key-requests.component';
-import { ReadOneColletionCircuitComponent } from './circuit/read-one-colletion-circuit/read-one-colletion-circuit.component';
+import { CreatekeyComponent } from './key/createkey/createkey.component';
+import { ReadKeyComponent } from './key/read-key/read-key.component';
+
 
 
 
@@ -56,7 +59,7 @@ const routes: Routes = [
   {path: 'createEmployee', component:CreateEmployeeComponent},
   {path: 'createEmployee/:id', component:CreateEmployeeComponent},
   {path: 'readEmployee', component:ReadEmployeeComponent},
-  {path: 'readEmployee:id', component:ReadEmployeeComponent},
+  {path: 'readEmployee/:id', component:ReadEmployeeComponent},
   {path: 'admin', component:AdminComponent},
   {path: 'manager', component:ManagerComponent},
   {path: 'menuEmployee', component:MenuEmployeeComponent},
@@ -65,7 +68,10 @@ const routes: Routes = [
   {path: 'comparar',component:CompararComponent},
   {path: 'readAnonimo', component:ReadAnonimoComponent},
   {path: 'logout', component:LogoutComponent},
-  {path: 'keyRequest', component:KeyRequestsComponent}
+  {path: 'keyRequest', component:KeyRequestsComponent},
+  {path: 'createKey', component:CreatekeyComponent},
+  {path: 'createKey/:id', component:CreatekeyComponent},
+  {path: 'readKey', component:ReadKeyComponent},
 
 
 

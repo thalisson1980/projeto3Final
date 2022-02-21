@@ -5,9 +5,8 @@ const bd = require('../bd/ligacao');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authToken = require('../token/secret.json');
-const Employee = require('../models/employee');
+const keyRequest = require('../models/keyRequest');
 const User = require('../models/user');
-const Collection = require('../models/collection');
 const { v4: uuidv4 } = require('uuid');
 const authMiddleware = require('../middlewares/auth');
 // const { Collection } = require('mongoose');
@@ -41,11 +40,11 @@ router.get('/', async(req, res) => {
             return res.status(400).send("You are not authorized to do this");
         }
 
-        const keys = await Key.find().populate('user');
+        const keys = await Key.find().populate('status');
         return res.json(keys);
 
     } catch (error) {
-        return res.status(400).send({ error: 'Error loading keys' })
+        return res.status(400).send({ error: 'Error loading key' })
     }
 })
 
@@ -112,17 +111,21 @@ router.put('/:keyId', authMiddleware, async(req, res) => {
             return res.status(400).send("User not found");
         }
 
-        if ((user.permission === 'view') || (user.permission === 'viewEmployee')) {
+        if (user.permission !== 'view') {
             return res.status(400).send("You are not authorized to do this");
         }
-        const { name, adress, postalCode, occupation, permission } = req.body;
+
+
+        // let usuario = req.body.User;
+        let keyReq = req.body.keyRequest;
+        const { endDate, startDate } = req.body;
         const key = await Key.findByIdAndUpdate(req.params.keyId, {
 
-            name,
-            adress,
-            postalCode,
-            occupation,
-            permission
+            endDate,
+            // user: usuario,
+            startDate,
+            status: keyReq
+
         }, { new: true });
 
         await key.save();

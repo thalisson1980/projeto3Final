@@ -1,32 +1,28 @@
 const mongoose = require('mongoose');
 
-
 const KeySchema = new mongoose.Schema({
     _id: {
-        type: String
-    },
-    startDate: {
-        type: Date,
-        required: false,
-        default: Date.now
+        type: String,
     },
     endDate: {
         type: Date,
         required: false,
-        default: null
     },
-    user: {
+    // user: {
+    //     type: mongoose.SchemaTypes.String,
+    //     ref: 'user'
+    // },
+    startDate: {
+        type: Date,
+        required: true,
+        default: Date.now
+    },
+    status: {
         type: mongoose.SchemaTypes.String,
-        ref: 'user'
-    },
-    ativo: {
-        type: Boolean,
-        required: false,
-        default: true,
+        ref: 'keyRequest'
     }
-
 });
 
-const Key = mongoose.model('key', KeySchema);
+const key = mongoose.model('key', KeySchema);
 
-module.exports = Key;
+module.exports = key;

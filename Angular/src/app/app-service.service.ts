@@ -163,6 +163,66 @@ export class AppServiceService {
       }),withCredentials:true});
   }
 
+//CRUD key
+createKey(data:any):Observable<any>
+{
+  console.log(data,'createapi=>')
+  return this._http.post("http://localhost:3000/key",data,{ headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+    'Access-Control-Allow-Headers': '*'
+    }),withCredentials:true});
+}
+getKey():Observable<any>
+{
+  return this._http.get("http://localhost:3000/key",{ headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+    'Access-Control-Allow-Headers': '*'
+    }),withCredentials:true});
+}
+
+getOneKey(id:any):Observable<any>
+{
+  let ids=id;
+  return this._http.get(`http://localhost:3000/key/${ids}`,{ headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+    'Access-Control-Allow-Headers': '*'
+    }),withCredentials:true});
+}
+
+deleteKey(id:any):Observable<any>
+{
+  let ids=id;
+  return this._http.delete(`http://localhost:3000/key/${ids}`,{ headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+    'Access-Control-Allow-Headers': '*'
+    }),withCredentials:true});
+}
+
+updateKey(data:any,id:any):Observable<any>
+{
+  let ids=id;
+  return this._http.put(`http://localhost:3000/key/${ids}`,data,{ headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+    'Access-Control-Allow-Headers': '*'
+    }),withCredentials:true});
+}
+
+
 
   //CRUD circuit
   createCircuit(data:any):Observable<any>
@@ -223,7 +283,7 @@ export class AppServiceService {
   updateCircuit(data:any,id:any):Observable<any>
   {
     let ids=id;
-    return this._http.put(`http://localhost:3000/employee/${ids}`,data,{ headers: new HttpHeaders({
+    return this._http.put(`http://localhost:3000/circuit/${ids}`,data,{ headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': 'true',
       'Access-Control-Allow-Origin': '*',
@@ -231,6 +291,8 @@ export class AppServiceService {
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }
+
+
 
   //CRUD collection
   createCollection(data:any):Observable<any>
@@ -312,7 +374,7 @@ export class AppServiceService {
   getOneContainer(id:any):Observable<any>
   {
     let ids=id;
-    return this._http.get(`http://localhost:3000/user/${ids}`,{ headers: new HttpHeaders({
+    return this._http.get(`http://localhost:3000/container/${ids}`,{ headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': 'true',
       'Access-Control-Allow-Origin': '*',
@@ -324,7 +386,7 @@ export class AppServiceService {
   deleteContainer(id:any):Observable<any>
   {
     let ids=id;
-    return this._http.delete(`http://localhost:3000/user/${ids}`,{ headers: new HttpHeaders({
+    return this._http.delete(`http://localhost:3000/container/${ids}`,{ headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': 'true',
       'Access-Control-Allow-Origin': '*',
@@ -336,7 +398,7 @@ export class AppServiceService {
   updateContainer(data:any,id:any):Observable<any>
   {
     let ids=id;
-    return this._http.put(`http://localhost:3000/user/${ids}`,data,{ headers: new HttpHeaders({
+    return this._http.put(`http://localhost:3000/container/${ids}`,data,{ headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': 'true',
       'Access-Control-Allow-Origin': '*',

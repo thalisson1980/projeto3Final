@@ -1,27 +1,30 @@
 const mongoose = require('mongoose');
 
 const KeyRequestSchema = new mongoose.Schema({
+    _id: {
+        type: String,
+    },
     userEmail: {
         type: String,
         required: true,
-        lowercase:true
+        lowercase: true
     },
-    requestDate:{
+    requestDate: {
         type: Date,
         required: true,
         default: Date.now
     },
-    requestReason:{
+    requestReason: {
         type: String,
-        lowercase:true
+        lowercase: true
     },
-    state:{
+    state: {
         type: String,
-        lowercase:true,
-        default:"pending"
+        lowercase: true,
+        default: "pending"
     }
 });
 
 const KeyRequest = mongoose.model('keyRequest', KeyRequestSchema);
 
-module.exports =KeyRequest;
+module.exports = KeyRequest;
