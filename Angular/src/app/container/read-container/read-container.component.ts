@@ -19,7 +19,7 @@ export class ReadContainerComponent implements OnInit {
   ngOnInit(): void {
 
     this.getparamid = this.activatedRoute.snapshot.paramMap.get('id');
-  this.service.getOneCircuit(this.getparamid).subscribe((res)=>{
+  this.service.getOneContainer(this.getparamid).subscribe((res)=>{
     this.successmsg = res.message;
     this.readContainer=[res]
     console.log(res.container, "res==>");

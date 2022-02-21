@@ -197,7 +197,17 @@ export class AppServiceService {
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
   }
-
+  getOneCollectionCircuit(id:any):Observable<any>
+  {
+    let ids=id;
+    return this._http.get(`http://localhost:3000/circuit/${ids}`,{ headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+      'Access-Control-Allow-Headers': '*'
+      }),withCredentials:true});
+  }
   deleteCircuit(id:any):Observable<any>
   {
     let ids=id;
@@ -255,7 +265,10 @@ export class AppServiceService {
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
       'Access-Control-Allow-Headers': '*'
       }),withCredentials:true});
+
   }
+
+
   deleteCollection(id:any):Observable<any>
   {
     let ids=id;

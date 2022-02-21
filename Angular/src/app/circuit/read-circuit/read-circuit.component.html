@@ -67,7 +67,8 @@
                                                     {{container.adress}}
                                                 </td> -->
 
-                                                <td><button button class="btn btn-sm btn-secondary" (click)="getCircuitId([circuit._id])">Read</button></td>
+                                                <!-- <td><button button class="btn btn-sm btn-secondary" (click)="getCircuitId([circuit._id])">Read</button></td> -->
+                                                <td><a [routerLink]="['/readOneCircuit', circuit._id]" class="btn btn-sm btn-secondary">Read</a></td>
                                                 <!-- (click)="getEmployeeId([circuit._id])" -->
                                                 <!-- <td><a [routerLink]="['/readOneCircuit', circuit.circuit._id]" class="btn btn-sm btn-secondary">Read</a></td> -->
                                                 <td><a [routerLink]="['/createCircuit', circuit._id]" class="btn btn-sm btn-success">Edit</a></td>

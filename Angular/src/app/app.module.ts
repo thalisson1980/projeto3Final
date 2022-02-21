@@ -30,6 +30,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { UpdateUserComponent } from './user/update-user/update-user.component';
 import { ReadOneUserComponent } from './user/read-one-user/read-one-user.component';
 import { KeyRequestsComponent } from './key-requests/key-requests.component';
+import { ReadOneColletionCircuitComponent } from './circuit/read-one-colletion-circuit/read-one-colletion-circuit.component';
+
 
 
 
@@ -65,6 +67,8 @@ import { KeyRequestsComponent } from './key-requests/key-requests.component';
     UpdateUserComponent,
     ReadOneUserComponent,
     KeyRequestsComponent,
+    ReadOneColletionCircuitComponent,
+
 
 
     ],

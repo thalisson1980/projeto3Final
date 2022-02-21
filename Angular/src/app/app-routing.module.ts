@@ -25,6 +25,12 @@ import { ReadOneCircuitComponent } from './circuit/read-one-circuit/read-one-cir
 import { LogoutComponent } from './logout/logout.component';
 import { UpdateUserComponent } from './user/update-user/update-user.component';
 import { KeyRequestsComponent } from './key-requests/key-requests.component';
+import { ReadOneColletionCircuitComponent } from './circuit/read-one-colletion-circuit/read-one-colletion-circuit.component';
+
+
+
+
+
 
 const routes: Routes = [
   {path: 'login', component:LoginComponent},
@@ -42,6 +48,7 @@ const routes: Routes = [
   {path: 'createCollection', component:CreateCollectionComponent},
   {path: 'readCollection', component:ReadCollectionComponent},
   {path: 'readOneCollection/:id', component:ReadOneCollectionComponent},
+  {path: 'readOneColletionCircuit/:id', component:ReadOneColletionCircuitComponent},
   {path: 'createContainer', component:CreateContainerComponent},
   {path: 'createContainer/:id', component:CreateContainerComponent},
   {path: 'readContainer', component:ReadContainerComponent},
@@ -59,6 +66,7 @@ const routes: Routes = [
   {path: 'readAnonimo', component:ReadAnonimoComponent},
   {path: 'logout', component:LogoutComponent},
   {path: 'keyRequest', component:KeyRequestsComponent}
+
 
 
 
