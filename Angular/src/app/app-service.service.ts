@@ -55,7 +55,13 @@ export class AppServiceService {
   makeRequest(dados:any):Observable<any>
   {
 
-      return this._http.post("http://localhost:3000/keyRequest",dados);
+      return this._http.post("http://localhost:3000/keyRequest",dados,{ headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+        'Access-Control-Allow-Headers': '*'
+        }),withCredentials:true});
   }
 
   listContainers(dados:any):Observable<any>
