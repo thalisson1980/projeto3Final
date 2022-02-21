@@ -71,10 +71,10 @@ export class PerfilComponent implements OnInit {
     //   }
     // })
 
-    // if(!sessionStorage.getItem('email')){
+     if(!sessionStorage.getItem('email')){
 
-    //   window.location.href = "http://localhost:4200/";
-    // }
+       window.location.href = "http://localhost:4200/";
+     }
 
   }
   logout(){
@@ -140,12 +140,9 @@ export class PerfilComponent implements OnInit {
 
   historicoDeposicaoPorRecolha(){
     document.querySelector<HTMLElement>('.bg-modal4')!.style.display ="flex";
-    const dados = {
-      email:localStorage.getItem('email'),
-      token:localStorage.getItem('token')
-    }
+    
 
-    var data = {choice: "recolha",code:"null",email: localStorage.getItem('email')}
+    var data = {choice: "recolha",code:"null",email: sessionStorage.getItem('email')}
       this.service.getDates(data).subscribe((res)=>{
         if(res){
           this.collections = res.collections;
@@ -163,11 +160,8 @@ export class PerfilComponent implements OnInit {
 
    var collectionsV2 = new Array;
     document.querySelector<HTMLElement>('.bg-modal5')!.style.display ="flex";
-    const dados = {
-      email:localStorage.getItem('email'),
-      token:localStorage.getItem('token')
-    }
-    var data = {choice: "recolha",code:"null",email: localStorage.getItem('email')}
+    
+    var data = {choice: "recolha",code:"null",email: sessionStorage.getItem('email')}
       this.service.getDates(data).subscribe((res)=>{
         if(res){
 

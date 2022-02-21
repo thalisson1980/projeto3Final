@@ -72,6 +72,7 @@
                                                 <td><button button class="btn btn-sm btn-secondary" (click)="getUserId([user._id])">Read </button></td>
                                                 <td><a [routerLink]="['/registar', user._id]" class="btn btn-sm btn-success">Edit</a></td>
                                                 <td><button button class="btn btn-sm btn-danger" (click)="deleteId(user._id)">Delete</button></td>
+                                                <td><button button class="btn btn-sm btn-secondary" (click)="historicoDeposicaoPorRecolha(user.email)">View history </button></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -86,5 +87,35 @@
 
 
     </section>
+    <div class="bg-modal bg-modal4">
+        <div class="modal-content modal-content4">
+
+            <div class="close" (click)="closeModal4()">+</div>
+
+            <h1>Collection history</h1>
+
+            <div class="container">
+                <table class="table">
+                    <thead>
+                        <th scope="col">Number of depositions</th>
+                        <th scope="col">Kgs deposited</th>
+                        <th scope="col">Date</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let collection of collections">
+                            <td>{{collection.numberCollections}}</td>
+                            <td>{{collection.massaCollect_kg}}</td>
+                            <td>{{collection.collectionDate}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+
+
+        </div>
+    </div>
 
 </body>
