@@ -8,16 +8,8 @@ const authMiddleware = require('../middlewares/auth');
 const { findOneAndUpdate } = require('../models/keyRequest');
 
 
-router.post('/',authMiddleware,async (req,res) =>{
-     //Verificar permissoes de user pelo cookie
-     const { token } = req.session
-     const payload = jwt.verify(token, authToken.secret);
-     const user = await User.findById(payload.id);
-
-     if (!user) {
-         return res.status(400).send("User not found");
-     }
-
+router.post('/',async (req,res) =>{
+     
      
     if(req.body.email){
         var query1 = { email: req.body.email };
@@ -41,6 +33,7 @@ router.post('/',authMiddleware,async (req,res) =>{
        
 
     }else{
+        console.log(req.body)
         var query1 = { email: req.body };
 
     const User1 =  await User.findOne(query1); 
@@ -100,9 +93,10 @@ router.get('/getPending',async (req,res) =>{
 }); 
 
 router.put('/',async (req,res) =>{
-    console.log(req.body)
+    
     const user = await User.findOne({email:req.body.user})
     if(req.body.decision == 'atribuir' && user){
+       
          await keyRequest.findOneAndUpdate({_id:req.body.idChave},{$set:{state:'assigned'}})
          let data = new Date();
          const chaves = await Key.find({user:user._id})
