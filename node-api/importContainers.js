@@ -11,8 +11,7 @@ containerCod.forEach(item => {
 
         const string = item.ecopont_tipo.split('.')
 
-        if ((string[1] + string[2]) === "C16" ||
-            (string[1] + string[2]) === "C04") {
+        if ((string[1] + string[2]) === "C12") {
 
 
             const _id = uuidv4();
@@ -21,7 +20,7 @@ containerCod.forEach(item => {
                 container_cod: item.ecopont_tipo,
                 gpsLocation: item.ecopont_coord_latitude + "," + item.ecopont_coord_longitude,
                 adress: "Viana",
-                ddccff: [{ "_id": "62079b7722bfe94e3cde4b13" }]
+                ddccff: { "_id": "62079b7722bfe94e3cde4b13" }
             })
 
             rotas.push(newContainer)

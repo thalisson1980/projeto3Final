@@ -109,7 +109,7 @@
                                                     <label for="container5" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container5" name="container5" formControlName="containers">
                                                     <!-- <option value="" selected></option> -->
-                                                    <option *ngFor='let container5 of readContainer' [value]="container5._id"> {{container5.container_cod}} </option>
+                                                    <option *ngFor='let container5 of readContainer' (click)="addSkill(container5._id)"[value]="container5._id"> {{container5.container_cod}} </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -120,7 +120,7 @@
                                                     <label for="container6" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container6" name="container6" formControlName="containers">
                                              <!-- <option value="" selected></option> -->
-                                            <option *ngFor='let container6 of readContainer' [value]="container6._id"> {{container6.container_cod}} </option>
+                                            <option *ngFor='let container6 of readContainer' (click)="addSkill(container6._id)"[value]="container6._id"> {{container6.container_cod}} </option>
 
                                           </select>
                                                 </div>
@@ -131,7 +131,7 @@
                                                     <label for="container7" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container7" name="container7" formControlName="containers">
                                            <!-- <option value="" selected></option> -->
-                                          <option *ngFor='let container7 of readContainer' [value]="container7._id"> {{container7.container_cod}} </option>
+                                          <option *ngFor='let container7 of readContainer' (click)="addSkill(container7._id)"[value]="container7._id"> {{container7.container_cod}} </option>
 
                                         </select>
                                                 </div>
@@ -142,7 +142,7 @@
                                                     <label for="container8" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container8" name="container8" formControlName="containers">
                                          <!-- <option value="" selected></option> -->
-                                        <option *ngFor='let container8 of readContainer' [value]="container8._id"> {{container8.container_cod}} </option>
+                                        <option *ngFor='let container8 of readContainer' (click)="addSkill(container8._id)"[value]="container8._id"> {{container8.container_cod}} </option>
 
                                       </select>
                                                 </div>
@@ -153,7 +153,7 @@
                                                     <label for="container9" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container9" name="containers_data" formControlName="containers">
                                        <!-- <option value="" selected></option> -->
-                                      <option *ngFor='let container9 of readContainer' [value]="container9._id"> {{container9.container_cod}} </option>
+                                      <option *ngFor='let container9 of readContainer' (click)="addSkill(container9._id)"[value]="container9._id"> {{container9.container_cod}} </option>
 
                                     </select>
                                                 </div>
@@ -164,7 +164,7 @@
                                                     <label for="container10" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container10" name="container10" formControlName="containers">
                                      <!-- <option value="" selected></option> -->
-                                    <option *ngFor='let container10 of readContainer' [value]="container10._id"> {{container10.container_cod}} </option>
+                                    <option *ngFor='let container10 of readContainer' (click)="addSkill(container10._id)"[value]="container10._id"> {{container10.container_cod}} </option>
 
                                   </select>
                                                 </div>
@@ -176,7 +176,7 @@
                                                     <label for="container11" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container11" name="container11" formControlName="containers">
                                    <!-- <option value="" selected></option> -->
-                                  <option *ngFor='let container11 of readContainer' [value]="container11._id"> {{container11.container_cod}} </option>
+                                  <option *ngFor='let container11 of readContainer' (click)="addSkill(container11._id)"[value]="container11._id"> {{container11.container_cod}} </option>
 
                                 </select>
                                                 </div>
@@ -187,7 +187,7 @@
                                                     <label for="container12" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container12" name="container12" formControlName="containers">
                                  <!-- <option value="" selected></option> -->
-                                <option *ngFor='let container12 of readContainer' [value]="container12._id"> {{container12.container_cod}} </option>
+                                <option *ngFor='let container12 of readContainer' (click)="addSkill(container12._id)"[value]="container12._id"> {{container12.container_cod}} </option>
 
                               </select>
                                                 </div>
@@ -198,7 +198,7 @@
                                                     <label for="container13" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container13" name="container13" formControlName="containers">
                                <!-- <option value="" selected></option> -->
-                              <option *ngFor='let container13 of readContainer' [value]="container13._id"> {{container13.container_cod}} </option>
+                              <option *ngFor='let container13 of readContainer' (click)="addSkill(container13._id)"[value]="container13._id"> {{container13.container_cod}} </option>
 
                             </select>
                                                 </div>
@@ -209,7 +209,7 @@
                                                     <label for="container14" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container14" name="container14" formControlName="containers">
                              <!-- <option value="" selected></option> -->
-                            <option *ngFor='let container14 of readContainer' [value]="container14._id"> {{container14.container_cod}} </option>
+                            <option *ngFor='let container14 of readContainer' (click)="addSkill(container14._id)"[value]="container14._id"> {{container14.container_cod}} </option>
 
                           </select>
                                                 </div>
@@ -220,7 +220,7 @@
                                                     <label for="container15" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container15" name="container15" formControlName="containers">
                            <!-- <option value="" selected></option> -->
-                          <option *ngFor='let container15 of readContainer' [value]="container15._id"> {{container15.container_cod}} </option>
+                          <option *ngFor='let container15 of readContainer' (click)="addSkill(container15._id)"[value]="container15._id"> {{container15.container_cod}} </option>
 
                         </select>
                                                 </div>
@@ -232,7 +232,7 @@
                                                     <label for="container16" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container16" name="container16" formControlName="containers">
                          <!-- <option value="" selected></option> -->
-                        <option *ngFor='let container16 of readContainer' [value]="container16._id"> {{container16.container_cod}} </option>
+                        <option *ngFor='let container16 of readContainer' (click)="addSkill(container16._id)"[value]="container16._id"> {{container16.container_cod}} </option>
 
                       </select>
                                                 </div>
@@ -243,7 +243,7 @@
                                                     <label for="container17" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container17" name="container17" formControlName="containers">
                        <!-- <option value="" selected></option> -->
-                      <option *ngFor='let container17 of readContainer' [value]="container17._id"> {{container17.container_cod}} </option>
+                      <option *ngFor='let container17 of readContainer' (click)="addSkill(container17._id)"[value]="container17._id"> {{container17.container_cod}} </option>
 
                     </select>
                                                 </div>
@@ -254,7 +254,7 @@
                                                     <label for="container18" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container18" name="container18" formControlName="containers">
                      <!-- <option value="" selected></option> -->
-                    <option *ngFor='let container18 of readContainer' [value]="container18._id"> {{container18.container_cod}} </option>
+                    <option *ngFor='let container18 of readContainer' (click)="addSkill(container18._id)"[value]="container18._id"> {{container18.container_cod}} </option>
 
                   </select>
                                                 </div>
@@ -265,7 +265,7 @@
                                                     <label for="container19" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container19" name="container19" formControlName="containers">
                    <!-- <option value="" selected></option> -->
-                  <option *ngFor='let container19 of readContainer' [value]="container19._id"> {{container19.container_cod}} </option>
+                  <option *ngFor='let container19 of readContainer' (click)="addSkill(container19._id)"[value]="container19._id"> {{container19.container_cod}} </option>
 
                 </select>
                                                 </div>
@@ -274,7 +274,7 @@
                                                     <label for="container20" class="form-label">Container</label>
                                                     <select matNativeControl [(ngModel)]="container20" name="container20" formControlName="containers">
                  <!-- <option value="" selected></option> -->
-                <option *ngFor='let container20 of readContainer' [value]="container20._id"> {{container20.container_cod}} </option>
+                <option *ngFor='let container20 of readContainer' (click)="addSkill(container20._id)"[value]="container20._id"> {{container20.container_cod}} </option>
 
               </select>
                                                 </div>
