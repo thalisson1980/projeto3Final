@@ -7,19 +7,21 @@ const KeySchema = new mongoose.Schema({
     endDate: {
         type: Date,
         required: false,
+        default:null
     },
-    // user: {
-    //     type: mongoose.SchemaTypes.String,
-    //     ref: 'user'
-    // },
+     user: {
+         type: mongoose.SchemaTypes.String,
+        ref: 'user'
+     },
     startDate: {
         type: Date,
         required: true,
         default: Date.now
     },
-    status: {
-        type: mongoose.SchemaTypes.String,
-        ref: 'keyRequest'
+    ativo: {
+        type: Boolean,
+        required: false,
+        default: true,
     }
 });
 

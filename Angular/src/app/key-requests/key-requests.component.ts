@@ -16,6 +16,7 @@ export class KeyRequestsComponent implements OnInit {
       console.log(res,"res==>");
 
       this.keyRequests = res.pedidos;
+      console.log(this.keyRequests)
     });
   }
 

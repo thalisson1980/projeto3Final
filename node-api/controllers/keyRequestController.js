@@ -8,15 +8,8 @@ const authMiddleware = require('../middlewares/auth');
 const { findOneAndUpdate } = require('../models/keyRequest');
 
 
-router.post('/',authMiddleware,async (req,res) =>{
-     //Verificar permissoes de user pelo cookie
-     const { token } = req.session
-     const payload = jwt.verify(token, authToken.secret);
-     const user = await User.findById(payload.id);
-
-     if (!user) {
-         return res.status(400).send("User not found");
-     }
+router.post('/',async (req,res) =>{
+     
 
      
     if(req.body.email){
