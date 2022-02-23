@@ -12,7 +12,7 @@ const Employee = require('../models/employee');
 const Circuit = require('../models/circuit');
 
 
-router.use(authMiddleware);
+// router.use(authMiddleware);
 
 router.get('/', authMiddleware, async(req, res) => {
     try {
@@ -36,7 +36,7 @@ router.get('/', authMiddleware, async(req, res) => {
     }
 })
 
-router.get('/:collectionId', async(req, res) => {
+router.get('/:collectionId', authMiddleware, async(req, res) => {
     try {
         const { token } = req.session
         const payload = jwt.verify(token, authToken.secret);
@@ -58,7 +58,7 @@ router.get('/:collectionId', async(req, res) => {
 })
 
 
-router.post('/', async(req, res) => {
+router.post('/', authMiddleware, async(req, res) => {
 
 
     try {

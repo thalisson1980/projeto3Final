@@ -44,7 +44,7 @@ export class CreateCircuitComponent implements OnInit {
 
   this.getparamid = this.activatedRoute.snapshot.paramMap.get('id');
   if(this.getparamid){
-  this.service.getOneContainer(this.getparamid).subscribe((res)=>{
+  this.service.getOneCircuit(this.getparamid).subscribe((res)=>{
     // console.log(res, 'res==>');
     this.circuitForm.patchValue({
       circuit_cod: res.circuit_cod,
@@ -70,7 +70,7 @@ this.service.getContainer().subscribe((res)=>{
 circuitForm = new FormGroup({
 
     'circuit_cod':new FormControl('',Validators.required),
-    'containers':new FormControl('',Validators.required),
+    'containers':new FormControl('',Validators.required)
 
   });
 

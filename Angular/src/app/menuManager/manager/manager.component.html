@@ -46,14 +46,7 @@
                         <p class="text-muted">
                         </p>
                     </div>
-                    <div class="col-sm-4 offset-md-1 py-4">
-                        <h4 class="text-white"></h4>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="text-white h5">Logout</a></li>
-                            <!-- <li><a href="#" class="text-white">Like on Facebook</a></li>
-                        <li><a href="#" class="text-white">Email me</a></li> -->
-                        </ul>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -63,9 +56,10 @@
                     <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> -->
                     <strong>Manager</strong>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+                <div class="text-right offset-md-1 py-4">
+                    <button routerLink="" role="button" (click)="logout()" type="button" class="btn btn-outline-light me-2 ">Logout</button>
+
+                </div>
             </div>
         </div>
     </header>
@@ -98,7 +92,7 @@
                             <img id="contentor" src="./assets/img/employee.png" class="contentor" alt="Sample image">
                             <!-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfIU0Xomf4Ebl2icBqJZDVEejGwqLiwkyrcM7Cb6HiSNNL4snXLdPN3sevpTDot776jWU&usqp=CAU -->
                             <div class="card-body">
-                                <p class="card-text">Create, List, Update</p>
+                                <p class="card-text">Create, List, Update.</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button routerLink="/readEmployee" type="button" class="btn btn-sm btn-outline-secondary">View</button>
@@ -110,7 +104,25 @@
                         </div>
                     </div>
 
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Users</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Users</text></svg> -->
+                            <h5>User</h5>
+                            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Containers</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Containers</text></svg> -->
+                            <img id="contentor" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA2kMnE-_fcOMNTKEWM3FtOIaEST6EiEGLuw&usqp=CAU" class="contentor" alt="Sample image">
 
+                            <div class="card-body">
+                                <p class="card-text">Create, List, Update.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button routerLink="/readUser" type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button routerLink="/registar" type="button" class="btn btn-sm btn-outline-secondary">Create</button>
+                                    </div>
+                                    <small class="text-muted"></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                     <div class="col">
@@ -119,7 +131,7 @@
                             <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Collections</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Collections</text></svg> -->
                             <img id="contentor" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5FPrEcGtqBHQEBNDoa9P63ozyeD7TcxyvKd8lenKbtPS2F-6C2nkETmJ8SZ4PKS0h5VU&usqp=CAU" class="contentor" alt="Sample image">
                             <div class="card-body">
-                                <p class="card-text">Create, List, Update</p>
+                                <p class="card-text">Create, List, Update.</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button routerLink="/readCollection" type="button" class="btn btn-sm btn-outline-secondary">View</button>
@@ -139,7 +151,7 @@
                             <!-- https://organicos.smsbvc.pt/wp-content/uploads/2019/12/2.jpg?fbclid=IwAR31MIfZLoAasXtNAegNHOw7lbrPV2jvkKOgxy0KEbPgu6uimhPBCOeK_1c -->
                             <!-- https://rethinking.ong/wp-content/uploads/2018/04/Captura-de-pantalla-2018-04-27-a-las-7.11.57.png -->
                             <div class="card-body">
-                                <p class="card-text">Create, List, Update</p>
+                                <p class="card-text">Create, List, Update.</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button routerLink="/readContainer" type="button" class="btn btn-sm btn-outline-secondary">View</button>
@@ -152,11 +164,30 @@
                     </div>
                     <div class="col">
                         <div class="card shadow-sm">
+                            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Keys</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Keys</text></svg>                            -->
+                            <h5>Container Collection</h5>
+
+                            <img id="contentor" src="https://www.smvc.pt/images/pages/Residuos/VianaAbraca/01.png" class="contentor" alt="Sample image">
+                            <!-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8dE-NoUFYI6hT-pkpbBqFhM0cvrfn3icWIAAfsNr_yMyLWmHURuXOC3l94ILglK_dFRw&usqp=CAU -->
+                            <div class="card-body">
+                                <p class="card-text">Create, List, Update.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button routerLink="" type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button routerLink="" type="button" class="btn btn-sm btn-outline-secondary">Create</button>
+                                    </div>
+                                    <small class="text-muted"></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card shadow-sm">
                             <h5>Circuit</h5>
                             <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Circuits</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Circuits</text></svg> -->
                             <img id="contentor" src="./assets/img/biowaste.png" class="contentor" alt="Sample image">
                             <div class="card-body">
-                                <p class="card-text">Create, List, Update</p>
+                                <p class="card-text">Create, List, Update.</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button routerLink="/readCircuit" type="button" class="btn btn-sm btn-outline-secondary">View</button>
@@ -167,7 +198,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col">
                         <div class="card shadow-sm">
                             <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Keys</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Keys</text></svg>                            -->
@@ -176,7 +206,7 @@
                             <img id="contentor" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4sFovr6R1qlHlwm3pie_l3DV5JtogqvdadG_8RdcydHIkCpQvVcV2ihitKPzpqaNz-LM&usqp=CAU" class="contentor" alt="Sample image">
                             <!-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8dE-NoUFYI6hT-pkpbBqFhM0cvrfn3icWIAAfsNr_yMyLWmHURuXOC3l94ILglK_dFRw&usqp=CAU -->
                             <div class="card-body">
-                                <p class="card-text">Create, List, Update</p>
+                                <p class="card-text">Create, List, Update.</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button routerLink="/readKey" type="button" class="btn btn-sm btn-outline-secondary">View</button>

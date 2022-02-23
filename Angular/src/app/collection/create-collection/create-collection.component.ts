@@ -12,7 +12,7 @@ import { ActivatedRoute} from '@angular/router'
 export class CreateCollectionComponent implements OnInit {
 
 
-  constructor(private service:AppServiceService,private router: Router, private activatedRoute: ActivatedRoute ) { }
+  constructor(private service:AppServiceService,private router: Router, private activatedRoute: ActivatedRoute, ) { }
 
   errormsg:any;
   successmsg:any;
@@ -31,14 +31,14 @@ export class CreateCollectionComponent implements OnInit {
 
     if(this.getparamid){
     this.service.getOneCollection(this.getparamid).subscribe((res)=>{
-      console.log(res, 'res==>');
+      // console.log(res, 'res==>');
       // console.log('res',res.collection.name)
       this.collectionForm.patchValue({
-        employees: res.collection[0].employees.name,
-        circuit: res.collection[0].circuit.circuit_code,
-        dateStartTime: res.collection[0].dateStartTime,
-        dateEndTime: res.collection[0].dateEndTime,
-        massaCollect_kg: res.collection[0].massaCollect_kg
+        employees: res.collection.employees.name,
+        circuit: res.collection.circuit.circuit_code,
+        dateStartTime: res.collection.dateStartTime,
+        dateEndTime: res.collection.dateEndTime,
+        massaCollect_kg: res.collection.massaCollect_kg
       });
     });
   }
