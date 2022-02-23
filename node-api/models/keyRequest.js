@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 
 const KeyRequestSchema = new mongoose.Schema({
-    _id: {
-        type: String,
-    },
     userEmail: {
         type: String,
         required: true,
