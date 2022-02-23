@@ -57,7 +57,7 @@
                                                     <label for="employees" class="form-label">Employee</label>
                                                     <select matNativeControl [(ngModel)]="employee1" name="employees" formControlName="employees">
                                                   <!-- <option value="" selected></option> -->
-                                                  <option *ngFor="let employee1 of readEmployee" [value]="employee1._id">
+                                                  <option *ngFor="let employee1 of readEmployee"(click)="addSkill(employee1._id)" [value]="employee1._id">
                                                     {{employee1.name}}
                                                   </option>
                                                 </select>
@@ -71,7 +71,7 @@
                                                     <label for="employees" class="form-label">Employee</label>
                                                     <select matNativeControl [(ngModel)]="employee2" name="employees" formControlName="employees">
                                                   <!-- <option value="" selected></option> -->
-                                                  <option *ngFor="let employee2 of readEmployee" [value]="employee2._id">
+                                                  <option *ngFor="let employee2 of readEmployee" (click)="addSkill(employee2._id)"[value]="employee2._id">
                                                     {{employee2.name}}
                                                   </option>
                                                 </select>
@@ -84,7 +84,7 @@
                                                     <label for="employees" class="form-label">Employee</label>
                                                     <select matNativeControl [(ngModel)]="employee3" name="employees" formControlName="employees">
                                                 <!-- <option value="" selected></option> -->
-                                                <option *ngFor="let employee3 of readEmployee" [value]="employee3._id">
+                                                <option *ngFor="let employee3 of readEmployee" (click)="addSkill(employee3._id)"[value]="employee3._id">
                                                   {{employee3.name}}
                                                 </option>
                                               </select>

@@ -70,16 +70,22 @@ this.service.getContainer().subscribe((res)=>{
 circuitForm = new FormGroup({
 
     'circuit_cod':new FormControl('',Validators.required),
-    'containers':new FormControl('',Validators.required)
-
+    'containers':new FormControl('',Validators.required),
   });
+  containers_data = new FormArray([]);
+
+
 
   circuitSubmit()
   {
+
     if(this.circuitForm.valid)
     {
     console.log(this.circuitForm.value);
-    this.service.createCircuit(this.circuitForm.value).subscribe((res)=>{
+    this.service.createCircuit({
+      circuit_cod:this.circuitForm.value.circuit_cod,
+      containers:this.containers_data.controls
+    }).subscribe((res)=>{
       console.log(res, 'res==>');
       this.circuitForm.reset();
       this.successmsg = res.message;
@@ -95,6 +101,9 @@ circuitForm = new FormGroup({
   }
 
 
+  addSkill(item:any) {
+    this.containers_data.push(item);
+  }
 
 circuitUpdate()
   {

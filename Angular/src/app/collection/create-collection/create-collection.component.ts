@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppServiceService} from '../../app-service.service';
-import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router'
 import { ActivatedRoute} from '@angular/router'
 
@@ -65,21 +65,30 @@ this.service.getCollection().subscribe((res)=>{
 
   collectionForm = new FormGroup({
     // '_id':new FormControl('',Validators.required),
-    'employees':new FormControl('',Validators.required),
+    // 'employees':new FormControl(''),
     'circuit':new FormControl('',Validators.required),
-    'dateStartTime':new FormControl('',Validators.required),
-    'dateEndTime':new FormControl('',Validators.required),
-    'massaCollect_kg':new FormControl('',Validators.required),
+    'dateStartTime':new FormControl(''),
+    'dateEndTime':new FormControl(''),
+    'massaCollect_kg':new FormControl('',),
   });
 
+  employees_data = new FormArray([]);
 
  collectionSubmit()
   {
+    console.log(this.collectionForm.valid)
+    console.log(this.collectionForm.value)
   if(this.collectionForm.valid)
   {
   console.log(this.collectionForm.value);
 
-  this.service.createCollection(this.collectionForm.value).subscribe((res)=>{
+  this.service.createCollection({
+    employees:this.employees_data.controls,
+    circuit: this.collectionForm.value.circuit,
+    dateStartTime:this.collectionForm.value.dateStartTime,
+    dateEndTime:this.collectionForm.value.dateEndTime,
+    'massaCollect_kg':this.collectionForm.value.massaCollect_kg
+  }).subscribe((res)=>{
     console.log(res, 'res==>');
     this.collectionForm.reset();
     this.successmsg = res.message;
@@ -92,6 +101,10 @@ this.service.getCollection().subscribe((res)=>{
   // {
   //   this.errormsg = 'All field is required';
   // }
+}
+
+addSkill(item:any){
+  this.employees_data.push(item);
 }
 
 collectionUpdate()

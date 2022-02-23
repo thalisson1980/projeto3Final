@@ -64,6 +64,7 @@ router.post('/', async(req, res) => {
 
 
     try {
+        console.log(res.body)
         const { token } = req.session
         const payload = jwt.verify(token, authToken.secret);
         const user = await User.findById(payload.id);

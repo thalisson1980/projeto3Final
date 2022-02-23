@@ -14,13 +14,14 @@ containerCod.forEach(item => {
         if ((string[1] + string[2]) === "C16" ||
             (string[1] + string[2]) === "C04") {
 
+
             const _id = uuidv4();
             const newContainer = new Container({
                 _id,
                 container_cod: item.ecopont_tipo,
                 gpsLocation: item.ecopont_coord_latitude + "," + item.ecopont_coord_longitude,
                 adress: "Viana",
-                ddccff: { "_id": "62079b7722bfe94e3cde4b13" }
+                ddccff: [{ "_id": "62079b7722bfe94e3cde4b13" }]
             })
 
             rotas.push(newContainer)

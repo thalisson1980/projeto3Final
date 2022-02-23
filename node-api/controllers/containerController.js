@@ -10,9 +10,8 @@ const code = require('../models/DDCCFF');
 const { v4: uuidv4 } = require('uuid');
 const authMiddleware = require('../middlewares/auth');
 const ddccff = require('../models/DDCCFF');
-
-
-
+const { map } = require('modern-async');
+const mongoose = require('mongoose');
 router.use(authMiddleware);
 
 router.get('/', async(req, res) => {
@@ -28,10 +27,21 @@ router.get('/', async(req, res) => {
         if (user.permission === 'view') {
             return res.status(400).send("You are not authorized to do this");
         }
-        const containers = await Container.find().populate('ddccff');
-        return res.json(containers);
+        const location = await ddccff.find({ code: '160948' })
+        console.log(location)
+        const containers = await Container.find().populate('ddccff._id');
+        const data = []
+        containers.forEach((q) => {
+            data.push({
+                ...q._doc,
+                ddccff: location
+            })
+        })
+
+        return res.json(data);
 
     } catch (error) {
+        console.log(error)
         return res.status(400).send({ error: 'Error loading containers' })
     }
 })
