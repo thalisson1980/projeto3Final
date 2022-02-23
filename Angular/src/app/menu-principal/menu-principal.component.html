@@ -127,7 +127,7 @@
                                 <p class="card-text">List</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button routerLink="/readUser" type="button" class="btn btn-sm btn-outline-secondary">Ask</button>
+                                        <button (click)="abrirModal()" type="button" class="btn btn-sm btn-outline-secondary">+info</button>
                                         <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
                                     </div>
                                     <small class="text-muted"></small>
@@ -150,7 +150,22 @@
                 <a href=""></a>.</p>
         </div>
     </footer>
+    <div class="bg-modal">
+        <div class="modal-content">
 
+            <div class="close" (click)="closeModal()">+</div>
+
+            <h1>About keys</h1>
+
+            <div class="container">
+               <h5>If you create an account and get a key you will be able to see the history of your depositions as well as compare it to other people in the area!</h5>
+
+            </div>
+
+
+
+        </div>
+    </div>
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
