@@ -62,46 +62,22 @@ export class AppServiceService {
   {
 
 
-    return this._http.post("http://localhost:3000/containerCollection/findByUser",dados,{ headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': 'true',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
-      'Access-Control-Allow-Headers': '*'
-      }),withCredentials:true});
+    return this._http.post("http://localhost:3000/containerCollection/findByUser",dados);
   }
 
   listCounties():Observable<any>
   {
-    return this._http.get("http://localhost:3000/DDCCFF/allCounties",{ headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': 'true',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
-      'Access-Control-Allow-Headers': '*'
-      }),withCredentials:true});
+    return this._http.get("http://localhost:3000/DDCCFF/allCounties");
   }
 
   listParish(code:any):Observable<any>
   {
-    return this._http.post("http://localhost:3000/DDCCFF/parishList",code,{ headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': 'true',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
-      'Access-Control-Allow-Headers': '*'
-      }),withCredentials:true});
+    return this._http.post("http://localhost:3000/DDCCFF/parishList",code);
   }
 
   listContainersByParish(code:any):Observable<any>
   {
-    return this._http.post("http://localhost:3000/container/containers/byParish",code,{ headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': 'true',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
-      'Access-Control-Allow-Headers': '*'
-      }),withCredentials:true});
+    return this._http.post("http://localhost:3000/container/containers/byParish",code);
   }
 
   getDates(data:any):Observable<any>
